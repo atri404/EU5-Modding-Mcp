@@ -4,6 +4,11 @@ import sys
 from pathlib import Path
 from typing import Any
 
+# 确保脚本所在目录位于 sys.path 最前端，支持作为插件独立调用
+root_dir = Path(__file__).resolve().parent
+if str(root_dir) not in sys.path:
+    sys.path.insert(0, str(root_dir))
+
 # 兼容 mcp 1.x (FastMCP) 与 mcp 2.x (MCPServer)
 try:
     from mcp.server.fastmcp import FastMCP

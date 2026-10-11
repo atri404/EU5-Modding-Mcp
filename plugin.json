@@ -1,0 +1,28 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "eu5-modding",
+  "version": "2.1.0",
+  "description": "Europa Universalis V modding suite for AI agents: integrates Jomini engine API MCP server, 1.4 beta knowledge base, and mod review/dev skills.",
+  "author": {
+    "name": "atri404",
+    "url": "https://github.com/atri404/EU5-Modding-Mcp"
+  },
+  "homepage": "https://github.com/atri404/EU5-Modding-Mcp",
+  "repository": "https://github.com/atri404/EU5-Modding-Mcp",
+  "license": "MIT",
+  "keywords": [
+    "eu5",
+    "modding",
+    "mcp",
+    "paradox",
+    "jomini"
+  ],
+  "mcpServers": {
+    "eu5-modding-mcp": {
+      "command": "python",
+      "args": [
+        "${pluginRoot}/server.py"
+      ]
+    }
+  }
+}

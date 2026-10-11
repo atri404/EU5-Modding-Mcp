@@ -1,0 +1,28 @@
+{
+  "name": "eu5-modding",
+  "version": "2.1.0",
+  "description": "EU5 (Europa Universalis V / Jomini 引擎) Modding 全流程智能体套件：结合 1.4 Beta 与 Pavia 1.3.x 权威知识库、Mod 制作与审查技能及 MCP API 检索服务器",
+  "author": {
+    "name": "atri404",
+    "url": "https://github.com/atri404/EU5-Modding-Mcp"
+  },
+  "homepage": "https://github.com/atri404/EU5-Modding-Mcp",
+  "repository": "https://github.com/atri404/EU5-Modding-Mcp",
+  "license": "MIT",
+  "keywords": [
+    "eu5",
+    "europa-universalis-5",
+    "modding",
+    "jomini",
+    "mcp",
+    "skills"
+  ],
+  "mcpServers": {
+    "eu5-modding-mcp": {
+      "command": "python",
+      "args": [
+        "${pluginRoot}/server.py"
+      ]
+    }
+  }
+}

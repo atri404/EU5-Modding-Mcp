@@ -1,0 +1,16 @@
+{
+  "name": "eu5-modding",
+  "version": "2.1.0",
+  "description": "EU5 (Europa Universalis V) Modding suite for Cursor: Jomini engine API MCP server, 1.4 beta knowledge base, and mod development skills.",
+  "author": {
+    "name": "atri404"
+  },
+  "mcpServers": {
+    "eu5-modding-mcp": {
+      "command": "python",
+      "args": [
+        "${pluginRoot}/server.py"
+      ]
+    }
+  }
+}

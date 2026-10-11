@@ -28,7 +28,9 @@ def get_paths():
     base_dir = Path(__file__).resolve().parent.parent
     docs_dir = base_dir / "docs"
     output_dir = base_dir / "mcp-data"
-    kb_dir = Path("D:/eu5mods/eu5-modding-kb")
+    kb_dir = base_dir / "kb"
+    if not kb_dir.exists():
+        kb_dir = Path("D:/eu5mods/eu5-modding-kb")
     game_dir = Path("D:/SteamLibrary/steamapps/common/Europa Universalis V/game")
     output_dir.mkdir(parents=True, exist_ok=True)
     return base_dir, docs_dir, output_dir, kb_dir, game_dir
