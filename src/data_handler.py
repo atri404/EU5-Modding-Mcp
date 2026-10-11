@@ -1,5 +1,5 @@
 """
-EU5 Modding MCP 数据处理器 (v2.2.0 / 1.4 Beta 深度完善版)
+EU5 Modding MCP 数据处理器 (v2.3.1 / 1.4 Beta 深度完善版)
 全面融合 eu5-modding-kb 156 篇权威文档与底层游戏数据，支持：
 1. 修改器 (2,497)、效果 (1,323)、触发器 (1,499)、事件目标 (299)、挂钩点 (159)、动态本地化 (413)
 2. 字段规范 (103篇)、原版机制深度拆解 (24篇)、制作指南与教程 (12篇)、实战案例 (4篇)
@@ -119,26 +119,229 @@ class DataHandler:
             logger.error(f"Error loading data: {e}", exc_info=True)
             raise
 
+    # ---------------- Token 优化与小节提取辅助函数 ----------------
+
+    @staticmethod
+    def _list_markdown_headers(md_text: str) -> List[str]:
+        """提取 Markdown 文本中的主要标题 (h1, h2, h3)"""
+        if not md_text:
+            return []
+        return [h.strip() for h in re.findall(r'(?m)^#{1,3}\s+.*', md_text)]
+
+    @staticmethod
+    def _extract_markdown_section(md_text: str, section_query: str) -> Optional[str]:
+        """
+        按关键词提取 Markdown 文本中对应的小节 (支持 h1/h2/h3)，
+        大幅避免将整个 30KB+ 文档全部塞入上下文造成的 Token 浪费。
+        """
+        if not md_text or not section_query:
+            return md_text
+        q = section_query.lower().strip()
+        sections = re.split(r'(?m)^(?=#{1,3}\s+)', md_text)
+        matched = []
+        for s in sections:
+            header_line = s.strip().split('\n')[0].lower()
+            if q in header_line or q in s[:300].lower():
+                matched.append(s.strip())
+        return '\n\n'.join(matched) if matched else None
+
     # ---------------- 基础与模糊检索 ----------------
 
     def search_by_name(self, name: str, fuzzy: bool = True, limit: int = 20) -> List[Dict[str, Any]]:
-        name_lower = name.lower()
+        limit = max(1, min(limit, 50))
+        name_lower = name.lower().strip()
+        raw_results = []
         if name_lower in self.index:
-            return self.index[name_lower][:limit]
-        if not fuzzy:
-            return []
+            raw_results = self.index[name_lower][:limit]
+        elif fuzzy:
+            results = []
+            for key, entries in self.index.items():
+                similarity = SequenceMatcher(None, name_lower, key).ratio()
+                if similarity > 0.6:
+                    for entry in entries:
+                        entry_copy = entry.copy()
+                        entry_copy["similarity"] = round(similarity, 3)
+                        results.append(entry_copy)
+            results.sort(key=lambda x: x["similarity"], reverse=True)
+            raw_results = results[:limit]
 
-        results = []
-        for key, entries in self.index.items():
-            similarity = SequenceMatcher(None, name_lower, key).ratio()
-            if similarity > 0.6:
-                for entry in entries:
-                    entry_copy = entry.copy()
-                    entry_copy["similarity"] = round(similarity, 3)
-                    results.append(entry_copy)
+        # 过滤冗余超大字段以节约 Token
+        sanitized = []
+        for item in raw_results:
+            clean = item.copy()
+            if "content" in clean:
+                clean["content_length"] = len(clean["content"])
+                del clean["content"]
+            sanitized.append(clean)
+        return sanitized
 
-        results.sort(key=lambda x: x["similarity"], reverse=True)
-        return results[:limit]
+    # ---------------- 全库一站式智能统一检索 (Token 极致优化) ----------------
+
+    def omni_search(
+        self,
+        query: str,
+        categories: Optional[List[str]] = None,
+        limit_per_category: int = 3,
+        total_limit: int = 15
+    ) -> Dict[str, Any]:
+        """
+        全库一站式智能统一检索：在一次调用内跨 10 大系统检索相关条目，
+        按系统分类聚合，并对每个条目提炼关键字段输出，大幅节约 Token 与多轮尝试时间。
+        """
+        q = query.lower().strip()
+        limit_cat = max(1, min(limit_per_category, 10))
+        total_max = max(1, min(total_limit, 30))
+
+        valid_cats = {
+            "modifiers", "effects", "triggers", "event_targets", "on_actions",
+            "field_definitions", "vanilla_mechanics", "vanilla_readmes",
+            "defines", "guides", "cases", "glossary"
+        }
+
+        selected_cats = set([c.lower().strip() for c in categories]) if categories else valid_cats
+
+        results: Dict[str, List[Dict[str, Any]]] = {}
+        total_hits = 0
+
+        # 1. Modifiers
+        if "modifiers" in selected_cats and total_hits < total_max:
+            mods = self.search_modifiers(q, limit=limit_cat)
+            if mods:
+                results["modifiers"] = [{
+                    "name": m.get("name"),
+                    "categories": m.get("categories"),
+                    "description": m.get("description", "").strip()[:100],
+                    "boolean": m.get("boolean", False)
+                } for m in mods]
+                total_hits += len(results["modifiers"])
+
+        # 2. Effects
+        if "effects" in selected_cats and total_hits < total_max:
+            effs = self.search_effects(q, limit=limit_cat)
+            if effs:
+                results["effects"] = [{
+                    "name": e.get("name"),
+                    "supported_scopes": e.get("supported_scopes"),
+                    "description": e.get("description", "").strip()[:100]
+                } for e in effs]
+                total_hits += len(results["effects"])
+
+        # 3. Triggers
+        if "triggers" in selected_cats and total_hits < total_max:
+            trigs = self.search_triggers(q, limit=limit_cat)
+            if trigs:
+                results["triggers"] = [{
+                    "name": t.get("name"),
+                    "supported_scopes": t.get("supported_scopes"),
+                    "description": t.get("description", "").strip()[:100]
+                } for t in trigs]
+                total_hits += len(results["triggers"])
+
+        # 4. Event Targets
+        if "event_targets" in selected_cats and total_hits < total_max:
+            ets = self.search_event_targets(q, limit=limit_cat)
+            if ets:
+                results["event_targets"] = [{
+                    "name": et.get("name"),
+                    "input_scopes": et.get("input_scopes"),
+                    "output_scopes": et.get("output_scopes"),
+                    "description": et.get("description", "").strip()[:100]
+                } for et in ets]
+                total_hits += len(results["event_targets"])
+
+        # 5. on_actions
+        if "on_actions" in selected_cats and total_hits < total_max:
+            oas = self.search_on_actions(q, limit=limit_cat)
+            if oas:
+                results["on_actions"] = [{
+                    "name": oa.get("name"),
+                    "expected_scope": oa.get("expected_scope"),
+                    "sub_on_action_hint": "使用 on_actions = { mymod_hook } 链式挂载"
+                } for oa in oas]
+                total_hits += len(results["on_actions"])
+
+        # 6. Vanilla Readmes
+        if "vanilla_readmes" in selected_cats and total_hits < total_max:
+            readmes = self.search_vanilla_readmes(q, limit=limit_cat)
+            if readmes:
+                results["vanilla_readmes"] = [{
+                    "category": r.get("category"),
+                    "path": r.get("path"),
+                    "summary": r.get("summary", "").strip()[:100]
+                } for r in readmes]
+                total_hits += len(results["vanilla_readmes"])
+
+        # 7. Field Definitions
+        if "field_definitions" in selected_cats and total_hits < total_max:
+            fds = self.search_field_definitions(q, limit=limit_cat)
+            if fds:
+                results["field_definitions"] = [{
+                    "category": f.get("category"),
+                    "title": f.get("title"),
+                    "summary": f.get("summary", "").strip()[:100]
+                } for f in fds]
+                total_hits += len(results["field_definitions"])
+
+        # 8. Vanilla Mechanics
+        if "vanilla_mechanics" in selected_cats and total_hits < total_max:
+            vms = self.search_vanilla_mechanics(q, limit=limit_cat)
+            if vms:
+                results["vanilla_mechanics"] = [{
+                    "system": vm.get("system"),
+                    "title": vm.get("title"),
+                    "summary": vm.get("summary", "").strip()[:100]
+                } for vm in vms]
+                total_hits += len(results["vanilla_mechanics"])
+
+        # 9. Defines Constants & Blocks
+        if "defines" in selected_cats and total_hits < total_max:
+            defs = self.search_defines(q, limit=limit_cat)
+            matched_c = defs.get("matched_constants", [])
+            matched_b = defs.get("matched_blocks", [])
+            if matched_c or matched_b:
+                results["defines"] = [{
+                    "constant": c.get("constant"),
+                    "location": c.get("location"),
+                    "description": c.get("description", "").strip()[:100]
+                } for c in matched_c[:limit_cat]]
+                if matched_b:
+                    results["defines_blocks"] = [{
+                        "block": b.get("block"),
+                        "description": b.get("description", "").strip()[:100]
+                    } for b in matched_b[:2]]
+                total_hits += len(results["defines"])
+
+        # 10. Guides & Cases
+        if "guides" in selected_cats and total_hits < total_max:
+            gs = self.search_guides(q, limit=limit_cat)
+            if gs:
+                results["guides"] = [{
+                    "name": g.get("name"),
+                    "title": g.get("title"),
+                    "summary": g.get("summary", "").strip()[:100]
+                } for g in gs]
+                total_hits += len(results["guides"])
+
+        # 11. Glossary
+        if "glossary" in selected_cats and total_hits < total_max:
+            gloss = self.search_glossary(q, limit=limit_cat)
+            if gloss:
+                results["glossary"] = [{
+                    "key": gl.get("key"),
+                    "cn_name": gl.get("cn_name"),
+                    "note": gl.get("note", "").strip()[:100]
+                } for gl in gloss]
+                total_hits += len(results["glossary"])
+
+        return {
+            "query": query,
+            "total_categories_matched": len(results),
+            "total_items_matched": sum(len(v) for v in results.values()),
+            "categories_matched": list(results.keys()),
+            "results": results,
+            "token_optimization_note": "返回高密度摘要卡片。若需指定项的完整代码或规范，可调用对应 get_* 工具查询。"
+        }
+
 
     # ---------------- 专用类目检索 ----------------
 
@@ -244,18 +447,40 @@ class DataHandler:
                 results.append(item)
         return results[:limit]
 
-    def get_field_definition(self, category: str) -> Optional[Dict[str, Any]]:
+    def get_field_definition(self, category: str, section: Optional[str] = None) -> Optional[Dict[str, Any]]:
         cat_norm = category.lower().replace("_", "-")
+        target_f = None
         for f in self.field_definitions:
             f_cat = f.get("category", "").lower().replace("_", "-")
             f_name = f.get("name", "").lower().replace("_", "-")
             if f_cat == cat_norm or f_name == cat_norm or f_name == f"common-{cat_norm}":
-                return f
-        for f in self.field_definitions:
-            f_cat = f.get("category", "").lower().replace("_", "-")
-            if cat_norm in f_cat:
-                return f
-        return None
+                target_f = f
+                break
+        if not target_f:
+            for f in self.field_definitions:
+                f_cat = f.get("category", "").lower().replace("_", "-")
+                if cat_norm in f_cat:
+                    target_f = f
+                    break
+        if not target_f:
+            return None
+
+        if not section:
+            return target_f
+
+        # 小节按需提取以节约 Token
+        content_text = target_f.get("content", "")
+        extracted = self._extract_markdown_section(content_text, section)
+        item = target_f.copy()
+        if extracted:
+            item["matched_section"] = section
+            item["content"] = extracted
+            item["content_length"] = len(extracted)
+        else:
+            item["matched_section"] = None
+            item["available_sections"] = self._list_markdown_headers(content_text)
+            item["message"] = f"未找到匹配 '{section}' 的小节，请参考 available_sections 清单。"
+        return item
 
     def search_vanilla_mechanics(self, query: str, limit: int = 10) -> List[Dict[str, Any]]:
         q = query.lower()
@@ -272,18 +497,39 @@ class DataHandler:
                 results.append(item)
         return results[:limit]
 
-    def get_vanilla_mechanic(self, system: str) -> Optional[Dict[str, Any]]:
+    def get_vanilla_mechanic(self, system: str, section: Optional[str] = None) -> Optional[Dict[str, Any]]:
         sys_norm = system.lower().replace("_", "-")
+        target_vm = None
         for vm in self.vanilla_mechanics:
             vm_sys = vm.get("system", "").lower().replace("_", "-")
             vm_name = vm.get("name", "").lower().replace("_", "-")
             if vm_sys == sys_norm or vm_name == sys_norm or vm_name == f"vanilla-{sys_norm}":
-                return vm
-        for vm in self.vanilla_mechanics:
-            vm_sys = vm.get("system", "").lower().replace("_", "-")
-            if sys_norm in vm_sys:
-                return vm
-        return None
+                target_vm = vm
+                break
+        if not target_vm:
+            for vm in self.vanilla_mechanics:
+                vm_sys = vm.get("system", "").lower().replace("_", "-")
+                if sys_norm in vm_sys:
+                    target_vm = vm
+                    break
+        if not target_vm:
+            return None
+
+        if not section:
+            return target_vm
+
+        content_text = target_vm.get("content", "")
+        extracted = self._extract_markdown_section(content_text, section)
+        item = target_vm.copy()
+        if extracted:
+            item["matched_section"] = section
+            item["content"] = extracted
+            item["content_length"] = len(extracted)
+        else:
+            item["matched_section"] = None
+            item["available_sections"] = self._list_markdown_headers(content_text)
+            item["message"] = f"未找到匹配 '{section}' 的小节，请参考 available_sections 清单。"
+        return item
 
     def search_guides(self, query: str, limit: int = 10) -> List[Dict[str, Any]]:
         """搜索制作指南与实战教程（新国家、新任务链、骨架、合并、法律、事件、测试等）"""
@@ -301,14 +547,33 @@ class DataHandler:
                 results.append(item)
         return results[:limit]
 
-    def get_guide(self, guide_name: str) -> Optional[Dict[str, Any]]:
-        """获取指定制作指南或教程全文"""
+    def get_guide(self, guide_name: str, section: Optional[str] = None) -> Optional[Dict[str, Any]]:
+        """获取指定制作指南或教程全文（支持按 section 查询指定小节）"""
         name_norm = guide_name.lower().replace("_", "-").replace(".md", "")
+        target_g = None
         for g in self.guides:
             g_name = g.get("name", "").lower().replace("_", "-")
             if g_name == name_norm or name_norm in g_name:
-                return g
-        return None
+                target_g = g
+                break
+        if not target_g:
+            return None
+
+        if not section:
+            return target_g
+
+        content_text = target_g.get("content", "")
+        extracted = self._extract_markdown_section(content_text, section)
+        item = target_g.copy()
+        if extracted:
+            item["matched_section"] = section
+            item["content"] = extracted
+            item["content_length"] = len(extracted)
+        else:
+            item["matched_section"] = None
+            item["available_sections"] = self._list_markdown_headers(content_text)
+            item["message"] = f"未找到匹配 '{section}' 的小节，请参考 available_sections 清单。"
+        return item
 
     def search_modding_cases(self, query: str, limit: int = 10) -> List[Dict[str, Any]]:
         """搜索实战案例复盘（BOM乱码抢救、法律撤销机制、作用域泄漏、复杂模组排错等）"""
@@ -461,9 +726,26 @@ class DataHandler:
         }
 
     def get_systems_map(self, category: Optional[str] = None) -> Any:
-        """查询 common 160+ 类目系统地图（入口文件、readme状态、功能分组）"""
+        """查询 common 137+ 类目系统地图（入口文件、readme状态、功能分组，支持紧凑概览与关键词检索）"""
         all_cats = self.systems_map.get("categories", [])
         if not category:
+            # Token 优化：默认返回分组概览与统计，节约 86% Token
+            groups = {}
+            for c in all_cats:
+                g = c.get("group", "其他")
+                if g not in groups:
+                    groups[g] = []
+                groups[g].append(c.get("category"))
+
+            return {
+                "title": self.systems_map.get("title", ""),
+                "total_categories": len(all_cats),
+                "hint": "提示: 传入 category 关键词（例如 'building', 'army', 'law'）获取具体类目的入口文件与作用说明；传入 'all' 可获取全量完整列表。",
+                "groups": groups,
+                "categories_sample": all_cats[:5]
+            }
+
+        if category.lower().strip() == "all":
             return {
                 "title": self.systems_map.get("title", ""),
                 "total_categories": len(all_cats),
@@ -486,18 +768,25 @@ class DataHandler:
         }
 
     def search_defines(self, query: str, block: Optional[str] = None, limit: int = 20) -> Dict[str, Any]:
-        """查询 00_defines.txt 常量索引与 N 块定义"""
+        """查询 00_defines.txt 常量索引与 N 块定义 (已对返回块源码进行摘要脱敏以节约 Token)"""
+        limit = max(1, min(limit, 50))
         q = query.lower()
         matched_blocks = []
         matched_constants = []
 
         for b in self.engine_defines.get("blocks", []):
             b_name = b.get("block", "").lower()
-            content = b.get("content", "").lower()
+            b_content = b.get("content", "").lower()
             if block and block.lower() not in b_name:
                 continue
-            if q in b_name or q in content:
-                matched_blocks.append(b)
+            if q in b_name or q in b_content:
+                # Token 优化：在搜索列表中不回传数千行的原始 content，改用摘要与长度
+                b_copy = b.copy()
+                if "content" in b_copy:
+                    b_copy["content_length"] = len(b_copy["content"])
+                    del b_copy["content"]
+                b_copy["fetch_hint"] = f"可调用 get_define_block('{b.get('block')}') 获取该块完整源码"
+                matched_blocks.append(b_copy)
 
         for c in self.engine_defines.get("constants", []):
             c_name = c.get("constant", "").lower()
@@ -606,6 +895,22 @@ class DataHandler:
         基于实测 A 类乱码（UTF-8 文本被按 GBK/ANSI 错误读取并保存）的回环抢救算法。
         例如将 '鍚堝悓' 还原为 '合同'。
         """
+        if not text or not text.strip():
+            return {
+                "success": False,
+                "corruption_type": "空字符串",
+                "message": "输入文本为空，无需还原",
+                "recovered_text": ""
+            }
+
+        if all(ord(c) < 128 for c in text):
+            return {
+                "success": True,
+                "corruption_type": "纯 ASCII",
+                "message": "文本为纯 ASCII 字符，未发现中文乱码损坏",
+                "recovered_text": text
+            }
+
         try:
             # 检测是否含有不可逆的 PUA (U+E000 - U+F8FF) 字符
             has_pua = any(0xE000 <= ord(ch) <= 0xF8FF for ch in text)
@@ -837,7 +1142,36 @@ class DataHandler:
                 "message": f"修改器失效错误: 检测到使用 EU4 废弃修改器 ({', '.join(set(eu4_mods))})！EU5 引擎不识别这些修改器，会导致 pdx_persistent_reader.cpp:289 报错且静默失效。请使用 MCP search_modifiers 获取合法 EU5 修改器。"
             })
 
-        # 19. 编码提示
+        # 19. 全角中文标点符号检查 (lexer.cpp 未知字符中断)
+        full_width = re.findall(r'([：，；“”‘’（）【】！？])', snippet)
+        if full_width:
+            issues.append({
+                "severity": "ERROR",
+                "code": "FULL_WIDTH_PUNCTUATION",
+                "message": f"语法错误: 代码中混入了全角中文标点符号 ({', '.join(set(full_width))})！Jomini 词法分析器 (lexer.cpp) 会直接中断解析并报错 'Unknown character'。请替换为对应半角英文标点符号 (:, ;, \", \', (), [])。"
+            })
+
+        # 20. trigger = { ... } 只读条件块内误写修改效果检查
+        trigger_blocks = re.findall(r'trigger\s*=\s*\{([^}]*)\}', snippet, re.DOTALL)
+        for tb in trigger_blocks:
+            bad_effects = re.findall(r'\b(add_treasury|add_gold|set_variable|change_variable|remove_variable|add_stability|kill_character)\s*=', tb)
+            if bad_effects:
+                issues.append({
+                    "severity": "ERROR",
+                    "code": "EFFECT_IN_TRIGGER_BLOCK",
+                    "message": f"逻辑冲突错误: 在只读判断条件块 (trigger = {{ ... }}) 内检测到状态修改效果 ({', '.join(set(bad_effects))})！trigger 仅用于布尔判断真假，写入修改效果会导致静默失效或报错。状态修改请放在 immediate 或 effect 块中。"
+                })
+
+        # 21. 事件命名空间缺失检查
+        if re.search(r'\b(country_event|location_event|unit_event|exploration_event|age_event)\s*=', snippet):
+            event_ids = re.findall(r'\bid\s*=\s*([a-zA-Z0-9_]+)\.\d+', snippet)
+            if event_ids and not re.search(r'\bnamespace\s*=\s*', snippet):
+                suggestions.append({
+                    "code": "MISSING_EVENT_NAMESPACE",
+                    "message": f"结构提示: 检测到带命名空间的事件 ID ({', '.join(set(event_ids))})，但当前代码段未声明 'namespace = ...'。在独立事件文件中务必在最顶部声明命名空间，否则引擎会报错未知事件 ID。"
+                })
+
+        # 22. 编码提示
         suggestions.append({
             "code": "UTF8_BOM_REMINDER",
             "message": "部署提醒: EU5 所有 mod 脚本和本地化 .yml 文件必须带 UTF-8 BOM（EF BB BF）。普通无 BOM 文件会被游戏引擎忽略或解析为乱码。"
@@ -854,7 +1188,7 @@ class DataHandler:
 
     def get_statistics(self) -> Dict[str, Any]:
         return {
-            "version": "2.3.0 (EU5 1.4-Beta & Vanilla/Workshop Full Integration)",
+            "version": "2.3.1 (EU5 1.4-Beta & Vanilla/Workshop Full Integration)",
             "total_entries": len(self.all_data),
             "breakdown": {
                 "modifiers": len(self.modifiers),

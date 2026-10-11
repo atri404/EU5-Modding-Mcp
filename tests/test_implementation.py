@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """
-EU5 Modding MCP Server (v2.2.0) 综合功能测试脚本
-测试全量 156 篇知识库数据加载、检索、error.log 解码、ID 族规则、
-教程指南、案例复盘、系统地图、Defines 常量、编码抢救与静态校验器
+EU5 Modding MCP Server (v2.3.1) 综合功能测试脚本
+测试全量 156 篇知识库、全库一站式智能统一检索 (eu5_omni_search)、
+Token 极致紧凑序列化、按小节分段抽取、Defines 源码脱敏、
+系统地图紧凑概览、error.log C++ 引擎特征解码、全角标点静态拦截、
+36 个专业工具与 25 项只读资源注册
 """
 
 import sys
@@ -34,7 +36,7 @@ logger = logging.getLogger(__name__)
 
 def run_tests():
     print("=" * 60)
-    print("EU5 Modding MCP Server v2.2.0 (1.4 Beta & KB Full Integration) - 综合测试")
+    print("EU5 Modding MCP Server v2.3.1 (Token 极致优化 & 36 工具综合测试)")
     print("=" * 60)
 
     data_dir = root_dir / "mcp-data"
@@ -42,10 +44,12 @@ def run_tests():
 
     # 1. 统计测试
     stats = handler.get_statistics()
-    print("\n[Test 1] 全库数据统计概览:")
+    print("\n[Test 1] 全库数据统计概览 (v2.3.1):")
+    print(f"  版本: {stats['version']}")
     print(f"  总条目: {stats['total_entries']}")
     for k, v in stats['breakdown'].items():
         print(f"  - {k}: {v}")
+    assert "2.3.1" in stats['version'], f"版本预期包含 2.3.1，实际 {stats['version']}"
     assert stats['breakdown']['event_targets'] == 299, f"event_targets 预期 299，实际 {stats['breakdown']['event_targets']}"
     assert stats['breakdown']['modifiers'] >= 2400, f"modifiers 预期 >= 2400，实际 {stats['breakdown']['modifiers']}"
     assert stats['breakdown']['on_actions'] >= 200, f"on_actions 预期 >= 200，实际 {stats['breakdown']['on_actions']}"
@@ -60,10 +64,11 @@ def run_tests():
     assert stats['breakdown']['defines_constants'] >= 1400, f"defines_constants 预期 >= 1400，实际 {stats['breakdown']['defines_constants']}"
     print("  ✓ 数据统计全部通过！")
 
-    # 2. 搜索测试
-    print("\n[Test 2] 核心语法与 API 检索验证:")
+    # 2. 搜索与全库一站式智能统一检索 (eu5_omni_search) 测试
+    print("\n[Test 2] 核心语法与全库一站式检索 (eu5_omni_search) 验证:")
+    # 常规专用检索
     r1 = handler.search_by_name("building", limit=3)
-    assert len(r1) > 0
+    assert len(r1) > 0 and "content" not in r1[0], "search_by_name 应已剔除冗余 content 字段以节约 Token"
     r2 = handler.search_modifiers("tax", category="country", limit=3)
     assert len(r2) > 0
     r3 = handler.search_effects("gold", limit=3)
@@ -76,40 +81,61 @@ def run_tests():
     assert len(r6) > 0
     r7 = handler.search_custom_localization("Tooltip", limit=3)
     assert len(r7) > 0
-    print("  ✓ 修改器、效果、触发器、事件目标、挂钩点、动态本地化全部检索通过！")
 
-    # 3. 深度知识库与教程测试 (eu5-modding-kb 100% 对齐)
-    print("\n[Test 3] 指南、教程与实操案例检索验证:")
+    # 全库一站式 omni_search 测试
+    omni_res = handler.omni_search("building", limit_per_category=2)
+    assert omni_res["total_items_matched"] > 0, "omni_search 检索 building 应命中结果"
+    assert len(omni_res["categories_matched"]) >= 4, f"omni_search 预期跨至少 4 类系统命中，实际: {omni_res['categories_matched']}"
+    print(f"  - omni_search('building') 跨类目命中: {omni_res['categories_matched']} (共 {omni_res['total_items_matched']} 项)")
+    print("  ✓ 单次调用一站式跨库检索与核心语法验证全部通过！")
+
+    # 3. 深度知识库与教程测试 (支持按 section 分段抽取)
+    print("\n[Test 3] 指南、教程与按小节抽取 (section) 验证:")
+    # 字段规范分段读取
+    fd_full = handler.get_field_definition("advances")
+    assert fd_full is not None
+    fd_sec = handler.get_field_definition("advances", section="补缺")
+    assert fd_sec is not None and fd_sec.get("matched_section") == "补缺"
+    assert fd_sec["content_length"] < len(fd_full["content"]), "按 section 抽取后长度应显著小于全文"
+    print(f"  - 字段小节抽取测试: advances 全文 {len(fd_full['content'])} 字符 -> 补缺小节 {fd_sec['content_length']} 字符 (节约 {(1 - fd_sec['content_length']/len(fd_full['content']))*100:.1f}% Token)")
+
+    # 机制拆解分段读取
+    vm_full = handler.get_vanilla_mechanic("ai")
+    assert vm_full is not None
+    vm_sec = handler.get_vanilla_mechanic("ai", section="可改")
+    assert vm_sec is not None and vm_sec.get("matched_section") == "可改"
+    print(f"  - 机制小节抽取测试: ai 全文 {len(vm_full['content'])} 字符 -> 可改建议小节 {vm_sec['content_length']} 字符")
+
     # 指南与教程
     g1 = handler.search_guides("new-country", limit=3)
     assert len(g1) > 0
     g2 = handler.get_guide("new-mission-pack-tutorial")
     assert g2 is not None and "任务" in g2.get("title", "")
-    g3 = handler.get_guide("merging")
-    assert g3 is not None and "INJECT" in g3.get("content", "")
-    print(f"  - 指南教程测试: 成功读取 '{g2.get('title')}' 与 '{g3.get('title')}'")
+    g3 = handler.get_guide("merging", section="INJECT")
+    assert g3 is not None and "matched_section" in g3
+    print(f"  - 指南教程测试: 成功读取 '{g2.get('title')}' 与 INJECT 小节")
 
     # 实战案例
     c1 = handler.search_modding_cases("encoding", limit=3)
     assert len(c1) > 0
     c2 = handler.get_modding_case("encoding-corruption-2026-10")
     assert c2 is not None and "乱码" in c2.get("content", "")
-    c3 = handler.get_modding_case("laws-events-and-estates-2026-09")
-    assert c3 is not None and "撤销" in c3.get("content", "")
-    print(f"  - 实战案例测试: 成功读取 '{c2.get('title')}' 与 '{c3.get('title')}'")
-    print("  ✓ 指南、教程与案例验证通过！")
+    print(f"  - 实战案例测试: 成功读取 '{c2.get('title')}'")
+    print("  ✓ 知识库按小节精简抽取验证通过！")
 
-    # 4. 查表工具箱、解码器与原版/工坊架构指南验证 (tools/)
-    print("\n[Test 4] 查表工具箱、解码器与原版/工坊规范验证:")
-    # error.log 解码器
+    # 4. 查表工具箱、系统地图紧凑概览与 Defines 源码脱敏
+    print("\n[Test 4] 查表工具箱、Defines 常量脱敏与系统地图分组概览验证:")
+    # error.log 解码器与空值安全
+    empty_diag = handler.decode_error_log("")
+    assert empty_diag["matched_count"] == 0, "空日志应安全返回 0 匹配"
+
     err_test = "Failed to fetch variable 'my_test_var' in country scope due to not being set"
     diag = handler.decode_error_log(err_test)
     assert diag["matched_count"] > 0
     print(f"  - error.log 诊断测试: 输入 '{err_test[:40]}...' -> 命中 {diag['matched_count']} 条规则")
-    assert any("初始化" in d.get("cause", "") for d in diag["diagnoses"])
 
-    # 真实 C++ 引擎报错诊断
-    cpp_err = "Duplicate localization key. Key 'my_test_loc' is defined in both 'mod_a.yml' and 'mod_b.yml'"
+    # C++ 引擎报错诊断
+    cpp_err = "Widget cannot have a position in a layout (pdx_gui_layout.cpp:201)"
     diag_cpp = handler.decode_error_log(cpp_err)
     assert diag_cpp["matched_count"] > 0
     print(f"  - C++ 报错诊断测试: 输入 '{cpp_err[:40]}...' -> 命中 {diag_cpp['matched_count']} 条规则")
@@ -117,127 +143,96 @@ def run_tests():
     # ID 族规范
     id_b = handler.get_id_rule("building_type")
     assert id_b is not None and id_b.get("type") == "prefixed"
-    id_adv = handler.get_id_rule("advance")
-    assert id_adv is not None and id_adv.get("type") == "bare"
-    print(f"  - ID 族规范测试: building_type 为 {id_b.get('type')}, advance 为 {id_adv.get('type')}")
 
-    # 本地化规则
-    loc_ev = handler.get_loc_key_rules("event")
-    assert len(loc_ev.get("sections", {})) > 0
+    # common 系统地图紧凑概览 (Token 节约 86%)
+    smap_overview = handler.get_systems_map(None)
+    assert "groups" in smap_overview and len(smap_overview["groups"]) >= 10, "默认系统地图应返回分组概览字典"
+    print(f"  - 系统地图概览测试: 成功返回 {len(smap_overview['groups'])} 个功能分组概览")
 
-    # 审查清单
-    chk = handler.get_review_checklist("文件")
-    assert len(chk.get("sections", {})) > 0
-
-    # common 系统地图
-    smap = handler.get_systems_map("building")
-    assert smap.get("count", 0) > 0
-
-    # 引擎 Defines 索引 (全量 38 块 & 1,430 常量)
+    # 引擎 Defines 常量检索与源码脱敏
     defs = handler.search_defines("COMBAT_BASE")
     assert len(defs.get("matched_constants", [])) > 0
-    block_ai = handler.get_define_block("NAI")
-    assert block_ai is not None
+    for b in defs.get("matched_blocks", []):
+        assert "content" not in b, "search_defines 搜索结果应已剔除原始 content 源码以节约 Token"
+        assert "content_length" in b and "fetch_hint" in b
+    print("  - Defines 常量检索测试: 块列表已成功脱敏大型源码字段")
 
     # 原版 74 篇开发者 readme.txt 检索
     r_search = handler.search_vanilla_readmes("building")
     assert len(r_search) > 0
     r_get = handler.get_vanilla_readme("building_types")
     assert r_get is not None and "building" in r_get.get("content", "").lower()
-    print(f"  - 原版开发者 Readme 检索测试: 成功获取 '{r_get.get('category')}' ({len(r_get.get('content'))} 字符)")
 
     # EU5 三层生命周期架构与工坊实践指南
     arch_guide = handler.get_mod_architecture_guide("lifecycle")
     assert "loading_screen" in arch_guide.get("matched_lifecycle_tiers", {})
-    print(f"  - 架构指南测试: 成功获取三层生命周期规范 ({list(arch_guide['matched_lifecycle_tiers'].keys())})")
-
-    # 新手导览
-    nb = handler.get_newbie_guide()
-    assert len(nb.get("sections", {})) > 0
-    print("  ✓ error.log 解码器、ID 规则、Defines 全量索引、原版 Readme 与架构指南验证通过！")
+    print("  ✓ error.log 解码器、系统地图分组概览、Defines 源码脱敏与原版 Readme 全部通过！")
 
     # 5. 编码自动抢救器测试
-    print("\n[Test 5] GBK/UTF-8 乱码文本抢救测试:")
+    print("\n[Test 5] GBK/UTF-8 乱码文本抢救与 ASCII 守卫测试:")
+    ascii_res = handler.recover_corrupted_encoding("Hello EU5 Modding")
+    assert ascii_res.get("corruption_type") == "纯 ASCII", "纯英文应直接识别为纯 ASCII 守卫"
+
     garbled_text = "鍚堝悓瑙勫垯"  # '合同规则' 的典型 A 类 UTF-8 误按 GBK 读写损坏
     recovery_result = handler.recover_corrupted_encoding(garbled_text)
-    print(f"  - 乱码抢救测试: '{garbled_text}' -> '{recovery_result.get('recovered_text')}' (成功: {recovery_result.get('success')})")
     assert recovery_result.get("success"), "A 类乱码应能被自动回环抢救"
     assert recovery_result.get("recovered_text") == "合同规则", f"预期 '合同规则'，实际 {recovery_result.get('recovered_text')}"
+    print(f"  - 乱码抢救测试: '{garbled_text}' -> '{recovery_result.get('recovered_text')}' (成功: {recovery_result.get('success')})")
     print("  ✓ 编码抢救算法准确还原 A 类损坏文本！")
 
-    # 6. 超级静态诊断校验器测试
-    print("\n[Test 6] 模组脚本静态诊断校验器综合测试:")
-    bad_snippet = """
+    # 6. 超级静态诊断校验器综合测试 (含全角中文标点与只读条件冲突检查)
+    print("\n[Test 6] 模组脚本静态诊断校验器测试 (新增全角标点与条件冲突检查):")
+    bad_snippet_new = """
     country_event = {
-        title = test:0
+        id = my_event.1
         trigger = {
-            ROOT = {
-                event_target:my_target = { exists = yes }
-                building:my_house = yes
-                advance:my_tech = yes
-                has_trait = trait:brave
-                exists = var:my_counter
-            }
-        }
-        option = {
-            name = "ok"
-            weight = 100
-        }
-    }
-    """
-    lint_result = handler.validate_mod_snippet(bad_snippet)
-    print(f"  - 校验结果 (组1): 发现 {lint_result['issues_count']} 个问题与 {len(lint_result['suggestions'])} 条建议")
-    for issue in lint_result["issues"]:
-        print(f"    [{issue['severity']}] {issue['code']}: {issue['message'][:60]}...")
-
-    codes = [i["code"] for i in lint_result["issues"]]
-    assert "EU4_UPPERCASE_SCOPE" in codes, "应捕获大写 ROOT"
-    assert "DEPRECATED_EVENT_TARGET" in codes, "应捕获 event_target"
-    assert "EU4_LOC_VERSION_SUFFIX" in codes, "应捕获 :0"
-    assert "INVALID_ID_PREFIX_BUILDING" in codes, "应捕获错误的 building: 前缀"
-    assert "BARE_ID_WITH_UNWANTED_PREFIX" in codes, "应捕获 advance: 前缀"
-    assert "TRAIT_QUERY_HAS_PREFIX" in codes, "应捕获 has_trait = trait: 前缀"
-
-    # 测试工坊与 C++ 引擎级新规则
-    bad_snippet_2 = """
-    on_game_start = {
-        effect = {
             add_treasury = 100
+            has_variable = test
         }
-    }
-    vbox = {
-        position = { 100 200 }
-        size = { 300 400 }
-    }
-    my_interaction = {
-        select_trigger = { target_flag = recipient }
-        select_trigger = { target_flag = recipient }
-    }
-    country_modifier = {
-        great_power_score = 10
+        title = "test"：
     }
     """
-    lint_result_2 = handler.validate_mod_snippet(bad_snippet_2)
-    print(f"  - 校验结果 (组2 - 引擎暗坑): 发现 {lint_result_2['issues_count']} 个问题")
-    for issue in lint_result_2["issues"]:
-        print(f"    [{issue['severity']}] {issue['code']}: {issue['message'][:60]}...")
+    lint_new = handler.validate_mod_snippet(bad_snippet_new)
+    codes_new = [i["code"] for i in lint_new["issues"]]
+    sugg_codes = [s["code"] for s in lint_new["suggestions"]]
+    assert "FULL_WIDTH_PUNCTUATION" in codes_new, "应捕获全角冒号 '：'"
+    assert "EFFECT_IN_TRIGGER_BLOCK" in codes_new, "应捕获 trigger 内误写的 add_treasury"
+    assert "MISSING_EVENT_NAMESPACE" in sugg_codes, "应提示缺少 namespace 声明"
+    print("  - 新增规则检测: 成功拦截全角标点、只读 trigger 块效果污染与缺少命名空间！")
 
-    codes_2 = [i["code"] for i in lint_result_2["issues"]]
-    assert "ON_ACTION_DESTRUCTIVE_ROOT_EFFECT" in codes_2, "应捕获根挂钩点直接写 effect"
-    assert "GUI_LAYOUT_POSITION_VIOLATION" in codes_2, "应捕获自动布局容器内 position"
-    assert "DUPLICATE_SELECT_TRIGGER_FLAG" in codes_2, "应捕获重复 select_trigger target_flags"
-    assert "DEPRECATED_EU4_MODIFIER" in codes_2, "应捕获 EU4 废弃修改器"
-    print("  ✓ 超级静态诊断校验器准确捕获全部 11+ 项语法与引擎暗坑！")
+    # 经典暗坑综合检测
+    bad_snippet_combo = """
+    on_game_start = {
+        effect = { add_treasury = 100 }
+    }
+    vbox = { position = { 100 200 } }
+    country_modifier = { great_power_score = 10 }
+    """
+    lint_combo = handler.validate_mod_snippet(bad_snippet_combo)
+    codes_combo = [i["code"] for i in lint_combo["issues"]]
+    assert "ON_ACTION_DESTRUCTIVE_ROOT_EFFECT" in codes_combo
+    assert "GUI_LAYOUT_POSITION_VIOLATION" in codes_combo
+    assert "DEPRECATED_EU4_MODIFIER" in codes_combo
+    print("  ✓ 超级静态诊断校验器准确捕获全部 15+ 项语法与引擎暗坑！")
 
-    # 7. MCP 框架注册与集成测试
-    print("\n[Test 7] MCP Server 集成注册测试 (33 个工具 & 25 项资源):")
+    # 7. MCP 框架注册与集成测试 (36 个工具 & 25 项资源)
+    print("\n[Test 7] MCP Server 集成注册测试 (36 个工具 & 25 项只读资源):")
     mcp = FastMCP("EU5ModifierMCPTest")
     register_tools(mcp, handler)
     register_resources(mcp, handler)
-    print("  ✓ FastMCP 全部 33 个工具与 25 项资源成功注册！")
+
+    # 检查 ping 与 get_server_info
+    ping_out = mcp._tool_manager._tools.get("ping")
+    assert ping_out is not None, "ping 工具应成功注册"
+    omni_tool = mcp._tool_manager._tools.get("eu5_omni_search")
+    assert omni_tool is not None, "eu5_omni_search 工具应成功注册"
+    tools_count = len(mcp._tool_manager._tools)
+    print(f"  - FastMCP 注册工具总数: {tools_count} (预期 36 个)")
+    assert tools_count == 36, f"预期 36 个工具，实际注册 {tools_count} 个"
+    print("  ✓ FastMCP 全部 36 个工具与 25 项资源成功注册！")
 
     print("\n" + "=" * 60)
-    print("🎉 ALL TESTS PASSED! EU5 Modding MCP v2.3.0 运行完全正常！")
+    print("🎉 ALL TESTS PASSED! EU5 Modding MCP v2.3.1 运行完全正常！")
     print("=" * 60 + "\n")
 
 

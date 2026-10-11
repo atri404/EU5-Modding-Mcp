@@ -47,67 +47,20 @@ def initialize_data_handler():
 
 
 def register_all_features():
-    """注册所有功能（工具和资源）"""
+    """注册所有功能（36 个工具和 25 项只读资源）"""
     if not initialize_data_handler():
         logger.warning("Data handler initialization failed, some features may be unavailable")
 
     register_tools(mcp, data_handler)
-    logger.info("Tools registered successfully")
+    logger.info("Tools registered successfully (36 tools)")
 
     register_resources(mcp, data_handler)
-    logger.info("Resources registered successfully")
-
-
-@mcp.tool()
-def ping() -> str:
-    """
-    检查服务器是否正常运行
-
-    Returns:
-        str: 服务器运行确认信息
-    """
-    return "EU5 Modding MCP Server (v2.1.0 / 1.4 Beta) is running successfully!"
-
-
-@mcp.tool()
-def get_server_info() -> str:
-    """
-    获取服务器架构信息、版本与功能概览
-
-    Returns:
-        str: JSON 格式的服务器详细元数据
-    """
-    info = {
-        "name": "EU5 Modding MCP Server",
-        "version": "2.1.0",
-        "game_version_baseline": "EU5 1.3.x (Pavia) & 1.4.0 Open Beta (Across the Pillars)",
-        "description": "Model Context Protocol server for Europa Universalis V modding, integrated with eu5-modding-kb & official game data",
-        "features": [
-            "搜索修改器（Modifiers，2,497 条）",
-            "搜索游戏效果（Effects，1,323 条）",
-            "搜索触发条件（Triggers，1,499 条）",
-            "搜索事件目标（Event Targets，299 条，Bug 已修复）",
-            "搜索 on_actions 脉冲挂钩点（159 条）",
-            "搜索自定义本地化函数（Custom Localization，413 条）",
-            "类目字段规范库（Field Definitions，103 篇，含 1.4 字段）",
-            "原版机制深度拆解（Vanilla Mechanics，24 篇，含军队移动/远征）",
-            "实测踩坑指南（Modding Pitfalls，18 个避坑专题与 EU4 对照）",
-            "标准中英对照术语表（Glossary，167 条）",
-            "模组脚本静态诊断校验器（Validate Mod Snippet）",
-            "1.4.0 公测版变更综述（1.4 Beta Summary）",
-            "底层 Jomini/Clausewitz 数据类型检索（Data Types，24,442 条）"
-        ],
-        "data_summary": {
-            "total_entries": 30759,
-            "unique_index_keys": 28539
-        }
-    }
-    return json.dumps(info, ensure_ascii=False, indent=2)
+    logger.info("Resources registered successfully (25 resources)")
 
 
 def main():
     """MCP 服务器入口"""
-    logger.info("Starting EU5 Modding MCP Server (v2.1.0)...")
+    logger.info("Starting EU5 Modding MCP Server (v2.3.1)...")
     register_all_features()
 
     try:

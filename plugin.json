@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "eu5-modding",
-  "version": "2.3.0",
-  "description": "Europa Universalis V modding suite for AI agents: integrates Jomini engine API MCP server with 33 tools and 25 resources, 74 vanilla developer readmes, 38 N-blocks defines (1,430 constants), 206 vanilla on-actions, 156 knowledge base documents, and mod dev/review/lookup skills.",
+  "version": "2.3.1",
+  "description": "Europa Universalis V modding suite for AI agents: integrates Jomini engine API MCP server with 36 tools and 25 resources, eu5_omni_search, token-compact serialization, 5 slash commands, 74 vanilla developer readmes, 38 N-blocks defines (1,430 constants), 206 vanilla on-actions, 156 knowledge base documents, and mod dev/review/lookup skills.",
   "author": {
     "name": "atri404",
     "url": "https://github.com/atri404/EU5-Modding-Mcp"
@@ -16,6 +16,13 @@
     "mcp",
     "paradox",
     "jomini"
+  ],
+  "commands": [
+    "./commands/eu5-search.md",
+    "./commands/eu5-lint.md",
+    "./commands/eu5-arch.md",
+    "./commands/eu5-readme.md",
+    "./commands/eu5-error.md"
   ],
   "mcpServers": {
     "eu5-modding-mcp": {

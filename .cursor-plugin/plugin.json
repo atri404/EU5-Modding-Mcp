@@ -1,7 +1,7 @@
 {
   "name": "eu5-modding",
-  "version": "2.3.0",
-  "description": "EU5 (Europa Universalis V) Modding suite for Cursor: Jomini engine API MCP server (33 tools, 25 resources), 74 vanilla readmes, 38 defines N-blocks, 156 knowledge base documents, and mod development skills.",
+  "version": "2.3.1",
+  "description": "EU5 (Europa Universalis V) Modding suite for Cursor: Jomini engine API MCP server (36 tools, 25 resources), eu5_omni_search, token-compact serialization, 74 vanilla readmes, 38 defines N-blocks, 156 knowledge base documents, and mod development skills.",
   "author": {
     "name": "atri404"
   },
