@@ -20,8 +20,19 @@ EU5 Modding MCP 数据转换与重建脚本 (v2.1.0 / 1.4 Beta 适配)
 import json
 import os
 import re
+import sys
 from pathlib import Path
 from typing import List, Dict, Any
+
+# 确保项目根目录和 scripts 目录在 sys.path 中
+_curr_dir = Path(__file__).resolve().parent
+_root_dir = _curr_dir.parent
+if str(_root_dir) not in sys.path:
+    sys.path.insert(0, str(_root_dir))
+if str(_curr_dir) not in sys.path:
+    sys.path.insert(0, str(_curr_dir))
+
+from extract_kb_extensions import convert_all_kb_extensions
 
 
 def get_paths():
@@ -497,6 +508,11 @@ def convert_all():
         json.dump(summary_14, f, ensure_ascii=False, indent=2)
     print("  ✓ version_1_4_beta.json: 1.4 测试版变更综述")
 
+    # 提取 guides, cases, error_log_decoder, id_rules, loc_rules, review_checklist, systems_map, engine_defines
+    ext_data = convert_all_kb_extensions(kb_dir, output_dir)
+    guides = ext_data["guides"]
+    cases = ext_data["cases"]
+
     print("\n🔍 构建全局索引 index.json 与 all_data.json ...")
     all_data = []
     all_data.extend(effects)
@@ -523,6 +539,18 @@ def convert_all():
             "name": m_item["name"],
             "description": m_item["summary"],
             "type": "vanilla_mechanic"
+        })
+    for g_item in guides:
+        all_data.append({
+            "name": g_item["name"],
+            "description": g_item["summary"],
+            "type": "guide"
+        })
+    for c_item in cases:
+        all_data.append({
+            "name": c_item["name"],
+            "description": c_item["summary"],
+            "type": "modding_case"
         })
 
     with open(output_dir / "all_data.json", "w", encoding="utf-8") as f:

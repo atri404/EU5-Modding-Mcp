@@ -1,0 +1,556 @@
+{
+  "title": "Defines 体系与 00_defines.txt 常量索引",
+  "blocks": [
+    {
+      "block": "NGame",
+      "line_range": "1–27",
+      "content": "时间（START_DATE \"1337.4.1\" / END_DATE \"1836.12.31\"）、HOUR_TICK=2、游戏速度表"
+    },
+    {
+      "block": "NCityAudio / NAlertAudio / NJominiMap / NGUI / NText",
+      "line_range": "28–124",
+      "content": "音频/地图/GUI/文本"
+    },
+    {
+      "block": "NCountry",
+      "line_range": "125–333",
+      "content": "国家级（稳定度、威望、厌战度等）"
+    },
+    {
+      "block": "NMercenary",
+      "line_range": "334–360",
+      "content": "雇佣兵（MERCENARY_PRISONER_MAX_MORALE=0.6）"
+    },
+    {
+      "block": "NUnit",
+      "line_range": "361–444",
+      "content": "单位：REGIMENT_SIZE=1000、LAND_MORALE=3.0、NAVAL_MORALE=3.0、MONTHLY_REINFORCE=0.25、MONTHLY_REPAIR=0.1、ATTRITION_LACK_OF_FOOD=5、LEVY_MAINTENANCE_FACTOR=0.01、ARMY_MOVEMENT_SPEED=0.13、NAVY_MOVEMENT_SPEED=0.5"
+    },
+    {
+      "block": "NCombat",
+      "line_range": "445–561",
+      "content": "战斗：COMBAT_DICE_SIDE=10、COMBAT_BASE=5、COMBAT_MAX=15、COMBAT_DAMAGE_MULT=0.01、HOURS_PER_PHASE=5、MINIMUM_COMBAT_DURATION=24、MINIMUM_NAVAL_COMBAT_DURATION=72、STRAIT_CROSSING_DICE=-2、RIVER_CROSSING_DICE=-1、SEA_LANDING_DICE=-1、MAX_FRONTAGE_OVERSTACKING=1.25、LAND_LEVY_COMBAT_IMPACT=0.75、INITIATIVE_*、ASSAULT_*、SIEGE_*、DAYS_PER_SIEGE_PHASE=30、MAX_BREACH=3、TRADITION_GAIN_LAND=10"
+    },
+    {
+      "block": "NAI",
+      "line_range": "**562–1592**",
+      "content": "AI：**1031 行内约 839 个常量**（`AI_` 前缀 393 / `PEACE_` 59 / `CONQUER_` 27 / `HUNT_` 16 / `WAR_` 11 / `COLONY_` 9…）——战争平衡（`WAR_BALANCE_REGULARS_IMPORTANCE=3`、`WAR_BALANCE_LEVY_BOATS_IMPORTANCE=10`）、胜率（`BATTLE_WIN_CHANCE_SENSITIVITY=16`、`BATTLE_WIN_CHANCE_ENEMY_BIAS=1.1`、100 军事≈+25% 兵力）、扩张（`DEFAULT_CHANCE_OF_EXPANSION=0.25`/月、`AI_NUM_EXPANSION_TARGETS=20`、`CONQUER_DESIRE_*` 27 个）、和平（`PEACE_OFFER_*` 59 个）、军事 AI（`HUNT_ARMIES_` 16、`CARPET_SIEGE_` 4、撤退阈值）、AI 性能节拍（`AI_PERFORMANCE_*_MONTHS_BETWEEN_UPDATES`：内阁 36 / 改革 24 / 政策 6 / 特权 12）、储蓄模式（`AI_SAVING_MODE_*`）。**逐条自带英文注释，是全游戏最自解释的一段 defines；详见 `vanilla\\vanilla-ai.md`**"
+    },
+    {
+      "block": "NCulture / NCharacter / NPortrait",
+      "line_range": "1593–1741",
+      "content": "文化；角色（MAX_ABILITY_VALUE=100、LEADER_COMBAT_TRAIT_GAIN_CHANCE=0.5、ASSIMILATION_* 同化修正表 1487–1506）"
+    },
+    {
+      "block": "NPop",
+      "line_range": "1752–1824",
+      "content": "POP：MIN_REBEL_POP_SIZE_THRESHOLD=5、DISPLAY_SIZE=1000（显示=千）、BASE_SATISFACTION=0.2、主文化+0.25/接纳+0.10/容忍+0.05、pop_join_rebel_threshold 相关 REBEL_JOIN_MIN_THRESHOLD=0.05、POP_MINORITY_SIMILAR_THRESHOLD=4/8、YEARLY_POP_SATISFACTION_FROM_EVENTS_DECAY=0.01"
+    },
+    {
+      "block": "NEstate",
+      "line_range": "1825–1891",
+      "content": "阶层"
+    },
+    {
+      "block": "NLocation",
+      "line_range": "1892–1956",
+      "content": "地点：SUPPLY_LIMIT_OWNER=0.25、FORT_GARRISON_UPKEEP=2、MIN_FRONTAGE_AFTER_TERRAIN=2、NORMAL_LOCATION_SIZE=25、MONTHLY_CONTROL_DECAY=0.01"
+    },
+    {
+      "block": "NMarket / NEconomy",
+      "line_range": "1957–2207",
+      "content": "市场/经济：MONTHLY_PRICE_CHANGE=0.05、GROWTH_FROM_FOOD_MULTIPLIER_MAX=10、LOCATION_DEPOPULATION_ALERT_MONTHS=60"
+    },
+    {
+      "block": "NDiplomacy / NWar",
+      "line_range": "2208–2702",
+      "content": "外交/战争：DEFAULT_WARGOAL_BATTLESCORE_BONUS=3、WARSCORE_MAX_FROM_BATTLES=50、BATTLE_RESULT_SCALE=25、PARTICIPATION_SCORE_BATTLE=0.03"
+    },
+    {
+      "block": "NWorkOfArt / NDynasty / NColony",
+      "line_range": "2703–2775",
+      "content": "艺术品/王朝/殖民"
+    },
+    {
+      "block": "NInternationalOrganization / NImperialCircle",
+      "line_range": "2776–2787",
+      "content": "国际组织/帝国圈。⚠️ **`NInternationalOrganization` 全文件出现两次**：`2776–2779`（仅 `MONTHS_TO_DISBAND_FROM_BIAS = 3`）与 **`2830–2836`**（议会四常量 `PARLIAMENT_REQUEST_ISSUE_SUPPORT_NEEDED=0.5` / `PARLIAMENT_ISSUE_THRESHOLD=0.5` / `PARLIAMENT_DURATION_DAYS=365` / `PARLIAMENT_AVAILABLE_AGENDAS=5`，在文件最末、`NDisease` 之后）——**引用该段常量必须带行号**"
+    },
+    {
+      "block": "NWeather",
+      "line_range": "2788–2798",
+      "content": "天气：*_DEGRADATION_DISTANCE_FOR_TOPOGRAPHY=125、PERCENT_DIFFERENCE_BETWEEN_GOOD_AND_BAD_SIDE_OF_CYCLONE=50"
+    },
+    {
+      "block": "NReligion / NSpreadable / NDisease",
+      "line_range": "2799–2829",
+      "content": "宗教/传播/疾病"
+    }
+  ],
+  "constants": [
+    {
+      "constant": "SOCIAL_VALUE_REQUIREMENT_FOR_REFORM",
+      "value": "50",
+      "location": "NCountry（155）",
+      "description": "政府改革要求的社会价值位置"
+    },
+    {
+      "constant": "GOVERNMENT_REFORM_SOCIETAL_VALUE_REQUIREMENT_FORECAST_IN_MONTHS / ..._CUTOFF_IN_MONTHS",
+      "value": "12 / 24",
+      "location": "NCountry（101–102）",
+      "description": "界面\"还要多久够格\"的预告窗口"
+    },
+    {
+      "constant": "BUREAUCRACY_ENTRENCHMENT_YEARS_PER_PHASE / ..._QUOTE_PER_PHASE",
+      "value": "100 / 50",
+      "location": "NMercenary 之后（295–296）",
+      "description": "官僚部门\"根深蒂固\"每阶段年数与每阶段份额"
+    },
+    {
+      "constant": "ESTATE_SATISFACTION_BUREAUCRACY",
+      "value": "0.01",
+      "location": "NEstate 区（230）",
+      "description": "官僚部门对阶层满意度的系数"
+    },
+    {
+      "constant": "DEFAULT_CURRENCY_GOVERNMENT_POWER / DEFAULT_CURRENCY_RIGHTEOUSNESS",
+      "value": "95 / 90",
+      "location": "NDiplomacy 区（1971/1974）",
+      "description": "货币偏置基准值"
+    },
+    {
+      "constant": "HEGEMONY_LOST_MONTHS / HEGEMONY_GRACE_PERIOD / HEGEMONY_ACTIVE_UNTIL_REPLACED / HEGEMONY_MONTHLY_PROGRESS",
+      "value": "120 / 12 / yes / 1",
+      "location": "霸权区（2273–2276）",
+      "description": "霸权的失去、宽限与易主规则"
+    },
+    {
+      "constant": "BASE_COST / DISTANCE_COST_FACTOR / POPULATION_COST_FACTOR（上限 3）",
+      "value": "1 / 0.0005 / 0.25",
+      "location": "**NColony（2746–2774）**",
+      "description": "特许殖民地的基础/距离/人口成本"
+    },
+    {
+      "constant": "SAME_AREA_COST_FACTOR / SAME_REGION_COST_FACTOR",
+      "value": "−0.5 / −0.33",
+      "location": "NColony",
+      "description": "同地区 / 同大区**折扣**"
+    },
+    {
+      "constant": "LOCATION_MAX_POP_ALLOWED_FOR_COLONY / DEVELOPMENT_AT_NEW_COLONY",
+      "value": "50（=5 万）/ 5",
+      "location": "NColony",
+      "description": "可殖民地点人口上限 / 新殖民地发展度"
+    },
+    {
+      "constant": "MAX_CHARTERS_IN_PROVINCE",
+      "value": "3",
+      "location": "NColony",
+      "description": "同一预设省份最多几个特许殖民地"
+    },
+    {
+      "constant": "EXPLORATION_CONSTRUCTION_TIME / CONQUISTADOR_CONSTRUCTION_TIME",
+      "value": "270 天 / 90 天",
+      "location": "NColony",
+      "description": "探索任务 / 征服者工期"
+    },
+    {
+      "constant": "EXPLORATION_BASE_COST / _BASE_TIME / _DISTANCE_TIME",
+      "value": "10 / 3 / 9",
+      "location": "NColony",
+      "description": "探索花费与时长"
+    },
+    {
+      "constant": "POWER_PROJECTION_SPREAD / EXPEL_TRIBAL_BENEFIT_DURATION",
+      "value": "0.005 / 120",
+      "location": "NColony",
+      "description": "力量投射扩散 / 驱逐部落收益持续月数"
+    },
+    {
+      "constant": "COLONIAL_POWER_PROJECTION_THRESHOLD_TO_START",
+      "value": "25",
+      "location": "NCountry（238）",
+      "description": "**力量投射不到 25 不能开始殖民**"
+    },
+    {
+      "constant": "COLONIAL_CHARTER_MIN/MAX_POPS_TO_TAKE_LOCATION",
+      "value": "1 / 5（1000–5000 人）",
+      "location": "NCountry（239–240）",
+      "description": "拿下一块地点所需当地人口"
+    },
+    {
+      "constant": "COLONIAL_MIGRATION_DISTANCE_FACTOR",
+      "value": "0.0001",
+      "location": "NCountry（235）",
+      "description": "迁徙量随距离衰减"
+    },
+    {
+      "constant": "EXPLORER_EXTRA_LIFE",
+      "value": "15",
+      "location": "NCharacter 区（1536）",
+      "description": "探险家的额外寿命"
+    },
+    {
+      "constant": "INTEL_THRESHOLD_LOCATION_MIGRATION",
+      "value": "5",
+      "location": "NDiplomacy 区（2383）",
+      "description": "情报门槛"
+    },
+    {
+      "constant": "HOUR_TICK",
+      "value": "2",
+      "location": "NGame",
+      "description": "NGame 关键定义常量"
+    },
+    {
+      "constant": "MERCENARY_PRISONER_MAX_MORALE",
+      "value": "0.6）",
+      "location": "NMercenary",
+      "description": "NMercenary 关键定义常量"
+    },
+    {
+      "constant": "REGIMENT_SIZE",
+      "value": "1000",
+      "location": "NUnit",
+      "description": "NUnit 关键定义常量"
+    },
+    {
+      "constant": "LAND_MORALE",
+      "value": "3.0",
+      "location": "NUnit",
+      "description": "NUnit 关键定义常量"
+    },
+    {
+      "constant": "NAVAL_MORALE",
+      "value": "3.0",
+      "location": "NUnit",
+      "description": "NUnit 关键定义常量"
+    },
+    {
+      "constant": "MONTHLY_REINFORCE",
+      "value": "0.25",
+      "location": "NUnit",
+      "description": "NUnit 关键定义常量"
+    },
+    {
+      "constant": "MONTHLY_REPAIR",
+      "value": "0.1",
+      "location": "NUnit",
+      "description": "NUnit 关键定义常量"
+    },
+    {
+      "constant": "ATTRITION_LACK_OF_FOOD",
+      "value": "5",
+      "location": "NUnit",
+      "description": "NUnit 关键定义常量"
+    },
+    {
+      "constant": "LEVY_MAINTENANCE_FACTOR",
+      "value": "0.01",
+      "location": "NUnit",
+      "description": "NUnit 关键定义常量"
+    },
+    {
+      "constant": "ARMY_MOVEMENT_SPEED",
+      "value": "0.13",
+      "location": "NUnit",
+      "description": "NUnit 关键定义常量"
+    },
+    {
+      "constant": "NAVY_MOVEMENT_SPEED",
+      "value": "0.5",
+      "location": "NUnit",
+      "description": "NUnit 关键定义常量"
+    },
+    {
+      "constant": "COMBAT_DICE_SIDE",
+      "value": "10",
+      "location": "NCombat",
+      "description": "NCombat 关键定义常量"
+    },
+    {
+      "constant": "COMBAT_BASE",
+      "value": "5",
+      "location": "NCombat",
+      "description": "NCombat 关键定义常量"
+    },
+    {
+      "constant": "COMBAT_MAX",
+      "value": "15",
+      "location": "NCombat",
+      "description": "NCombat 关键定义常量"
+    },
+    {
+      "constant": "COMBAT_DAMAGE_MULT",
+      "value": "0.01",
+      "location": "NCombat",
+      "description": "NCombat 关键定义常量"
+    },
+    {
+      "constant": "HOURS_PER_PHASE",
+      "value": "5",
+      "location": "NCombat",
+      "description": "NCombat 关键定义常量"
+    },
+    {
+      "constant": "MINIMUM_COMBAT_DURATION",
+      "value": "24",
+      "location": "NCombat",
+      "description": "NCombat 关键定义常量"
+    },
+    {
+      "constant": "MINIMUM_NAVAL_COMBAT_DURATION",
+      "value": "72",
+      "location": "NCombat",
+      "description": "NCombat 关键定义常量"
+    },
+    {
+      "constant": "STRAIT_CROSSING_DICE",
+      "value": "-2",
+      "location": "NCombat",
+      "description": "NCombat 关键定义常量"
+    },
+    {
+      "constant": "RIVER_CROSSING_DICE",
+      "value": "-1",
+      "location": "NCombat",
+      "description": "NCombat 关键定义常量"
+    },
+    {
+      "constant": "SEA_LANDING_DICE",
+      "value": "-1",
+      "location": "NCombat",
+      "description": "NCombat 关键定义常量"
+    },
+    {
+      "constant": "MAX_FRONTAGE_OVERSTACKING",
+      "value": "1.25",
+      "location": "NCombat",
+      "description": "NCombat 关键定义常量"
+    },
+    {
+      "constant": "LAND_LEVY_COMBAT_IMPACT",
+      "value": "0.75",
+      "location": "NCombat",
+      "description": "NCombat 关键定义常量"
+    },
+    {
+      "constant": "DAYS_PER_SIEGE_PHASE",
+      "value": "30",
+      "location": "NCombat",
+      "description": "NCombat 关键定义常量"
+    },
+    {
+      "constant": "MAX_BREACH",
+      "value": "3",
+      "location": "NCombat",
+      "description": "NCombat 关键定义常量"
+    },
+    {
+      "constant": "TRADITION_GAIN_LAND",
+      "value": "10",
+      "location": "NCombat",
+      "description": "NCombat 关键定义常量"
+    },
+    {
+      "constant": "WAR_BALANCE_REGULARS_IMPORTANCE",
+      "value": "3`",
+      "location": "NAI",
+      "description": "NAI 关键定义常量"
+    },
+    {
+      "constant": "WAR_BALANCE_LEVY_BOATS_IMPORTANCE",
+      "value": "10`）",
+      "location": "NAI",
+      "description": "NAI 关键定义常量"
+    },
+    {
+      "constant": "BATTLE_WIN_CHANCE_SENSITIVITY",
+      "value": "16`",
+      "location": "NAI",
+      "description": "NAI 关键定义常量"
+    },
+    {
+      "constant": "BATTLE_WIN_CHANCE_ENEMY_BIAS",
+      "value": "1.1`",
+      "location": "NAI",
+      "description": "NAI 关键定义常量"
+    },
+    {
+      "constant": "DEFAULT_CHANCE_OF_EXPANSION",
+      "value": "0.25`/月",
+      "location": "NAI",
+      "description": "NAI 关键定义常量"
+    },
+    {
+      "constant": "AI_NUM_EXPANSION_TARGETS",
+      "value": "20`",
+      "location": "NAI",
+      "description": "NAI 关键定义常量"
+    },
+    {
+      "constant": "MAX_ABILITY_VALUE",
+      "value": "100",
+      "location": "NCulture / NCharacter / NPortrait",
+      "description": "NCulture / NCharacter / NPortrait 关键定义常量"
+    },
+    {
+      "constant": "LEADER_COMBAT_TRAIT_GAIN_CHANCE",
+      "value": "0.5",
+      "location": "NCulture / NCharacter / NPortrait",
+      "description": "NCulture / NCharacter / NPortrait 关键定义常量"
+    },
+    {
+      "constant": "MIN_REBEL_POP_SIZE_THRESHOLD",
+      "value": "5",
+      "location": "NPop",
+      "description": "NPop 关键定义常量"
+    },
+    {
+      "constant": "DISPLAY_SIZE",
+      "value": "1000（显示=千）",
+      "location": "NPop",
+      "description": "NPop 关键定义常量"
+    },
+    {
+      "constant": "BASE_SATISFACTION",
+      "value": "0.2",
+      "location": "NPop",
+      "description": "NPop 关键定义常量"
+    },
+    {
+      "constant": "REBEL_JOIN_MIN_THRESHOLD",
+      "value": "0.05",
+      "location": "NPop",
+      "description": "NPop 关键定义常量"
+    },
+    {
+      "constant": "POP_MINORITY_SIMILAR_THRESHOLD",
+      "value": "4/8",
+      "location": "NPop",
+      "description": "NPop 关键定义常量"
+    },
+    {
+      "constant": "YEARLY_POP_SATISFACTION_FROM_EVENTS_DECAY",
+      "value": "0.01",
+      "location": "NPop",
+      "description": "NPop 关键定义常量"
+    },
+    {
+      "constant": "SUPPLY_LIMIT_OWNER",
+      "value": "0.25",
+      "location": "NLocation",
+      "description": "NLocation 关键定义常量"
+    },
+    {
+      "constant": "FORT_GARRISON_UPKEEP",
+      "value": "2",
+      "location": "NLocation",
+      "description": "NLocation 关键定义常量"
+    },
+    {
+      "constant": "MIN_FRONTAGE_AFTER_TERRAIN",
+      "value": "2",
+      "location": "NLocation",
+      "description": "NLocation 关键定义常量"
+    },
+    {
+      "constant": "NORMAL_LOCATION_SIZE",
+      "value": "25",
+      "location": "NLocation",
+      "description": "NLocation 关键定义常量"
+    },
+    {
+      "constant": "MONTHLY_CONTROL_DECAY",
+      "value": "0.01",
+      "location": "NLocation",
+      "description": "NLocation 关键定义常量"
+    },
+    {
+      "constant": "MONTHLY_PRICE_CHANGE",
+      "value": "0.05",
+      "location": "NMarket / NEconomy",
+      "description": "NMarket / NEconomy 关键定义常量"
+    },
+    {
+      "constant": "GROWTH_FROM_FOOD_MULTIPLIER_MAX",
+      "value": "10",
+      "location": "NMarket / NEconomy",
+      "description": "NMarket / NEconomy 关键定义常量"
+    },
+    {
+      "constant": "LOCATION_DEPOPULATION_ALERT_MONTHS",
+      "value": "60",
+      "location": "NMarket / NEconomy",
+      "description": "NMarket / NEconomy 关键定义常量"
+    },
+    {
+      "constant": "DEFAULT_WARGOAL_BATTLESCORE_BONUS",
+      "value": "3",
+      "location": "NDiplomacy / NWar",
+      "description": "NDiplomacy / NWar 关键定义常量"
+    },
+    {
+      "constant": "WARSCORE_MAX_FROM_BATTLES",
+      "value": "50",
+      "location": "NDiplomacy / NWar",
+      "description": "NDiplomacy / NWar 关键定义常量"
+    },
+    {
+      "constant": "BATTLE_RESULT_SCALE",
+      "value": "25",
+      "location": "NDiplomacy / NWar",
+      "description": "NDiplomacy / NWar 关键定义常量"
+    },
+    {
+      "constant": "PARTICIPATION_SCORE_BATTLE",
+      "value": "0.03",
+      "location": "NDiplomacy / NWar",
+      "description": "NDiplomacy / NWar 关键定义常量"
+    },
+    {
+      "constant": "MONTHS_TO_DISBAND_FROM_BIAS",
+      "value": "3`）与",
+      "location": "NInternationalOrganization / NImperialCircle",
+      "description": "NInternationalOrganization / NImperialCircle 关键定义常量"
+    },
+    {
+      "constant": "PARLIAMENT_REQUEST_ISSUE_SUPPORT_NEEDED",
+      "value": "0.5`",
+      "location": "NInternationalOrganization / NImperialCircle",
+      "description": "NInternationalOrganization / NImperialCircle 关键定义常量"
+    },
+    {
+      "constant": "PARLIAMENT_ISSUE_THRESHOLD",
+      "value": "0.5`",
+      "location": "NInternationalOrganization / NImperialCircle",
+      "description": "NInternationalOrganization / NImperialCircle 关键定义常量"
+    },
+    {
+      "constant": "PARLIAMENT_DURATION_DAYS",
+      "value": "365`",
+      "location": "NInternationalOrganization / NImperialCircle",
+      "description": "NInternationalOrganization / NImperialCircle 关键定义常量"
+    },
+    {
+      "constant": "PARLIAMENT_AVAILABLE_AGENDAS",
+      "value": "5`",
+      "location": "NInternationalOrganization / NImperialCircle",
+      "description": "NInternationalOrganization / NImperialCircle 关键定义常量"
+    },
+    {
+      "constant": "_DEGRADATION_DISTANCE_FOR_TOPOGRAPHY",
+      "value": "125",
+      "location": "NWeather",
+      "description": "NWeather 关键定义常量"
+    },
+    {
+      "constant": "PERCENT_DIFFERENCE_BETWEEN_GOOD_AND_BAD_SIDE_OF_CYCLONE",
+      "value": "50",
+      "location": "NWeather",
+      "description": "NWeather 关键定义常量"
+    }
+  ],
+  "content": "# Defines 体系（defines）\n\n> **一句话**：引擎常量文件 00_defines.txt 的 N 块索引与实查数值（战斗、AI、POP、殖民等），并给出直接覆盖与游戏规则覆盖两种改法。\n> **什么时候看**：要改任何引擎常量前，先用这张索引定位它属于哪个 N 块、大致行号与现值。\n> **体量**：84 行 · 约 4 分钟通读\n\n位置：`loading_screen\\common\\defines\\`（三处）：\n- `00_defines.txt`（2836 行）——全部引擎常量\n- `graphic\\00_graphics.txt`——图形常量\n- `jomini\\`——引擎层：00_tooltips.txt / adjacencies.txt / fog_of_war.txt / icons.txt / mapeditor.txt / rivers.txt / roads.txt\n\n## 00_defines.txt 的 N 块索引（实查）\n\n| 块 | 行区间（约） | 内容 |\n|---|---|---|\n| NGame | 1–27 | 时间（START_DATE \"1337.4.1\" / END_DATE \"1836.12.31\"）、HOUR_TICK=2、游戏速度表 |\n| NCityAudio / NAlertAudio / NJominiMap / NGUI / NText | 28–124 | 音频/地图/GUI/文本 |\n| NCountry | 125–333 | 国家级（稳定度、威望、厌战度等） |\n| NMercenary | 334–360 | 雇佣兵（MERCENARY_PRISONER_MAX_MORALE=0.6） |\n| **NUnit** | 361–444 | 单位：REGIMENT_SIZE=1000、LAND_MORALE=3.0、NAVAL_MORALE=3.0、MONTHLY_REINFORCE=0.25、MONTHLY_REPAIR=0.1、ATTRITION_LACK_OF_FOOD=5、LEVY_MAINTENANCE_FACTOR=0.01、ARMY_MOVEMENT_SPEED=0.13、NAVY_MOVEMENT_SPEED=0.5 |\n| **NCombat** | 445–561 | 战斗：COMBAT_DICE_SIDE=10、COMBAT_BASE=5、COMBAT_MAX=15、COMBAT_DAMAGE_MULT=0.01、HOURS_PER_PHASE=5、MINIMUM_COMBAT_DURATION=24、MINIMUM_NAVAL_COMBAT_DURATION=72、STRAIT_CROSSING_DICE=-2、RIVER_CROSSING_DICE=-1、SEA_LANDING_DICE=-1、MAX_FRONTAGE_OVERSTACKING=1.25、LAND_LEVY_COMBAT_IMPACT=0.75、INITIATIVE_*、ASSAULT_*、SIEGE_*、DAYS_PER_SIEGE_PHASE=30、MAX_BREACH=3、TRADITION_GAIN_LAND=10 |\n| **NAI** | **562–1592** | AI：**1031 行内约 839 个常量**（`AI_` 前缀 393 / `PEACE_` 59 / `CONQUER_` 27 / `HUNT_` 16 / `WAR_` 11 / `COLONY_` 9…）——战争平衡（`WAR_BALANCE_REGULARS_IMPORTANCE=3`、`WAR_BALANCE_LEVY_BOATS_IMPORTANCE=10`）、胜率（`BATTLE_WIN_CHANCE_SENSITIVITY=16`、`BATTLE_WIN_CHANCE_ENEMY_BIAS=1.1`、100 军事≈+25% 兵力）、扩张（`DEFAULT_CHANCE_OF_EXPANSION=0.25`/月、`AI_NUM_EXPANSION_TARGETS=20`、`CONQUER_DESIRE_*` 27 个）、和平（`PEACE_OFFER_*` 59 个）、军事 AI（`HUNT_ARMIES_` 16、`CARPET_SIEGE_` 4、撤退阈值）、AI 性能节拍（`AI_PERFORMANCE_*_MONTHS_BETWEEN_UPDATES`：内阁 36 / 改革 24 / 政策 6 / 特权 12）、储蓄模式（`AI_SAVING_MODE_*`）。**逐条自带英文注释，是全游戏最自解释的一段 defines；详见 `vanilla\\vanilla-ai.md`** |\n| NCulture / NCharacter / NPortrait | 1593–1741 | 文化；角色（MAX_ABILITY_VALUE=100、LEADER_COMBAT_TRAIT_GAIN_CHANCE=0.5、ASSIMILATION_* 同化修正表 1487–1506） |\n| **NPop** | 1752–1824 | POP：MIN_REBEL_POP_SIZE_THRESHOLD=5、DISPLAY_SIZE=1000（显示=千）、BASE_SATISFACTION=0.2、主文化+0.25/接纳+0.10/容忍+0.05、pop_join_rebel_threshold 相关 REBEL_JOIN_MIN_THRESHOLD=0.05、POP_MINORITY_SIMILAR_THRESHOLD=4/8、YEARLY_POP_SATISFACTION_FROM_EVENTS_DECAY=0.01 |\n| NEstate | 1825–1891 | 阶层 |\n| **NLocation** | 1892–1956 | 地点：SUPPLY_LIMIT_OWNER=0.25、FORT_GARRISON_UPKEEP=2、MIN_FRONTAGE_AFTER_TERRAIN=2、NORMAL_LOCATION_SIZE=25、MONTHLY_CONTROL_DECAY=0.01 |\n| NMarket / NEconomy | 1957–2207 | 市场/经济：MONTHLY_PRICE_CHANGE=0.05、GROWTH_FROM_FOOD_MULTIPLIER_MAX=10、LOCATION_DEPOPULATION_ALERT_MONTHS=60 |\n| NDiplomacy / NWar | 2208–2702 | 外交/战争：DEFAULT_WARGOAL_BATTLESCORE_BONUS=3、WARSCORE_MAX_FROM_BATTLES=50、BATTLE_RESULT_SCALE=25、PARTICIPATION_SCORE_BATTLE=0.03 |\n| NWorkOfArt / NDynasty / NColony | 2703–2775 | 艺术品/王朝/殖民 |\n| NInternationalOrganization / NImperialCircle | 2776–2787 | 国际组织/帝国圈。⚠️ **`NInternationalOrganization` 全文件出现两次**：`2776–2779`（仅 `MONTHS_TO_DISBAND_FROM_BIAS = 3`）与 **`2830–2836`**（议会四常量 `PARLIAMENT_REQUEST_ISSUE_SUPPORT_NEEDED=0.5` / `PARLIAMENT_ISSUE_THRESHOLD=0.5` / `PARLIAMENT_DURATION_DAYS=365` / `PARLIAMENT_AVAILABLE_AGENDAS=5`，在文件最末、`NDisease` 之后）——**引用该段常量必须带行号** |\n| **NWeather** | 2788–2798 | 天气：*_DEGRADATION_DISTANCE_FOR_TOPOGRAPHY=125、PERCENT_DIFFERENCE_BETWEEN_GOOD_AND_BAD_SIDE_OF_CYCLONE=50 |\n| NReligion / NSpreadable / NDisease | 2799–2829 | 宗教/传播/疾病 |\n\n（⚠️ **行区间已按测试版 2026-10-01 build 重算**；beta 仍会再排，定稿前一律以 grep 定位为准。新增块 `NPortraitAssetShowcase`（L1742）与两处 `NInternationalOrganization`（L2776 / L2830）。）\n\n**行号口径与体检结论（2026-09 全量复核）**：\n\n- 上表与各篇引用的区间口径是 **`起始行 – 结束行`，结束行 = 该段 `}` 所在行**（个别处多算一行空行）。精确定位一律用 `grep -n '^NXxx = {'`，别信区间。\n- **顶层段落共 30 个**（去重后；`NInternationalOrganization` 重名两次，见上表）。\n- 复核通过：`NAI` **746 个常量** ✔（930 行）、`NCharacter` 起 1661 ✔、`NCombat` 起 445 ✔、`NWar` 起 2640 ✔、`NDiplomacy` 起 2208 ✔、`NColony` 起 2746 ✔、`NWeather` 起 2788 ✔、`NDisease` 起 2592 ✔、`NMarket` 起 1754 ✔、`NEconomy` 起 1839 ✔、`NImperialCircle` 起 2556 ✔。文件总行数 **2,609**。\n\n## 修改方式\n\n1. **直接覆盖**：mod 里建 `loading_screen\\common\\defines\\00_defines.txt`，只写要改的块（同名块合并，键级覆盖）。\n2. **游戏规则覆盖**（推荐，玩家可选）：`main_menu\\common\\game_rules\\00_game_rules.txt` 的 setting 里写 `defines = { NCombat = { COMBAT_BASE = 6 } }`（格式见 `_game_rules.info`），并可配 flag 阻止成就。\n3. **图形常量**：`graphic\\00_graphics.txt`。\n\n## 关键事实\n\n- `HOUR_TICK = 2`：游戏按 2 小时 tick；战斗阶段 `HOURS_PER_PHASE = 5`。\n- `START_DATE = \"1337.4.1\"`、`END_DATE = \"1836.12.31\"`：事件时间窗（dynamic_historical_event 的 from/to）应落在此区间。\n- 修改 defines 会**改变存档兼容性与多人哈希**，平衡性改动优先用修正（static_modifiers/auto_modifiers）而非 defines。\n\n## 散落在其它 N 块里的\"政府/改革\"常量（2026-09 补）\n\n| 常量 | 值 | 所在块（行） | 含义 |\n|---|---|---|---|\n| `SOCIAL_VALUE_REQUIREMENT_FOR_REFORM` | **50** | NCountry（155） | 政府改革要求的社会价值位置 |\n| `GOVERNMENT_REFORM_SOCIETAL_VALUE_REQUIREMENT_FORECAST_IN_MONTHS` / `..._CUTOFF_IN_MONTHS` | 12 / 24 | NCountry（101–102） | 界面\"还要多久够格\"的预告窗口 |\n| `BUREAUCRACY_ENTRENCHMENT_YEARS_PER_PHASE` / `..._QUOTE_PER_PHASE` | **100** / 50 | NMercenary 之后（295–296） | 官僚部门\"根深蒂固\"每阶段年数与每阶段份额 |\n| `ESTATE_SATISFACTION_BUREAUCRACY` | 0.01 | NEstate 区（230） | 官僚部门对阶层满意度的系数 |\n| `DEFAULT_CURRENCY_GOVERNMENT_POWER` / `DEFAULT_CURRENCY_RIGHTEOUSNESS` | 95 / 90 | NDiplomacy 区（1971/1974） | 货币偏置基准值 |\n| `HEGEMONY_LOST_MONTHS` / `HEGEMONY_GRACE_PERIOD` / `HEGEMONY_ACTIVE_UNTIL_REPLACED` / `HEGEMONY_MONTHLY_PROGRESS` | 120 / 12 / yes / 1 | 霸权区（2273–2276） | 霸权的失去、宽限与易主规则 |\n\n详见 `vanilla\\vanilla-government-and-reform.md`。\n\n## 殖民与探索常量（2026-09 补）\n\n| 常量 | 值 | 所在块（行） | 含义 |\n|---|---|---|---|\n| `BASE_COST` / `DISTANCE_COST_FACTOR` / `POPULATION_COST_FACTOR`（上限 3） | 1 / 0.0005 / 0.25 | **NColony（2746–2774）** | 特许殖民地的基础/距离/人口成本 |\n| `SAME_AREA_COST_FACTOR` / `SAME_REGION_COST_FACTOR` | **−0.5** / −0.33 | NColony | 同地区 / 同大区**折扣** |\n| `LOCATION_MAX_POP_ALLOWED_FOR_COLONY` / `DEVELOPMENT_AT_NEW_COLONY` | 50（=5 万）/ 5 | NColony | 可殖民地点人口上限 / 新殖民地发展度 |\n| **`MAX_CHARTERS_IN_PROVINCE`** | **3** | NColony | 同一预设省份最多几个特许殖民地 |\n| `EXPLORATION_CONSTRUCTION_TIME` / `CONQUISTADOR_CONSTRUCTION_TIME` | **270 天** / **90 天** | NColony | 探索任务 / 征服者工期 |\n| `EXPLORATION_BASE_COST` / `_BASE_TIME` / `_DISTANCE_TIME` | 10 / 3 / 9 | NColony | 探索花费与时长 |\n| `POWER_PROJECTION_SPREAD` / `EXPEL_TRIBAL_BENEFIT_DURATION` | 0.005 / 120 | NColony | 力量投射扩散 / 驱逐部落收益持续月数 |\n| **`COLONIAL_POWER_PROJECTION_THRESHOLD_TO_START`** | **25** | NCountry（238） | **力量投射不到 25 不能开始殖民** |\n| `COLONIAL_CHARTER_MIN/MAX_POPS_TO_TAKE_LOCATION` | 1 / 5（1000–5000 人） | NCountry（239–240） | 拿下一块地点所需当地人口 |\n| `COLONIAL_MIGRATION_DISTANCE_FACTOR` | 0.0001 | NCountry（235） | 迁徙量随距离衰减 |\n| `EXPLORER_EXTRA_LIFE` | 15 | NCharacter 区（1536） | 探险家的额外寿命 |\n| `INTEL_THRESHOLD_LOCATION_MIGRATION` | 5 | NDiplomacy 区（2383） | 情报门槛 |\n\n详见 `vanilla\\vanilla-colonization-and-exploration.md`。\n",
+  "type": "engine_defines"
+}

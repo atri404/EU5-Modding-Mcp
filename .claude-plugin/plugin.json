@@ -1,7 +1,7 @@
 {
   "name": "eu5-modding",
-  "version": "2.1.0",
-  "description": "EU5 (Europa Universalis V / Jomini 引擎) Modding 全流程智能体套件：结合 1.4 Beta 与 Pavia 1.3.x 权威知识库、Mod 制作与审查技能及 MCP API 检索服务器",
+  "version": "2.2.0",
+  "description": "EU5 (Europa Universalis V / Jomini 引擎) Modding 全流程智能体套件：全面融合 eu5-modding-kb 156 篇权威知识库、30 个 MCP 检索与排错工具、23 项只读资源及绑定的三项智能体开发审查技能",
   "author": {
     "name": "atri404",
     "url": "https://github.com/atri404/EU5-Modding-Mcp"

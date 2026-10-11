@@ -1,0 +1,361 @@
+{
+  "title": "词条与 ID 存在性目录（ID 族总表：前缀族 vs 裸写族）",
+  "prefixed_rules": [
+    {
+      "family": "`culture`",
+      "vanilla_scale": "2,087",
+      "rule": "**3,321**",
+      "source_doc": "`fields\\common-culture-religion.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`international_organization`",
+      "vanilla_scale": "36",
+      "rule": "**2,630**（`is_member_of_international_organization = international_organization:<类型名>`，仅 unique 类型有效）",
+      "source_doc": "`fields\\common-international_organizations.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`language`",
+      "vanilla_scale": "53 档",
+      "rule": "1,351（`court_language ?= language:<id>`）",
+      "source_doc": "`fields\\common-culture-religion.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`religion`",
+      "vanilla_scale": "293",
+      "rule": "1,293",
+      "source_doc": "同上",
+      "type": "prefixed"
+    },
+    {
+      "family": "`modifier`",
+      "vanilla_scale": "**2,436**",
+      "rule": "**1,211**（`modifier:<键> = yes`）；出现在修正字段里时裸写 `country_modifier = { <键> = 1 }`",
+      "source_doc": "`fields\\main_menu-modifier_type_definitions.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`societal_value`",
+      "vanilla_scale": "17 轴",
+      "rule": "1,055（**必须 `A_vs_B` 全串**）",
+      "source_doc": "`fields\\common-societal_values.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`situation`",
+      "vanilla_scale": "22",
+      "rule": "932",
+      "source_doc": "`fields\\common-situations.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`estate_type`",
+      "vanilla_scale": "8",
+      "rule": "836（`country_has_estate = estate_type:<id>`）",
+      "source_doc": "`vanilla\\vanilla-law-and-estate.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`region` / `area` / `province_definition`",
+      "vanilla_scale": "82 / 805 / 4,309",
+      "rule": "683 / 267 / 84（必须是 `map_data\\definitions.txt` 的真实层级）",
+      "source_doc": "`vanilla\\vanilla-map-and-geography.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`special_status`",
+      "vanilla_scale": "11 档",
+      "rule": "447",
+      "source_doc": "IO 篇",
+      "type": "prefixed"
+    },
+    {
+      "family": "`estate_privilege`",
+      "vanilla_scale": "261",
+      "rule": "445",
+      "source_doc": "`fields\\common-estate_privileges.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`price`",
+      "vanilla_scale": "—",
+      "rule": "437（`implementation_price = price:<id>`）",
+      "source_doc": "`fields\\common-prices.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`goods`",
+      "vanilla_scale": "74",
+      "rule": "294",
+      "source_doc": "`fields\\common-goods.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`building_type`",
+      "vanilla_scale": "465",
+      "rule": "**1,369**（⚠️ **不是 `building:`**——`building:` 原版 **0** 处）",
+      "source_doc": "`fields\\common-building_types.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`sub_unit_category`",
+      "vanilla_scale": "10",
+      "rule": "**278**（⚠️ **不是 `unit_category:`**——0 处）",
+      "source_doc": "`fields\\common-unit.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`country_rank`",
+      "vanilla_scale": "4",
+      "rule": "219（`rank_empire` 等）",
+      "source_doc": "`fields\\common-country_ranks.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`disaster_type`",
+      "vanilla_scale": "36",
+      "rule": "**201**（`disaster_type = disaster_type:<id>`）",
+      "source_doc": "`fields\\common-disasters.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`casus_belli`",
+      "vanilla_scale": "102",
+      "rule": "195",
+      "source_doc": "`fields\\common-casus_belli.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`dynasty`",
+      "vanilla_scale": "开局数据",
+      "rule": "188",
+      "source_doc": "`vanilla\\vanilla-character-dynasty-cabinet.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`law`",
+      "vanilla_scale": "196",
+      "rule": "178",
+      "source_doc": "`fields\\common-laws.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`parliament_type`",
+      "vanilla_scale": "14",
+      "rule": "170",
+      "source_doc": "`fields\\common-parliament.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`resolution`",
+      "vanilla_scale": "**21**",
+      "rule": "154",
+      "source_doc": "`fields\\common-resolutions.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`heir_selection`",
+      "vanilla_scale": "44",
+      "rule": "79（`change_heir_selection = heir_selection:<id>`）",
+      "source_doc": "`fields\\common-heir_selections.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`character`",
+      "vanilla_scale": "开局数据",
+      "rule": "76",
+      "source_doc": "角色篇",
+      "type": "prefixed"
+    },
+    {
+      "family": "`pop_type`",
+      "vanilla_scale": "8",
+      "rule": "61",
+      "source_doc": "`vanilla\\vanilla-pop.md`／POP 篇",
+      "type": "prefixed"
+    },
+    {
+      "family": "`unit_type`",
+      "vanilla_scale": "323",
+      "rule": "53",
+      "source_doc": "`fields\\common-unit_types.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`regency_type`",
+      "vanilla_scale": "15",
+      "rule": "29",
+      "source_doc": "`fields\\common-regencies.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`subject_type`",
+      "vanilla_scale": "**20**",
+      "rule": "21",
+      "source_doc": "`fields\\common-subject_types.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`trait`",
+      "vanilla_scale": "147",
+      "rule": "20（**仅 `add_trait = trait:<id>`**；`has_trait` 那侧裸写，见 §二）",
+      "source_doc": "`fields\\common-traits.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`work_of_art`",
+      "vanilla_scale": "21 类型",
+      "rule": "16",
+      "source_doc": "`fields\\common-artist.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`cabinet_action`",
+      "vanilla_scale": "73",
+      "rule": "16",
+      "source_doc": "`fields\\common-cabinet_actions.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`mission_task`",
+      "vanilla_scale": "108",
+      "rule": "10（`mission_task_completed = mission_task:<id>`）",
+      "source_doc": "`fields\\common-missions.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`generic_action`",
+      "vanilla_scale": "428",
+      "rule": "6",
+      "source_doc": "`fields\\common-generic_actions.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`holy_site_type`",
+      "vanilla_scale": "10",
+      "rule": "3",
+      "source_doc": "`fields\\common-holy_sites.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`peace_treaty`",
+      "vanilla_scale": "**64**",
+      "rule": "**1**",
+      "source_doc": "`fields\\common-peace_treaties.md`",
+      "type": "prefixed"
+    },
+    {
+      "family": "`mission`",
+      "vanilla_scale": "11",
+      "rule": "**1**",
+      "source_doc": "`fields\\common-missions.md`",
+      "type": "prefixed"
+    }
+  ],
+  "bare_rules": [
+    {
+      "family": "`advance`",
+      "vanilla_scale": "`has_advance = <id>`（裸 id）",
+      "rule": "`fields\\common-advances.md`",
+      "source_doc": "",
+      "type": "bare"
+    },
+    {
+      "family": "`road_type`",
+      "vanilla_scale": "`unlock_road_type = gravel_road`",
+      "rule": "`fields\\common-road_types.md`",
+      "source_doc": "",
+      "type": "bare"
+    },
+    {
+      "family": "`production_method`",
+      "vanilla_scale": "`unlock_production_method = paper_guild_fiber_pulp_maintenance`",
+      "rule": "`fields\\common-production_methods.md`",
+      "source_doc": "",
+      "type": "bare"
+    },
+    {
+      "family": "`trait`（查询侧）",
+      "vanilla_scale": "`has_trait = <id>`（**38 处裸写 / `trait:` 0 处**）；新增才用 `add_trait = trait:<id>`",
+      "rule": "`fields\\common-traits.md`",
+      "source_doc": "",
+      "type": "bare"
+    },
+    {
+      "family": "`gene`",
+      "vanilla_scale": "`gene_<名> = { attribute = … value = { min max } }`（名字须在 `genes\\` 定义）",
+      "rule": "`fields\\common-genes-ethnicities.md`",
+      "source_doc": "",
+      "type": "bare"
+    },
+    {
+      "family": "`coa`",
+      "vanilla_scale": "`coa = <COA 键>`（或 `list \"<池名>\"`）——**裸键**，见 4,566 个 COA 键",
+      "rule": "`fields\\main_menu-flag_definitions.md`",
+      "source_doc": "",
+      "type": "bare"
+    },
+    {
+      "family": "`game_concept`",
+      "vanilla_scale": "本地化里 `[<裸概念名>\\",
+      "rule": "e]`——**只在 loc 中引用**，脚本不引用",
+      "source_doc": "`fields\\main_menu-game_concepts.md`",
+      "type": "bare"
+    },
+    {
+      "family": "开局模板（205 档）",
+      "vanilla_scale": "`include = \"<模板名>\"`（`10_countries.txt` 里 5,256 处 / 192 去重；**拼错不报错、只是没效果**）",
+      "rule": "`guides\\new-country-tutorial.md` §2b",
+      "source_doc": "",
+      "type": "bare"
+    },
+    {
+      "family": "`unit_ability` / `area_preference` / `static_modifier` / `auto_modifier` / `topography` / `vegetation` / `climate` / `town_right` / `named_color` / `message_type` / `alert`",
+      "vanilla_scale": "各族前缀写法均为 **0 处**——引用方式见对应字段档（多数是按名/按枚举/由引擎侧读取）",
+      "rule": "见 `fields\\` 同名档",
+      "source_doc": "",
+      "type": "bare"
+    }
+  ],
+  "special_rules": [
+    {
+      "family": "`death_reason`",
+      "vanilla_scale": "**脚本里 0 引用**（只有本地化键）——不要在 mod 里发明 `death_reason = <id>` 效果",
+      "rule": "全库 grep",
+      "source_doc": "",
+      "type": "special"
+    },
+    {
+      "family": "`regency`",
+      "vanilla_scale": "由继承法/法律逻辑内部引用，脚本直接写 id 的场合极少",
+      "rule": "`regencies\\*.txt`",
+      "source_doc": "",
+      "type": "special"
+    },
+    {
+      "family": "`ethnicity`",
+      "vanilla_scale": "由角色生成侧读取（`template = \"<族群 id>\"`，**带引号**）",
+      "rule": "`fields\\common-genes-ethnicities.md`",
+      "source_doc": "",
+      "type": "special"
+    },
+    {
+      "family": "`artist_type`",
+      "vanilla_scale": "前缀写法 0 处（走 `artist_types` 定义侧与 `allow = { artist_type … }`）",
+      "rule": "`fields\\common-artist.md`",
+      "source_doc": "",
+      "type": "special"
+    },
+    {
+      "family": "角色 / 王朝",
+      "vanilla_scale": "**本体不在 `common\\`**——是开局数据（`main_menu\\setup\\start\\05_characters.txt` / `04_dynasties.txt`）",
+      "rule": "角色篇",
+      "source_doc": "",
+      "type": "special"
+    }
+  ],
+  "content": "# 审查清单辅助：词条与 ID 存在性目录（ID 族总表）\n\n> **一句话**：各类 ID 族的总表：分带前缀族与裸写族列出原版规模与实测引用写法，并给角色、开局数据族的特殊规则。\n> **什么时候看**：审查引用类 ID 前先查这里的写法（前缀还是裸写），写反了不报错、只是永不命中。\n> **体量**：82 行 · 约 4 分钟通读\n\n> 用途：`SKILL.md` 第 5 节检查清单的按需加载表，审查引用类 ID **前**加载。**每族的原版规模与\"脚本里到底怎么写\"都来自原版实查**（2026-09，统计范围 `in_game\\common` + `main_menu\\common`（+ 注明处含 events/gui））。\n>\n> **为什么要有\"引用写法\"这一列**：同一族 ID 在原版里**有的必须带 `族:` 前缀、有的必须裸写**——写反了**不报错、只是永不命中**，是\"改了没效果\"的头号来源。\n\n## 一、带前缀族：脚本里写 `<族>:<id>`\n\n| 族 | 原版规模 | 前缀写法实测用量 | 权威档 |\n|---|---|---|---|\n| `culture` | 2,087 | **3,321** | `fields\\common-culture-religion.md` |\n| `international_organization` | 36 | **2,630**（`is_member_of_international_organization = international_organization:<类型名>`，仅 unique 类型有效） | `fields\\common-international_organizations.md` |\n| `language` | 53 档 | 1,351（`court_language ?= language:<id>`） | `fields\\common-culture-religion.md` |\n| `religion` | 293 | 1,293 | 同上 |\n| **`modifier`** | **2,436** | **1,211**（`modifier:<键> = yes`）；出现在修正字段里时裸写 `country_modifier = { <键> = 1 }` | `fields\\main_menu-modifier_type_definitions.md` |\n| `societal_value` | 17 轴 | 1,055（**必须 `A_vs_B` 全串**） | `fields\\common-societal_values.md` |\n| `situation` | 22 | 932 | `fields\\common-situations.md` |\n| `estate_type` | 8 | 836（`country_has_estate = estate_type:<id>`） | `vanilla\\vanilla-law-and-estate.md` |\n| `region` / `area` / `province_definition` | 82 / 805 / 4,309 | 683 / 267 / 84（必须是 `map_data\\definitions.txt` 的真实层级） | `vanilla\\vanilla-map-and-geography.md` |\n| `special_status` | 11 档 | 447 | IO 篇 |\n| `estate_privilege` | 261 | 445 | `fields\\common-estate_privileges.md` |\n| `price` | — | 437（`implementation_price = price:<id>`） | `fields\\common-prices.md` |\n| `goods` | 74 | 294 | `fields\\common-goods.md` |\n| **`building_type`** | 465 | **1,369**（⚠️ **不是 `building:`**——`building:` 原版 **0** 处） | `fields\\common-building_types.md` |\n| **`sub_unit_category`** | 10 | **278**（⚠️ **不是 `unit_category:`**——0 处） | `fields\\common-unit.md` |\n| `country_rank` | 4 | 219（`rank_empire` 等） | `fields\\common-country_ranks.md` |\n| **`disaster_type`** | 36 | **201**（`disaster_type = disaster_type:<id>`） | `fields\\common-disasters.md` |\n| `casus_belli` | 102 | 195 | `fields\\common-casus_belli.md` |\n| `dynasty` | 开局数据 | 188 | `vanilla\\vanilla-character-dynasty-cabinet.md` |\n| `law` | 196 | 178 | `fields\\common-laws.md` |\n| `parliament_type` | 14 | 170 | `fields\\common-parliament.md` |\n| `resolution` | **21** | 154 | `fields\\common-resolutions.md` |\n| `heir_selection` | 44 | 79（`change_heir_selection = heir_selection:<id>`） | `fields\\common-heir_selections.md` |\n| `character` | 开局数据 | 76 | 角色篇 |\n| `pop_type` | 8 | 61 | `vanilla\\vanilla-pop.md`／POP 篇 |\n| `unit_type` | 323 | 53 | `fields\\common-unit_types.md` |\n| `regency_type` | 15 | 29 | `fields\\common-regencies.md` |\n| `subject_type` | **20** | 21 | `fields\\common-subject_types.md` |\n| `trait` | 147 | 20（**仅 `add_trait = trait:<id>`**；`has_trait` 那侧裸写，见 §二） | `fields\\common-traits.md` |\n| `work_of_art` | 21 类型 | 16 | `fields\\common-artist.md` |\n| `cabinet_action` | 73 | 16 | `fields\\common-cabinet_actions.md` |\n| `mission_task` | 108 | 10（`mission_task_completed = mission_task:<id>`） | `fields\\common-missions.md` |\n| `generic_action` | 428 | 6 | `fields\\common-generic_actions.md` |\n| `holy_site_type` | 10 | 3 | `fields\\common-holy_sites.md` |\n| `peace_treaty` | **64** | **1** | `fields\\common-peace_treaties.md` |\n| `mission` | 11 | **1** | `fields\\common-missions.md` |\n\n## 二、裸写法族：加前缀反而错（原版 `<族>:` 实测 0 处）\n\n| 族 | 原版正确写法（实测样例） | 权威档 |\n|---|---|---|\n| `advance` | `has_advance = <id>`（裸 id） | `fields\\common-advances.md` |\n| `road_type` | `unlock_road_type = gravel_road` | `fields\\common-road_types.md` |\n| `production_method` | `unlock_production_method = paper_guild_fiber_pulp_maintenance` | `fields\\common-production_methods.md` |\n| `trait`（查询侧） | `has_trait = <id>`（**38 处裸写 / `trait:` 0 处**）；新增才用 `add_trait = trait:<id>` | `fields\\common-traits.md` |\n| `gene` | `gene_<名> = { attribute = … value = { min max } }`（名字须在 `genes\\` 定义） | `fields\\common-genes-ethnicities.md` |\n| `coa` | `coa = <COA 键>`（或 `list \"<池名>\"`）——**裸键**，见 4,566 个 COA 键 | `fields\\main_menu-flag_definitions.md` |\n| `game_concept` | 本地化里 `[<裸概念名>\\|e]`——**只在 loc 中引用**，脚本不引用 | `fields\\main_menu-game_concepts.md` |\n| **开局模板**（205 档） | `include = \"<模板名>\"`（`10_countries.txt` 里 5,256 处 / 192 去重；**拼错不报错、只是没效果**） | `guides\\new-country-tutorial.md` §2b |\n| `unit_ability` / `area_preference` / `static_modifier` / `auto_modifier` / `topography` / `vegetation` / `climate` / `town_right` / `named_color` / `message_type` / `alert` | 各族前缀写法均为 **0 处**——引用方式见对应字段档（多数是按名/按枚举/由引擎侧读取） | 见 `fields\\` 同名档 |\n\n## 三、角色与开局数据族（特殊规则）\n\n| 族 | 脚本里的写法 | 证据 |\n|---|---|---|\n| `death_reason` | **脚本里 0 引用**（只有本地化键）——不要在 mod 里发明 `death_reason = <id>` 效果 | 全库 grep |\n| `regency` | 由继承法/法律逻辑内部引用，脚本直接写 id 的场合极少 | `regencies\\*.txt` |\n| `ethnicity` | 由角色生成侧读取（`template = \"<族群 id>\"`，**带引号**） | `fields\\common-genes-ethnicities.md` |\n| `artist_type` | 前缀写法 0 处（走 `artist_types` 定义侧与 `allow = { artist_type … }`） | `fields\\common-artist.md` |\n| 角色 / 王朝 | **本体不在 `common\\`**——是开局数据（`main_menu\\setup\\start\\05_characters.txt` / `04_dynasties.txt`） | 角色篇 |\n\n## 四、核对规则（零幻觉）\n\n- 引用类 ID：先查原版 `game\\in_game\\common\\<类目>\\`（或 `main_menu\\common\\` / `dlc\\`）与 mod 自身对应目录，**存在才通过**；查不到标 `[存疑]`。\n- **同时核写法**：按 §一/§二确认该族在原版到底是前缀还是裸写；写法不符**属于错误**（不是存疑）——因为原版同族有大量反例可证。\n- 效果/触发器词条：引擎内置、无全表——明显笔误（重复字符/乱码/大小写错乱）→ 错误；拼写疑似但无法证实 → `[存疑]` + 最接近候选，不断言。\n- 脚本化内容：`scripted_effects`（**476** 个）/ `scripted_triggers`（**501** 个）/ `on_action`（**216** 条）引用在 mod 或原版目录内可查；`$参数$` 未传会刷大量 missing 报错（见 `tools\\error-log-decoder.md`）。\n- **本地化键**存在性另有一套（键是全局的、含 DLC 与 `missions\\` 子目录）→ `tools\\loc-keys.md`。\n",
+  "type": "id_rules"
+}

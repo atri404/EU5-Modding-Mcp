@@ -1,6 +1,6 @@
 """
-EU5 Modding MCP 资源模块 (v2.1.0 / 1.4 Beta 适配)
-定义供客户端直接读取的各类只读数据资源 URI
+EU5 Modding MCP 资源模块 (v2.2.0 / 1.4 Beta 深度完善版)
+定义供客户端直接读取的各类只读数据资源 URI (共 23 项权威资源)
 """
 
 import json
@@ -44,7 +44,7 @@ def register_resources(mcp, data_handler):
 
     @mcp.resource("eu5://event_targets")
     def get_event_targets_resource() -> str:
-        """获取全部 299 条事件目标（修复了原版只有1条的Bug）"""
+        """获取全部 299 条事件目标（含完整输入/输出作用域）"""
         if not data_handler:
             return "[]"
         return json.dumps(data_handler.event_targets, ensure_ascii=False, indent=2)
@@ -90,6 +90,80 @@ def register_resources(mcp, data_handler):
         } for m in data_handler.vanilla_mechanics]
         return json.dumps(summary_list, ensure_ascii=False, indent=2)
 
+    @mcp.resource("eu5://guides")
+    def get_guides_resource() -> str:
+        """获取全部 12 篇制作指南与实战教程清单（新国家、新任务、骨架、合并、法律等）"""
+        if not data_handler:
+            return "[]"
+        summary_list = [{
+            "name": g.get("name"),
+            "title": g.get("title"),
+            "summary": g.get("summary"),
+            "when_to_read": g.get("when_to_read")
+        } for g in data_handler.guides]
+        return json.dumps(summary_list, ensure_ascii=False, indent=2)
+
+    @mcp.resource("eu5://cases")
+    def get_cases_resource() -> str:
+        """获取 4 篇实操案例复盘清单（BOM损坏抢救、法律撤销机理、无地国事件等）"""
+        if not data_handler:
+            return "[]"
+        summary_list = [{
+            "name": c.get("name"),
+            "title": c.get("title"),
+            "summary": c.get("summary")
+        } for c in data_handler.modding_cases]
+        return json.dumps(summary_list, ensure_ascii=False, indent=2)
+
+    @mcp.resource("eu5://error_log_decoder")
+    def get_error_log_decoder_resource() -> str:
+        """获取 error.log 权威解码表（报错串 → 病因 → 首查点）"""
+        if not data_handler:
+            return "{}"
+        return json.dumps(data_handler.error_log_decoder, ensure_ascii=False, indent=2)
+
+    @mcp.resource("eu5://id_rules")
+    def get_id_rules_resource() -> str:
+        """获取全游戏 ID 族规范总表（前缀族 vs 裸写族）"""
+        if not data_handler:
+            return "{}"
+        return json.dumps(data_handler.id_rules, ensure_ascii=False, indent=2)
+
+    @mcp.resource("eu5://loc_rules")
+    def get_loc_rules_resource() -> str:
+        """获取本地化键形态总表与缺键排查规范"""
+        if not data_handler:
+            return "{}"
+        return json.dumps(data_handler.loc_rules, ensure_ascii=False, indent=2)
+
+    @mcp.resource("eu5://review_checklist")
+    def get_review_checklist_resource() -> str:
+        """获取 7 维度机械审查清单"""
+        if not data_handler:
+            return "{}"
+        return json.dumps(data_handler.review_checklist, ensure_ascii=False, indent=2)
+
+    @mcp.resource("eu5://systems_map")
+    def get_systems_map_resource() -> str:
+        """获取 common 160+ 类目系统地图与入口文件"""
+        if not data_handler:
+            return "{}"
+        return json.dumps(data_handler.systems_map, ensure_ascii=False, indent=2)
+
+    @mcp.resource("eu5://defines")
+    def get_defines_resource() -> str:
+        """获取 00_defines.txt 常量索引与 N 块清单"""
+        if not data_handler:
+            return "{}"
+        return json.dumps(data_handler.engine_defines, ensure_ascii=False, indent=2)
+
+    @mcp.resource("eu5://start_here")
+    def get_start_here_resource() -> str:
+        """获取从零开始新手路线与按任务速查路线"""
+        if not data_handler:
+            return "{}"
+        return json.dumps(data_handler.start_here, ensure_ascii=False, indent=2)
+
     @mcp.resource("eu5://pitfalls")
     def get_pitfalls_resource() -> str:
         """获取 EU5 实测踩坑指南与 EU4 对照全文本"""
@@ -113,7 +187,7 @@ def register_resources(mcp, data_handler):
 
     @mcp.resource("eu5://statistics")
     def get_statistics_resource() -> str:
-        """获取全库条目统计信息"""
+        """获取全库条目统计信息与知识库覆盖率"""
         if not data_handler:
             return "{}"
         return json.dumps(data_handler.get_statistics(), ensure_ascii=False, indent=2)
@@ -123,5 +197,5 @@ def register_resources(mcp, data_handler):
         """获取特定类别的数据类型定义列表 (common, gui, internalclausewitzgui, script, uncategorized)"""
         if not data_handler:
             return "[]"
-        data = data_handler.get_data_types_by_category(category)
+        data = data_handler.data_types_by_category.get(category, [])
         return json.dumps(data, ensure_ascii=False, indent=2)
