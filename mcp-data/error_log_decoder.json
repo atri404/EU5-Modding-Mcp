@@ -88,6 +88,102 @@
       "first_check": "`tools\\review-checklist.md` 的\"语义陷阱\"与\"引用完整性\"两节",
       "source": "",
       "section": "三、启动即崩 / assert（目录与文件级）"
+    },
+    {
+      "pattern": "Duplicate localization key. Key '...' is defined in both '...' and '...'",
+      "symptom": "本地化键重复定义冲突 (Duplicate localization key)",
+      "cause": "多个模组或模组与原版定义了完全同名的本地化键。Jomini 引擎会根据文件名字母序覆盖或因哈希顺序导致不可预期的文本显示",
+      "first_check": "全局搜索冲突的键名；若是自定键应增加模组专属前缀 (如 mymod_)，若为有意覆盖原版需注意文件加载顺序",
+      "source": "pdx_localize.cpp:221",
+      "section": "本地化引擎"
+    },
+    {
+      "pattern": "Localization key hash collision. Key '...' and '...' have the same hash",
+      "symptom": "本地化键哈希碰撞 (Localization key hash collision)",
+      "cause": "两个不同的本地化键在 Jomini 散列表中生成了完全相同的 32/64 位哈希值，导致界面取词错乱",
+      "first_check": "微调其中一个键名（例如增加 _key 或修改下划线缩写）打破哈希冲突",
+      "source": "pdx_localize.cpp:187",
+      "section": "本地化引擎"
+    },
+    {
+      "pattern": "Invalid character '...' in key name '...' at line N and column N",
+      "symptom": "本地化键名包含非法字符 (Invalid character in key name)",
+      "cause": "YAML 本地化文件的键名包含了空格、汉字、全角标点或非法符号。键名仅允许 ASCII 字母、数字和下划线",
+      "first_check": "打开报错位置行号列号，删除键名中的空格或非法字符",
+      "source": "localization_reader.cpp:445",
+      "section": "本地化语法"
+    },
+    {
+      "pattern": "Illegal localization break character (`) at line N and column N",
+      "symptom": "本地化文本断行或特殊字符语法损坏 (Illegal break character)",
+      "cause": "本地化字符串中使用了反引号 (`) 或未闭合的单双引号，破坏了 YAML 解析器规范",
+      "first_check": "确保本地化文本使用双引号 \"...\" 完整包裹，移除反引号或转为标准样式标签 #bold ...#! 或 $...$",
+      "source": "localization_reader.cpp:111",
+      "section": "本地化语法"
+    },
+    {
+      "pattern": "File '...' should be in utf8-bom encoding (will try to use it anyways)",
+      "symptom": "文件缺失 UTF-8 BOM 签名 (Missing UTF-8 BOM)",
+      "cause": "脚本或本地化文件被保存为普通 UTF-8 (无BOM) 或 ANSI/GBK 格式。Jomini lexer 严格要求 UTF-8 with BOM (EF BB BF)",
+      "first_check": "在编辑器中另存为 'UTF-8 with BOM'，或使用 MCP 编码修复工具批量添加 BOM 签名",
+      "source": "lexer.cpp:501",
+      "section": "编码格式"
+    },
+    {
+      "pattern": "Unlocalized text '...' at gui/..., either localize it or use the raw_text property",
+      "symptom": "GUI 文本框直接使用未经本地化的裸字符串",
+      "cause": "在 .gui 文件中直接写了 text = \"xxx\" 但 xxx 并非已定义的本地化键",
+      "first_check": "若显示固定英文或调试文本，属性改为 raw_text = \"xxx\"；若需多语言支持，应改为本地化键并在 .yml 中提供翻译",
+      "source": "pdx_gui_localize.cpp:182",
+      "section": "GUI 规范"
+    },
+    {
+      "pattern": "Widget cannot have a position in a layout",
+      "symptom": "自动布局容器内的子组件包含绝对坐标 (position in layout)",
+      "cause": "在 vbox, hbox, flowcontainer, dynamicgridbox 等自动布局容器内直接给子元素写了 position = { x y }",
+      "first_check": "移除子组件上的 position 属性，改用 layoutpolicy_horizontal/vertical, margin, spacing 或外层包裹 container",
+      "source": "pdx_gui_layout.cpp:201",
+      "section": "GUI 规范"
+    },
+    {
+      "pattern": "'...' is not a valid widget/type/property",
+      "symptom": "GUI 组件类型或属性未定义/拼写错误",
+      "cause": "在 .gui 中写了不存在的控件名（如误用 CK3/VIC3 特有组件）或向容器赋予了不支持的属性",
+      "first_check": "核对 Jomini GUI 控件属性表，检查组件类型和属性拼写",
+      "source": "pdx_gui_factory.cpp:624",
+      "section": "GUI 规范"
+    },
+    {
+      "pattern": "Unknown modifier type: ... It is either invalid, or a potential dynamic modifier",
+      "symptom": "修改器名称不存在或使用了 EU4 废弃修改器",
+      "cause": "脚本中引用了不存在的 modifier，典型如移植 EU4 时遗留的 great_power_score, army_reinforce_cost, exploration_maintenance_cost 等",
+      "first_check": "调用 MCP search_modifiers 查询 EU5 对应的合法修改器（如 army_maintenance_cost, colony_maintenance_cost 等）",
+      "source": "pdx_persistent_reader.cpp:289",
+      "section": "修改器体系"
+    },
+    {
+      "pattern": "Duplicate select_trigger target_flags in common/...",
+      "symptom": "交互动作中的 select_trigger 目标标记重复",
+      "cause": "在 country_interactions 或 character_interactions 中，多个 select_trigger 块使用了相同的 target_flag = <name>",
+      "first_check": "确保交互动作中的每个 select_trigger 块拥有唯一的 target_flag 命名（如 recipient, secondary_actor, target_province 等）",
+      "source": "interaction_target.cpp:3505",
+      "section": "交互体系"
+    },
+    {
+      "pattern": "The following two countries have the same name '...' & '...' = '...'",
+      "symptom": "国家定义 TAG 或内部名称冲突",
+      "cause": "setup/countries/ 或 common/countries/ 中两个文件定义了相同的国家 TAG 或内部标识符",
+      "first_check": "确保自定国家 TAG 不与原版或其他模组冲突，检查 00_countries.txt 及历史文件",
+      "source": "country_database.cpp:107",
+      "section": "国家数据库"
+    },
+    {
+      "pattern": "Trying to use ShowDBDefinitionName when there is no game state",
+      "symptom": "在无活动游戏状态（主菜单阶段）调用了游戏内数据绑定",
+      "cause": "在 main_menu/ 的 GUI 界面中引用了依赖运行中存档/国家的游戏内函数（如 GetPlayer, ShowDBDefinitionName）",
+      "first_check": "仅在 in_game/gui/ 中使用游戏状态数据绑定，前端界面使用 [And(IsInGame, ...)] 进行条件守卫",
+      "source": "data_factory_hooks.cpp:3272",
+      "section": "数据绑定"
     }
   ],
   "content": "# error.log 解码表（报错串 → 病因 → 首查点）\n\n> **一句话**：error.log 报错串的速查表：先做归属与阶段判断，再按原文查病因与首查点，附启动即崩与静默失效两类。\n> **什么时候看**：游戏报错或改了没效果时，拿报错串来这张表查首查点，再决定回哪篇文档。\n> **体量**：50 行 · 约 3 分钟通读\n\n> **来源**：本库的实测记录（`pitfalls.md`、`cases\\blades-and-thrones-2026-08.md`、`guides\\scripting-core.md`）与官方 `.info` 原文。**没有跑过游戏就没有新条目**——补条目时必须注明\"报错串原文 + 来源 + 版本\"，不要把猜测写成事实。\n>\n> **本档不做的事**：不列引擎全部报错串（没有全表）；不解释与 mod 无关的原版报错（见 §一 的归属法）。\n\n## 一、先做归属判断（否则会白改）\n\n1. **看 `Script location:` 行**——它给出 `文件:行号`。若指向**原版文件**，先怀疑是原版自身或\"你改了行号导致对不上\"。\n   - 实战：1.3.11 有一条高丽必现的报错**与本 mod 无关**，先看归属再动手。\n2. **区分报错阶段**：\n   - **加载期**（拼写/引用/括号）→ 多为 `missing effect` / `missing trigger` / raw key；\n   - **运行期**（作用域/变量/界面）→ 多为 `Failed to fetch variable` / `unset scope` / `Invalid scope types`。\n3. **存档 metadata 不含启用 mod 列表**——验证\"游戏跑的是哪个版本\"，用 `Script location` 的行号与本地文件对照（行号差 = 版本不一致）。\n\n## 二、报错串 → 病因 → 首查点\n\n| 报错串（原文） | 典型病因 | 首查点 | 来源 |\n|---|---|---|---|\n| `Failed to fetch variable ... due to not being set` | 变量**用前没初始化**（读一个从未 `set_variable` 的变量）；或用错的 scope 里读（跨 scope 是两份变量） | 使用侧之前是否初始化；初始化与使用**是否同 scope** | `pitfalls.md` §三 |\n| `Event target link 'var' returned an unset scope` | 同上，且常与上一条**连锁出现**（数值变量的存在性守卫写成了 `exists = var:X` → 守卫不生效、初始化被跳过） | 数值变量**改用 `has_variable = X`** 守卫；`exists = var:X` 只宜用于\"国家引用变量\" | `pitfalls.md` §三（实测单会话 670 次） |\n| `Data error in loc string` | 本地化串里引用了**未初始化的变量**（老档/无历史时悬停选项即报） | 在事件 `immediate` 里做**幂等兜底初始化**（`if NOT has_variable → set 0`） | `pitfalls.md` §三 |\n| `Duplicated event ID` | **无害**：改了原版事件的常见后果（新文件 + 原版 namespace + 复制修改） | 不用改；但**事件不能 REPLACE/INJECT**，只能复制修改 | `pitfalls.md` §四、`guides\\merging.md` |\n| `missing effect`（大量刷） | 参数化 `scripted_effect` 的 **`$参数$` 没传**（或拼错参数名） | 调用处是否把该 effect 声明的全部 `$…$` 都给了；例如 `my_arg_$type$` 那类\"参数拼进键名\"的写法最易漏 | `fields\\common-scripted_effects.md`、`guides\\scripting-core.md` |\n| `missing trigger`（大量刷） | 参数化 `scripted_trigger` 的 `$参数$` 未传 | 同上 | `fields\\common-scripted_triggers.md` |\n| `Invalid scope types for event ...` | 在**错误的作用域**里访问对象：如 estate scope 不能在 location 作用域内访问；或 `?=` 可选块内写了裸 trigger（那里是 effect 上下文） | 该效果/触发器的合法作用域表；`?=` 块内的上下文 | `cases\\blades-and-thrones-2026-08.md` §5 |\n| raw key（界面直接显示键名，如 `my_mod.1.title`） | 引用的 **loc 键不存在**：键写错、漏键、忘 BOM、放在错误的位置，或键在 DLC / `missions\\` 子目录里 | `tools\\loc-keys.md` 的\"判缺键三原则\"（键全局、含 DLC、含子目录） | `pitfalls.md` §五 |\n\n## 三、启动即崩 / assert（目录与文件级）\n\n| 现象 | 病因 | 首查点 |\n|---|---|---|\n| 删掉空壳目录后启动 assert | **`policies` / `mission_task_defs` / `scripted_rules` 是空壳·勿删**（info 原文：目录为空但删掉会 assert；任务项其实在 `missions\\` 里） | `guides\\systems-map.md` 对应行 |\n| yml 整个文件被忽略 / 中文乱码 | loc 文件**无 BOM**（或编辑工具保存时剥了 BOM） | 读前 3 字节是否为 `EF BB BF`；**每次编辑后都要查**（`pitfalls.md` §五） |\n| 改了没效果但无报错 | **静默失效类**：ID 前缀写反（见 `tools\\audit-ids.md`）、修正键未注册、`ai_is_valid` 未开、`scripted_guis` 漏 `.End`、`using` 指向不存在的库控件、条件写在了不生效的字段（`potential` vs `allow`） | `tools\\review-checklist.md` 的\"语义陷阱\"与\"引用完整性\"两节 |\n\n## 四、取证与复现手段（本库已有）\n\n- **脚本测试**：`in_game\\common\\tests\\`（`year` / `success` / `failure` / `end_year` / `success_child`，日志行格式见 `fields\\common-tests.md`）。\n- **调试事件**：`events\\debug\\qa_debug.txt` 的 `orphan = yes` + `trigger = { always = no }` 模板；`000_johan_debug.txt` 是**实体自检**事件（`mission:` / `goods:` / `road_type:` 等实体引用清单）。\n- **观察者模式**：验证 AI 行为（160 年 0 触发的教训见 `pitfalls.md` §六）。\n- **版本/改动定位**：用 `Script location` 行号对照本地文件行号。\n\n## 五、相关档\n\n`guides\\testing.md`（测试流程）· `tools\\review-checklist.md`（可机械判定项）· `tools\\audit-ids.md`（ID 与写法核对）· `tools\\loc-keys.md`（键存在性）· `pitfalls.md`（坑速查）· `cases\\`（真实复盘）\n",

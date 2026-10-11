@@ -22,7 +22,10 @@ import os
 import re
 import sys
 from pathlib import Path
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 
 # 确保项目根目录和 scripts 目录在 sys.path 中
 _curr_dir = Path(__file__).resolve().parent
@@ -174,34 +177,84 @@ def parse_event_targets(file_path: Path) -> List[Dict[str, Any]]:
     return entries
 
 
-def parse_on_actions(file_path: Path) -> List[Dict[str, Any]]:
-    entries = []
-    with open(file_path, "r", encoding="utf-8") as f:
-        content = f.read()
+def parse_on_actions(file_path: Path, game_dir: Optional[Path] = None) -> List[Dict[str, Any]]:
+    entries_dict = {}
+    if file_path.exists():
+        with open(file_path, "r", encoding="utf-8") as f:
+            content = f.read()
 
-    for block in content.split("--------------------"):
-        block = block.strip()
-        if not block or block.startswith("On Action Documentation:"):
-            continue
-        lines = block.split("\n")
-        name = lines[0].strip().rstrip(":")
-        from_code = False
-        exp_scope = "none"
+        for block in content.split("--------------------"):
+            block = block.strip()
+            if not block or block.startswith("On Action Documentation:"):
+                continue
+            lines = block.split("\n")
+            name = lines[0].strip().rstrip(":")
+            from_code = False
+            exp_scope = "none"
 
-        for line in lines[1:]:
-            l = line.strip()
-            if l.startswith("From Code:"):
-                from_code = "yes" in l.lower()
-            elif l.startswith("Expected Scope:"):
-                exp_scope = l.replace("Expected Scope:", "").strip()
+            for line in lines[1:]:
+                l = line.strip()
+                if l.startswith("From Code:"):
+                    from_code = "yes" in l.lower()
+                elif l.startswith("Expected Scope:"):
+                    exp_scope = l.replace("Expected Scope:", "").strip()
 
-        entries.append({
-            "name": name,
-            "from_code": from_code,
-            "expected_scope": exp_scope,
-            "type": "on_action"
-        })
-    return entries
+            entries_dict[name] = {
+                "name": name,
+                "from_code": from_code,
+                "expected_scope": exp_scope,
+                "type": "on_action",
+                "events_called": [],
+                "sub_on_actions": [],
+                "file": "on_actions.log"
+            }
+
+    # 从游戏本体 in_game/common/on_action/*.txt 补充/合并全部 206+ 个原生挂钩点
+    if game_dir and game_dir.exists():
+        oa_dir = game_dir / "in_game" / "common" / "on_action"
+        if oa_dir.exists():
+            for f in sorted(oa_dir.glob("*.txt")):
+                content = f.read_text(encoding="utf-8", errors="replace")
+                matches = re.finditer(r'^([a-zA-Z0-9_]+)\s*=\s*\{', content, flags=re.MULTILINE)
+                for m in matches:
+                    oa_name = m.group(1)
+                    start_idx = m.end()
+                    brace_count = 1
+                    pos = start_idx
+                    while pos < len(content) and brace_count > 0:
+                        if content[pos] == '{': brace_count += 1
+                        elif content[pos] == '}': brace_count -= 1
+                        pos += 1
+                    block_text = content[start_idx:pos-1]
+
+                    sub_oa = re.findall(r'on_actions\s*=\s*\{([^}]+)\}', block_text)
+                    sub_list = []
+                    for s in sub_oa:
+                        sub_list.extend(s.split())
+
+                    events_m = re.findall(r'events\s*=\s*\{([^}]+)\}', block_text)
+                    ev_list = []
+                    for e in events_m:
+                        ev_list.extend([x for x in e.split() if not x.startswith('#')])
+
+                    if oa_name in entries_dict:
+                        entries_dict[oa_name]["file"] = f.name
+                        entries_dict[oa_name]["sub_on_actions"] = sub_list
+                        entries_dict[oa_name]["events_called"] = ev_list
+                        if f.name == "_hardcoded.txt":
+                            entries_dict[oa_name]["from_code"] = True
+                    else:
+                        entries_dict[oa_name] = {
+                            "name": oa_name,
+                            "from_code": f.name == "_hardcoded.txt",
+                            "expected_scope": "various",
+                            "type": "on_action",
+                            "file": f.name,
+                            "sub_on_actions": sub_list,
+                            "events_called": ev_list
+                        }
+
+    return list(entries_dict.values())
 
 
 def parse_custom_localization(file_path: Path) -> List[Dict[str, Any]]:
@@ -464,8 +517,8 @@ def convert_all():
         json.dump(event_targets, f, ensure_ascii=False, indent=2)
     print(f"  ✓ event_targets.json: {len(event_targets)} 条目 (旧版本仅有 1 条错误合并)")
 
-    print("\n🔄 处理 on_actions (新支持) ...")
-    on_actions = parse_on_actions(docs_dir / "on_actions.log")
+    print("\n🔄 处理 on_actions (新支持 & 整合游戏本体 206+ 原生挂钩点) ...")
+    on_actions = parse_on_actions(docs_dir / "on_actions.log", game_dir)
     with open(output_dir / "on_actions.json", "w", encoding="utf-8") as f:
         json.dump(on_actions, f, ensure_ascii=False, indent=2)
     print(f"  ✓ on_actions.json: {len(on_actions)} 条目")
@@ -508,10 +561,12 @@ def convert_all():
         json.dump(summary_14, f, ensure_ascii=False, indent=2)
     print("  ✓ version_1_4_beta.json: 1.4 测试版变更综述")
 
-    # 提取 guides, cases, error_log_decoder, id_rules, loc_rules, review_checklist, systems_map, engine_defines
-    ext_data = convert_all_kb_extensions(kb_dir, output_dir)
+    # 提取 guides, cases, error_log_decoder, id_rules, loc_rules, review_checklist, systems_map, engine_defines, vanilla_readmes, mod_architecture
+    ext_data = convert_all_kb_extensions(kb_dir, output_dir, game_dir)
     guides = ext_data["guides"]
     cases = ext_data["cases"]
+    vanilla_readmes = ext_data.get("vanilla_readmes", [])
+    mod_architecture = ext_data.get("mod_architecture", {})
 
     print("\n🔍 构建全局索引 index.json 与 all_data.json ...")
     all_data = []
@@ -552,6 +607,17 @@ def convert_all():
             "description": c_item["summary"],
             "type": "modding_case"
         })
+    for vr in vanilla_readmes:
+        all_data.append({
+            "name": vr["name"],
+            "description": vr["summary"],
+            "type": "vanilla_readme"
+        })
+    all_data.append({
+        "name": "mod_architecture_guide",
+        "description": mod_architecture.get("title", "EU5 模组架构体系与创意工坊实践指南"),
+        "type": "mod_architecture_guide"
+    })
 
     with open(output_dir / "all_data.json", "w", encoding="utf-8") as f:
         json.dump(all_data, f, ensure_ascii=False, indent=2)

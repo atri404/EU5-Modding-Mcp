@@ -1,0 +1,65 @@
+{
+  "title": "EU5 模组架构体系与创意工坊实践指南 (3-Tier Lifecycle Architecture)",
+  "version": "1.4.0-compatible",
+  "lifecycle_tiers": {
+    "loading_screen": {
+      "purpose": "引擎启动与全局引导层 (Boot & Initialization)",
+      "critical_paths": [
+        "loading_screen/common/defines/00_defines.txt (所有全局宏、AI、战斗、经济常量必须放此处)",
+        "loading_screen/gfx/defines/00_gfx.txt (摄像机 NCamera 配置)",
+        "loading_screen/data_binding/ (全局数据绑定宏，如 CMF 跨模组宏)",
+        "loading_screen/input_profile/ (*.profile 按键绑定映射)",
+        "loading_screen/fonts/ (全局字体与字形配置)"
+      ],
+      "pitfall": "严禁将 00_defines.txt 误放入根目录 common/defines/，否则引擎完全静默忽略！"
+    },
+    "main_menu": {
+      "purpose": "前端界面与全局静态数据库 (Frontend & Global DB)",
+      "critical_paths": [
+        "main_menu/common/static_modifiers/ (全局国家、行省、难度静态修正)",
+        "main_menu/common/achievements/ (成就体系定义)",
+        "main_menu/gui/ (主菜单、选国界面、大厅等前端控件)",
+        "main_menu/localization/ (前端及全局通用本地化)",
+        "main_menu/setup/start/ (开局全局初始化设置)"
+      ],
+      "pitfall": "禁止在 main_menu 阶段调用依赖活动存档的数据函数 (如 GetPlayer, ShowDBDefinitionName)，会导致 Trying to use ... when there is no game state 崩溃"
+    },
+    "in_game": {
+      "purpose": "运行时游戏玩法模拟层 (Gameplay Simulation)",
+      "critical_paths": [
+        "in_game/common/ (全部 124 个玩法类目：advances, building_types, laws, generic_actions, country_interactions 等)",
+        "in_game/events/ (国家、角色、灾难、局势等事件)",
+        "in_game/gui/ (游戏内 HUD、lateralview、脚本组件)",
+        "in_game/localization/ (游戏内事件、任务、修正描述本地化)",
+        "in_game/map_data/ (地图投影、河流、地块)",
+        "in_game/setup/ (历史剧本、国家开局数据、省份人口分布)"
+      ],
+      "pitfall": "玩法逻辑严禁散落至 main_menu 或根目录；common 和 events 必须置于 in_game/ 下"
+    }
+  },
+  "best_practices": {
+    "sub_on_action_chaining": {
+      "pattern": "无冲突 Sub-on-action 链式挂载",
+      "description": "严禁直接使用 on_game_start = { effect = { ... } }，否则会完全覆盖原版和其他模组的初始化逻辑。应使用 on_actions 嵌套子动作：\non_game_start = { on_actions = { mymod_init_hook } }\nmymod_init_hook = { effect = { ... } }"
+    },
+    "storage_country": {
+      "pattern": "CMF 虚拟存储国机制 (Storage Country)",
+      "description": "由于全局变量表在跨网络或重载时可能存在作用域穿透问题，大型工坊模组（如 CMF）在 setup/countries/ 定义无地虚拟存储国 (如 c:CMF)，用于全局数据、配置选项与异步任务队列的安全存取。"
+    },
+    "scripted_gui_actionbar": {
+      "pattern": "动态脚本化 GUI 注入",
+      "description": "通过 scripted_widgets 与 scripted_guis 在不替换原版 topbar 文件的原则下，将自定义功能栏安全注入到 foreign_country_lateralview 或 ingame_topbar。"
+    },
+    "performance_tuning": {
+      "pattern": "Faster Universalis 级引擎性能优化常量",
+      "key_defines": [
+        "AI_PERFORMANCE_EVALUATE_MARKET_RATIO_PER_BUILDING = 0.02 (降低巨型市场建筑穷举频率)",
+        "AI_PERFORMANCE_CABINET_ACTION_MONTHS_BETWEEN_UPDATES = 72 (拉长内阁动作评估周期)",
+        "AI_CONSTRUCTION_QUEUE_PARALLEL_CHECK_MAX = 30 (硬性约束 AI 每月建筑评估峰值)",
+        "AI_PERFORMANCE_PATHFIND_DISTANCE_THRESHOLD = 50 (缩减非必要路径寻路精度)",
+        "CARPET_SIEGE_SEARCH_DEPTHS = { 5 4 3 2 2 2 2 2 1 1 1 1 1 1 1 1 1 1 } (地毯式围城寻路步长限制)"
+      ]
+    }
+  },
+  "type": "mod_architecture_guide"
+}

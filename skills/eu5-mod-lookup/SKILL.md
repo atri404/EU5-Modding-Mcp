@@ -19,10 +19,12 @@ disable-model-invocation: false
 | 查询场景 | 推荐 MCP 工具 | 示例参数 / 说明 |
 | :--- | :--- | :--- |
 | **查询 1.4 Beta 变更** | `get_1_4_beta_summary` | 无参数，查看 1.4 Open Beta 权威变更与新增机制 |
+| **查三层生命周期与工坊规范** | `get_mod_architecture_guide` | `topic: "lifecycle"` (三层隔离) / `"sub_on_action"` (无冲突挂载) / `"performance"` (性能调优) |
+| **查原版 74 份开发者 Readme** | `get_vanilla_readme` / `search_vanilla_readmes` | `category: "building_types"` / `"cabinet_actions"` / `"laws"` (官方设计规范全文) |
 | **查制作教程与实战手册** | `get_guide` / `search_guides` | `guide_name: "new-country-tutorial"` / `"new-mission-pack-tutorial"` / `"merging"` |
-| **查 error.log 日志报错** | `decode_error_log` | `log_text: "Failed to fetch variable ..."` 智能给出病因与首查点 |
+| **查 error.log 日志报错** | `decode_error_log` | `log_text: "Failed to fetch variable ..."` 智能给出病因与首查点 (含 C++ 引擎报错特征) |
 | **查 ID 族写法（前缀 vs 裸写）** | `get_id_rule` / `search_id_rules` | `family: "building_type"`（前缀）/ `"advance"`（裸写） |
-| **查 00_defines.txt 常量数值** | `search_defines` / `get_define_block` | `query: "COMBAT_BASE"` / `block_name: "NAI"` |
+| **查 00_defines.txt 常量数值** | `search_defines` / `get_define_block` | `query: "COMBAT_BASE"` / `block_name: "NAI"` (全量 38 块与 1,430 常量) |
 | **查 common 160+ 类目地图** | `get_systems_map` | `category: "building"` 查看入口文件与 readme 状态 |
 | **查类目有哪些字段** | `get_field_definition` | `category: "expedition_types"` / `"estates"` / `"laws"` |
 | **查底层机制与硬编码边界** | `get_vanilla_mechanic` | `system: "army_movement"` / `"production_and_buildings"` / `"pop"` |
@@ -30,7 +32,7 @@ disable-model-invocation: false
 | **查结构化审查清单** | `get_review_checklist` | `section: "文件"` / `"作用域"` / `"白名单"` |
 | **查修改器名字与格式** | `search_modifiers` | `query: "discipline"`, `category: "country"` |
 | **查触发器或效果语法** | `search_triggers` / `search_effects` | `query: "has_building"`, `scope: "location"` |
-| **查挂钩点 on_actions** | `search_on_actions` | `query: "yearly_country_pulse"` |
+| **查挂钩点 on_actions** | `search_on_actions` | `query: "yearly_country_pulse"` (含原版全部 206 挂钩点) |
 | **查中英双语官方术语** | `search_glossary` | `query: "市场接入度"` 或 `"market_access"` |
 | **查避坑经验与 EU4 对照** | `get_modding_pitfalls` | `topic: "scope"` / `"merging"` / `"BOM"` |
 | **抢救 A 类中文乱码** | `recover_corrupted_encoding` | `text: "鍚堝悓"` 自动还原为 `"合同"` |

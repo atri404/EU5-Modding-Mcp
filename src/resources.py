@@ -192,6 +192,27 @@ def register_resources(mcp, data_handler):
             return "{}"
         return json.dumps(data_handler.get_statistics(), ensure_ascii=False, indent=2)
 
+    @mcp.resource("eu5://mod_architecture")
+    def get_mod_architecture_resource() -> str:
+        """获取 EU5 三层生命周期架构 (loading_screen/main_menu/in_game) 与工坊实践指南"""
+        if not data_handler:
+            return "{}"
+        return json.dumps(data_handler.mod_architecture_guide, ensure_ascii=False, indent=2)
+
+    @mcp.resource("eu5://vanilla_readmes")
+    def get_vanilla_readmes_resource() -> str:
+        """获取游戏本体全部 74 份官方开发者 readme.txt 规范概要清单"""
+        if not data_handler:
+            return "[]"
+        summary_list = [{
+            "name": r.get("name"),
+            "category": r.get("category"),
+            "path": r.get("path"),
+            "summary": r.get("summary"),
+            "content_length": r.get("content_length")
+        } for r in data_handler.vanilla_readmes]
+        return json.dumps(summary_list, ensure_ascii=False, indent=2)
+
     @mcp.resource("eu5://data_types/{category}")
     def get_data_types_by_category_resource(category: str) -> str:
         """获取特定类别的数据类型定义列表 (common, gui, internalclausewitzgui, script, uncategorized)"""

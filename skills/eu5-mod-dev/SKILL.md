@@ -23,37 +23,77 @@ disable-model-invocation: false
 ## 🛠️ MCP 协同工具（即开即用）
 
 当本插件启用时，以下 MCP 工具随技能一同生效，编写过程中优先调用：
+- `get_mod_architecture_guide`：查询 EU5 三层生命周期架构规范、无冲突 Sub-on-action 链式挂载、CMF 虚拟存储国机制与 Faster Universalis 性能调优常量。
+- `search_vanilla_readmes` / `get_vanilla_readme`：调阅游戏本体 74 份官方开发者 readme.txt 规范（涵盖 advances, building_types, laws, generic_actions 等）。
 - `search_guides` / `get_guide`：调阅 12 篇制作指南与端到端教程（如 `new-country-tutorial` 新国家、`new-mission-pack-tutorial` 新任务链、`mod-skeleton` 骨架、`merging` 合并规则、`law-design` 法律、`defines` 常量）。
 - `search_modifiers`：查询 2,497 条修改器属性（包含是否百分比、布尔及适用范围）。
 - `search_effects` / `search_triggers`：查询游戏效果与触发条件语法签名及适用作用域。
 - `search_id_rules` / `get_id_rule`：核对某个类目引用必须带前缀（如 `building_type:`）还是裸写（如 `advance`）。
 - `get_loc_key_rules`：查询事件、任务、修正、概念等类目的固定本地化键命名规范。
 - `get_systems_map`：定位 160+ 类目的原版入口文件与 readme 状态。
-- `search_defines` / `get_define_block`：查询 00_defines.txt 常量数值与行范围。
+- `search_defines` / `get_define_block`：查询 00_defines.txt 常量数值与行范围（聚合本体 38 个 N 块与 1,430 个常量）。
 - `get_field_definition`：获取指定类目（如 `building_types`, `laws`, `expedition_types`）的完整字段白名单与 1.4 beta 变更。
-- `validate_mod_snippet`：对你生成的脚本片段进行离线语法诊断。
+- `validate_mod_snippet`：对生成的脚本片段执行离线语法诊断与高危陷阱排查。
 
 ---
 
-## 一、搭建 Mod 骨架
+## 一、EU5 三层生命周期架构 (3-Tier Lifecycle Architecture)
 
-1. **模组路径**：`Documents\Paradox Interactive\Europa Universalis V\mod\<your_mod>\`
-2. **注册清单**：新建 `.metadata\metadata.json`：
-```json
-{
-  "name": "My Mod Name",
-  "id": "my_mod_unique_id",
-  "version": "1.0.0",
-  "supported_game_version": "1.4.*",
-  "short_description": "A mod for Europa Universalis V",
-  "tags": ["Gameplay", "Historical"]
+EU5 相比旧代引擎的核心差异在于将所有数据、界面与脚本严格解耦为**三个生命周期层级**，放错目录会导致静默忽略或直接崩溃：
+
+### 1. 引导启动层 (`loading_screen/`)
+- **职能**：引擎冷启动与全局常量初始化。
+- **核心路径**：
+  - `loading_screen/common/defines/00_defines.txt`：**所有全局 Defines 常量必须放这里**（⚠️ 严禁直接放 `common/defines/`，会被引擎静默略过！）。
+  - `loading_screen/gfx/defines/00_gfx.txt`：摄像机 `NCamera` 参数。
+  - `loading_screen/data_binding/`：跨界面全局数据绑定宏。
+  - `loading_screen/input_profile/*.profile`：全局按键映射。
+
+### 2. 前端界面与全局静态层 (`main_menu/`)
+- **职能**：游戏进入主菜单、选国界面与游戏大厅。
+- **核心路径**：
+  - `main_menu/common/static_modifiers/`：全局静态修正。
+  - `main_menu/common/modifier_type_definitions/`：自定修改器类型注册。
+  - `main_menu/gui/`：主菜单与选国 HUD。
+  - `main_menu/localization/<lang>/`：前端与全局通用词条。
+  - `main_menu/setup/start/`：开局启动序列脚本。
+- **禁忌**：严禁调用依赖运行中国家的数据绑定（如 `GetPlayer`, `ShowDBDefinitionName`），会触发 `Trying to use ... when there is no game state`。
+
+### 3. 游戏内玩法模拟层 (`in_game/`)
+- **职能**：活动游戏会话（Active Game Session）的核心玩法逻辑。
+- **核心路径**：
+  - `in_game/common/`：124 个玩法类目（`advances`, `building_types`, `laws`, `generic_actions`, `country_interactions`, `on_action` 等）。
+  - `in_game/events/`：事件体系。
+  - `in_game/gui/`：游戏内 Lateralview、顶部栏与 Scripted Widgets。
+  - `in_game/localization/<lang>/`：事件、任务、决议具体多语言文本。
+  - `in_game/setup/`：国家、省份与角色历史数据。
+
+---
+
+## 二、工坊核心实践规范
+
+### 1. 无冲突 Sub-on-action 链式挂载
+严禁在根挂钩点（如 `on_game_start`, `on_new_ruler`）直接使用 `effect = { ... }`，否则会直接覆盖原版和其他模组的全部逻辑！
+**唯一正确做法**：
+```pdx
+on_game_start = {
+    on_actions = {
+        mymod_on_game_start_hook
+    }
+}
+
+mymod_on_game_start_hook = {
+    effect = {
+        # 自定义初始化逻辑
+    }
 }
 ```
-3. **四区分离机制**：
-   - `in_game\common\`：主体逻辑（事件、科技、建筑、单位、法律、阶层等）
-   - `loading_screen\common\defines\`：数值常量（`00_defines.txt`）
-   - `main_menu\common\`：修正类型注册（`modifier_type_definitions\`）、静态修正（`static_modifiers\`）、旗帜纹章等
-   - `main_menu\localization\<lang>\`：主本地化文件（带 UTF-8 BOM）
+
+### 2. CMF 虚拟存储国机制 (Storage Country)
+跨多人会话或多脚本协同存储全局变量时，Jomini 的 `global_variable_list` 有概率遭遇 scope 寻址穿透。工坊主流实践在 `in_game/setup/countries/` 创建一个无地虚拟国（如 `c:CMF`），通过 `c:MYMOD = { set_variable = ... }` 稳定存取全局配置与异步队列。
+
+### 3. GUI 布局黄金法则
+在 `vbox`, `hbox`, `flowcontainer`, `dynamicgridbox` 等自动布局容器内**严禁包含 `position = { x y }`**，否则会触发 C++ 报错 `Widget cannot have a position in a layout (pdx_gui_layout.cpp:201)`。位置微调应使用 `margin`, `spacing` 或 `layoutpolicy_horizontal/vertical`。裸英文字符串在 GUI 中必须使用 `raw_text = "..."` 避免报缺词条警告。
 
 ---
 

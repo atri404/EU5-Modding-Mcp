@@ -1,6 +1,6 @@
 ---
 name: eu5-mod-review
-description: EU5（Jomini 引擎）模组全流程审查与排错技能：对标原版规范、7 级结构化代码审查、error.log 日志诊断、ID 族引用校验、乱码抢救、变量守卫与 UTF-8 BOM，结合绑定的 EU5 Modding MCP 诊断工具输出分级结构化自检报告。
+description: EU5（Jomini 引擎）模组全流程审查与排错技能：对标原版规范、8 级结构化代码审查、error.log 日志诊断、ID 族引用校验、三层生命周期存放检查、GUI 自动布局约束、乱码抢救与防误报白名单，结合绑定的 EU5 Modding MCP 诊断工具输出分级结构化自检报告。
 whenToUse: 用户要求审查、检查、自检、验证、排错 EU5 模组代码或提供 mod 目录要求审计时使用
 disable-model-invocation: false
 ---
@@ -15,8 +15,10 @@ disable-model-invocation: false
 ## 🛠️ MCP 审查与排错工具联动
 
 审查与排错过程中优先调用以下绑定的 MCP 工具：
-- `validate_mod_snippet`：对目标代码段执行底层规则离线诊断（大写 ROOT、废弃语法、错误 building:/unit_category: 前缀、花括号平衡、法规撤销陷阱、变量守卫误用等）；
-- `decode_error_log`：当提供 `error.log` 日志行时，自动解码报错病因、首查点与解决建议；
+- `validate_mod_snippet`：对目标代码段执行底层规则离线诊断（大写 ROOT、废弃语法、错误 building:/unit_category: 前缀、花括号平衡、法规撤销陷阱、变量守卫误用、根挂钩点 effect 破坏性覆写、vbox 内 position 布局冲突、重复 target_flag 等 11+ 项规则）；
+- `decode_error_log`：当提供 `error.log` 日志行时，自动解码报错病因、首查点与解决建议（集成 23 条包含真实 C++ 引擎签名的规则）；
+- `get_mod_architecture_guide`：核对文件是否放在正确的生命周期层级（`loading_screen/`, `main_menu/`, `in_game/`）；
+- `search_vanilla_readmes` / `get_vanilla_readme`：调阅对应类目的原版开发者官方规范；
 - `search_id_rules` / `get_id_rule`：核对代码中引用的 ID 属于带前缀族（`building_type:`, `sub_unit_category:`）还是裸写族（`advance`, `trait` 查询），排查静默失效；
 - `get_loc_key_rules`：核对事件、任务、修正等本地化键命名及缺键排查原则；
 - `get_review_checklist`：获取 7 维度机械审查项与防误报白名单（白名单内容不得误报为错误）；
@@ -36,7 +38,7 @@ disable-model-invocation: false
 
 ---
 
-## 二、七级结构化检查清单
+## 二、八级结构化检查清单
 
 ### 1. 结构与格式（致命缺陷）
 - [ ] **括号配对**：花括号 `{}` 严格平衡，防止跨块穿透（可用 `validate_mod_snippet` 自动测定）；
@@ -73,7 +75,17 @@ disable-model-invocation: false
 - [ ] **顺序敏感块**：`levies` 特化单位、`country_name_construction` 是按第一个匹配生效的块，**绝不能使用 `INJECT:`**，必须整体文件覆盖并置顶新条目；
 - [ ] **REPLACE 完整性**：使用 `REPLACE:` 时必须保留原版同名块内的全部非修改字段。
 
-### 7. 防误报核对（白名单排除）
+### 7. 生命周期层级与工坊规范
+- [ ] **三层物理隔离**：
+  - `00_defines.txt` 必须放 `loading_screen/common/defines/`，严禁放根 `common/`；
+  - 玩法类目必须放 `in_game/common/`；
+  - 静态修正放 `main_menu/common/static_modifiers/`；
+- [ ] **无冲突 Sub-on-action 链**：根挂钩点（如 `on_game_start`, `on_new_ruler`）绝不能直接写 `effect = { ... }`，必须通过 `on_actions = { <sub_hook> }` 挂载！
+- [ ] **GUI 自动布局约束**：`vbox`, `hbox`, `flowcontainer`, `dynamicgridbox` 内严禁给子元素写 `position = { ... }`，会引发 `pdx_gui_layout.cpp:201` 引擎报错；
+- [ ] **交互动作 target_flags**：同一交互动作内多个 `select_trigger` 必须使用不同的 `target_flag` 命名；
+- [ ] **废弃修改器**：禁止使用 EU4 废弃修改器（如 `great_power_score`, `army_reinforce_cost` 等）。
+
+### 8. 防误报核对（白名单排除）
 - 检查项是否属于 `review_checklist` 第七节白名单（如：空壳目录 `policies`/`mission_task_defs` 勿删、无脚本引用的 static_modifier 引擎按名生效、新教 `enable = 9999.1.1` 正常写法等），严禁误报！
 
 ---

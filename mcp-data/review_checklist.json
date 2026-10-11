@@ -1,5 +1,5 @@
 {
-  "title": "审查清单（review-checklist）：可机械判定的项",
+  "title": "机械审查清单（7 级结构化检查 + 防误报白名单）",
   "sections": {
     "overview": "# 审查清单（review-checklist）：可机械判定的项\n\n> **一句话**：把全库「审查要点」按检查方式重排的统一检查表：文件结构、引用完整性、作用域、语义陷阱、本地化、合并覆盖与防误报白名单。\n> **什么时候看**：逐文件审查 mod 时当主检查表用；判不准某条是不是错，就翻第七节白名单。\n> **体量**：88 行 · 约 4 分钟通读\n\n> **用途**：`eu5-mod-review` 逐文件审查时的**统一检查表**。内容是把本库 24 篇 vanilla + 103 篇 fields 里的「审查要点」按**检查方式**重新归类——**能脚本判的给判据，判不了的给对照表**。每条末尾括号里是权威档，细节回原档看。",
     "一、文件与结构（脚本可判）": "| # | 检查项 | 判据 / 常见错法 |\n|---|---|---|\n| 1 | 事件文件首行是 `namespace =` | ID 形式 `<ns>.<数字>`，数字 **1–9999**，跨全 mod 唯一（`fields\\common-events.md`） |\n| 2 | 事件 `type` 属白名单 | `country_event/location_event/unit_event/exploration_event/age_event`；**统计时必须按取值白名单过滤**，否则 `estate_type`/`casus_belli` 等同名键会污染（`pitfalls.md` §十三） |\n| 3 | 文件名与定义名一致 | 任务包 `generic_x_mission_pack.txt` → 链 `generic_x`；面板文件名 = 对象 id；成就须进 `achievement_groups`（`fields\\common-missions.md`、`gui-panels.md`） |\n| 4 | 单 `.txt` 扩展名 | `x.txt.txt` **仍会被加载**（别判成死文件）；反过来**不能靠加后缀停用**原版档，要用 `.bak`（`vanilla\\vanilla-dlc-and-assets.md`） |\n| 5 | 花括号配对 + 顶层计数 | 用**花括号深度扫描**；`key =` 与 `{` 分两行的写法（`child_educations` / `resolutions` 3 个 / `biases` 1 个）会让缩进锚点漏算（`pitfalls.md` §十三） |\n| 6 | 本地化文件带 **BOM** | 读前 3 字节须为 `EF BB BF`（mod 目录要求 BOM；**本库自身 `.md` 不带 BOM**）（`pitfalls.md` §五） |",

@@ -13348,6 +13348,11 @@
       "name": "Goods",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "goods",
+      "type": "vanilla_readme",
+      "description": "﻿#<goods id> = {"
     }
   ],
   "goods_category": [
@@ -20845,6 +20850,11 @@
       "name": "casus_belli",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "casus_belli",
+      "type": "vanilla_readme",
+      "description": "﻿# CASUS BELLIs"
     }
   ],
   "defender_leader": [
@@ -22639,6 +22649,11 @@
       "name": "Institution",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "institution",
+      "type": "vanilla_readme",
+      "description": "﻿#<institution_id> = {"
     }
   ],
   "international_organization": [
@@ -22991,6 +23006,11 @@
       "name": "recruitment_method",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "recruitment_method",
+      "type": "vanilla_readme",
+      "description": "﻿#<recruitment method id> = {"
     }
   ],
   "region": [
@@ -23246,6 +23266,11 @@
       "name": "Situation",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "situation",
+      "type": "vanilla_readme",
+      "description": "# If you want to create a situation in the UI:"
     }
   ],
   "societal_value_type": [
@@ -24904,6 +24929,405 @@
   "delhi_four_yearly_pulse": [
     {
       "name": "delhi_four_yearly_pulse",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "on_new_age_global": [
+    {
+      "name": "on_new_age_global",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "on_omen_god_selected": [
+    {
+      "name": "on_omen_god_selected",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "on_colonize_annex": [
+    {
+      "name": "on_colonize_annex",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "on_colonize_annexed": [
+    {
+      "name": "on_colonize_annexed",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "on_pre_war_declared": [
+    {
+      "name": "on_pre_war_declared",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "on_subject_created": [
+    {
+      "name": "on_subject_created",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "on_bureaucracy_change": [
+    {
+      "name": "on_bureaucracy_change",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "on_bureaucracy_added": [
+    {
+      "name": "on_bureaucracy_added",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "on_bureaucracy_removed": [
+    {
+      "name": "on_bureaucracy_removed",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "on_character_estate_change": [
+    {
+      "name": "on_character_estate_change",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "on_culture_changed": [
+    {
+      "name": "on_culture_changed",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "on_union_merging": [
+    {
+      "name": "on_union_merging",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "on_parliament_abolished": [
+    {
+      "name": "on_parliament_abolished",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "on_parliament_established": [
+    {
+      "name": "on_parliament_established",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "on_shattered_country": [
+    {
+      "name": "on_shattered_country",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "on_country_rank_change": [
+    {
+      "name": "on_country_rank_change",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "on_gain_hegemon_status": [
+    {
+      "name": "on_gain_hegemon_status",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "on_lose_hegemon_status": [
+    {
+      "name": "on_lose_hegemon_status",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "on_enforce_peace_accepted": [
+    {
+      "name": "on_enforce_peace_accepted",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "on_enforce_peace_declined": [
+    {
+      "name": "on_enforce_peace_declined",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "on_transfer_subject": [
+    {
+      "name": "on_transfer_subject",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "on_truce_broken": [
+    {
+      "name": "on_truce_broken",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "on_ai_personalities_game_start": [
+    {
+      "name": "on_ai_personalities_game_start",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "on_four_yearly_check_for_script": [
+    {
+      "name": "on_four_yearly_check_for_script",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "on_albanian_migration": [
+    {
+      "name": "on_albanian_migration",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "on_papal_authority_updated": [
+    {
+      "name": "on_papal_authority_updated",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "earthquake_yearly_pulse": [
+    {
+      "name": "earthquake_yearly_pulse",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "yearly_flavor_sic_pulse": [
+    {
+      "name": "yearly_flavor_sic_pulse",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "yearly_flavor_nap_pulse": [
+    {
+      "name": "yearly_flavor_nap_pulse",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "yearly_flavor_hab_tir_pulse": [
+    {
+      "name": "yearly_flavor_hab_tir_pulse",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "yearly_flavor_ven_pulse": [
+    {
+      "name": "yearly_flavor_ven_pulse",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "yearly_flavor_kor_pulse": [
+    {
+      "name": "yearly_flavor_kor_pulse",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "yearly_flavor_ira_pulse": [
+    {
+      "name": "yearly_flavor_ira_pulse",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "yearly_flavor_nav_pulse": [
+    {
+      "name": "yearly_flavor_nav_pulse",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "yearly_flavor_kni_pulse": [
+    {
+      "name": "yearly_flavor_kni_pulse",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "yearly_flavor_pol_union_pulse": [
+    {
+      "name": "yearly_flavor_pol_union_pulse",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "yearly_flavor_cop_pulse": [
+    {
+      "name": "yearly_flavor_cop_pulse",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "yearly_infidel_holds_rome_pulse": [
+    {
+      "name": "yearly_infidel_holds_rome_pulse",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "yearly_hre_circle_leader_pulse": [
+    {
+      "name": "yearly_hre_circle_leader_pulse",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "on_estate_culture_changed": [
+    {
+      "name": "on_estate_culture_changed",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "on_estate_religion_changed": [
+    {
+      "name": "on_estate_religion_changed",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "government_flavor_pulse_monarchy": [
+    {
+      "name": "government_flavor_pulse_monarchy",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "government_flavor_pulse_republic": [
+    {
+      "name": "government_flavor_pulse_republic",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "government_flavor_pulse_theocracy": [
+    {
+      "name": "government_flavor_pulse_theocracy",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "government_flavor_pulse_tribe": [
+    {
+      "name": "government_flavor_pulse_tribe",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "government_flavor_pulse_steppe_horde": [
+    {
+      "name": "government_flavor_pulse_steppe_horde",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "religion_flavor_pulse_muslim": [
+    {
+      "name": "religion_flavor_pulse_muslim",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "religion_flavor_pulse_catholic": [
+    {
+      "name": "religion_flavor_pulse_catholic",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "religion_flavor_pulse_protestant": [
+    {
+      "name": "religion_flavor_pulse_protestant",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "religion_flavor_pulse_orthodox": [
+    {
+      "name": "religion_flavor_pulse_orthodox",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "religion_flavor_pulse_buddhist": [
+    {
+      "name": "religion_flavor_pulse_buddhist",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "religion_flavor_pulse_dharmic": [
+    {
+      "name": "religion_flavor_pulse_dharmic",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "religion_flavor_pulse_nahuatl": [
+    {
+      "name": "religion_flavor_pulse_nahuatl",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "religion_flavor_pulse_hellenism": [
+    {
+      "name": "religion_flavor_pulse_hellenism",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "religion_flavor_pulse_shinto": [
+    {
+      "name": "religion_flavor_pulse_shinto",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "chi_expedition_war_support_pulse": [
+    {
+      "name": "chi_expedition_war_support_pulse",
+      "type": "on_action",
+      "description": ""
+    }
+  ],
+  "chi_expedition_rotation_pulse": [
+    {
+      "name": "chi_expedition_rotation_pulse",
       "type": "on_action",
       "description": ""
     }
@@ -83890,6 +84314,11 @@
       "name": "Disaster",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "disaster",
+      "type": "vanilla_readme",
+      "description": "# If you want to create a disaster in the UI:"
     }
   ],
   "disease_outbreak": [
@@ -93506,6 +93935,11 @@
       "name": "advances",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "advances",
+      "type": "vanilla_readme",
+      "description": "﻿#<advance ID> = {"
     }
   ],
   "advances_icon": [
@@ -94563,6 +94997,11 @@
       "name": "avatars",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "avatars",
+      "type": "vanilla_readme",
+      "description": "﻿# Avatars! The different forms or manifestations a god can take, and they receive different names. For example, Rama an"
     }
   ],
   "avatars_icon": [
@@ -95109,6 +95548,11 @@
       "name": "building_types",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "building_types",
+      "type": "vanilla_readme",
+      "description": "﻿# Building Types"
     }
   ],
   "building_types_icon": [
@@ -95319,6 +95763,11 @@
       "name": "cabinet_actions",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "cabinet_actions",
+      "type": "vanilla_readme",
+      "description": "﻿# Government actions! Stuff you can get your cabinet to do."
     }
   ],
   "cabinet_actions_icon": [
@@ -95767,6 +96216,11 @@
       "name": "character_interactions",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "character_interactions",
+      "type": "vanilla_readme",
+      "description": "﻿#<interaction_name> = {"
     }
   ],
   "character_interactions_icon": [
@@ -97153,6 +97607,11 @@
       "name": "countries",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "countries",
+      "type": "vanilla_readme",
+      "description": "﻿TAG = {"
     }
   ],
   "countries_icon": [
@@ -97195,6 +97654,11 @@
       "name": "country_interactions",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "country_interactions",
+      "type": "vanilla_readme",
+      "description": "﻿#<interaction_name> = {"
     }
   ],
   "country_interactions_icon": [
@@ -97272,6 +97736,11 @@
       "name": "country_ranks",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "country_ranks",
+      "type": "vanilla_readme",
+      "description": "﻿# - color: color on map"
     }
   ],
   "country_ranks_icon": [
@@ -98880,6 +99349,11 @@
       "name": "disasters",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "disasters",
+      "type": "vanilla_readme",
+      "description": "﻿# Disasters"
     }
   ],
   "disasters_icon": [
@@ -99041,6 +99515,11 @@
       "name": "diseases",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "diseases",
+      "type": "vanilla_readme",
+      "description": "﻿# Diseases - model possibility of outbreaks, origins, spreads, resistance, pop deaths, and ends."
     }
   ],
   "diseases_icon": [
@@ -99937,6 +100416,11 @@
       "name": "employment_systems",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "employment_systems",
+      "type": "vanilla_readme",
+      "description": "﻿# Employment System"
     }
   ],
   "employment_systems_icon": [
@@ -100154,6 +100638,11 @@
       "name": "estate_privileges",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "estate_privileges",
+      "type": "vanilla_readme",
+      "description": "﻿# Estate Privileges"
     }
   ],
   "estate_privileges_icon": [
@@ -100392,6 +100881,11 @@
       "name": "events",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "events",
+      "type": "vanilla_readme",
+      "description": "﻿#Make sure that for the event file you first define the namespace for all the events in the file!"
     }
   ],
   "events_icon": [
@@ -101603,6 +102097,11 @@
       "name": "formable_countries",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "formable_countries",
+      "type": "vanilla_readme",
+      "description": "﻿#example_f = {"
     }
   ],
   "formable_countries_icon": [
@@ -102359,6 +102858,11 @@
       "name": "gods",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "gods",
+      "type": "vanilla_readme",
+      "description": "﻿# Gods! Deities that may or may not affect gameplay."
     }
   ],
   "gods_icon": [
@@ -102574,6 +103078,11 @@
       "name": "government_reforms",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "government_reforms",
+      "type": "vanilla_readme",
+      "description": "﻿# GOVERNMENT REFORMS"
     }
   ],
   "government_reforms_icon": [
@@ -103372,6 +103881,11 @@
       "name": "holy_site_types",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "holy_site_types",
+      "type": "vanilla_readme",
+      "description": "﻿# Holy Site Types!"
     }
   ],
   "holy_site_types_icon": [
@@ -103421,6 +103935,11 @@
       "name": "holy_sites",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "holy_sites",
+      "type": "vanilla_readme",
+      "description": "﻿# Holy sites! Locations of religious significance."
     }
   ],
   "holy_sites_icon": [
@@ -104387,6 +104906,11 @@
       "name": "international_organizations",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "international_organizations",
+      "type": "vanilla_readme",
+      "description": "﻿# International Organization"
     }
   ],
   "international_organizations_icon": [
@@ -104912,6 +105436,11 @@
       "name": "laws",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "laws",
+      "type": "vanilla_readme",
+      "description": "﻿# Laws and Policies"
     }
   ],
   "laws_icon": [
@@ -105199,6 +105728,11 @@
       "name": "levies",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "levies",
+      "type": "vanilla_readme",
+      "description": "﻿#<levy_id> = {"
     }
   ],
   "levies_icon": [
@@ -108653,6 +109187,11 @@
       "name": "parliament_agendas",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "parliament_agendas",
+      "type": "vanilla_readme",
+      "description": "﻿# <parliament agenda key> = {"
     }
   ],
   "parliament_agendas_icon": [
@@ -108772,6 +109311,11 @@
       "name": "parliament_issues",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "parliament_issues",
+      "type": "vanilla_readme",
+      "description": "﻿#<parliament_issue> = {"
     }
   ],
   "parliament_issues_icon": [
@@ -108905,6 +109449,11 @@
       "name": "parliament_types",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "parliament_types",
+      "type": "vanilla_readme",
+      "description": "﻿#<parliament type key> = {"
     }
   ],
   "parliament_types_icon": [
@@ -109087,6 +109636,11 @@
       "name": "peace_treaties",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "peace_treaties",
+      "type": "vanilla_readme",
+      "description": "﻿# script your own peace treaties!"
     }
   ],
   "peace_treaties_icon": [
@@ -109829,6 +110383,11 @@
       "name": "prices",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "prices",
+      "type": "vanilla_readme",
+      "description": "﻿#<price id> = {"
     }
   ],
   "prices_icon": [
@@ -110263,6 +110822,11 @@
       "name": "production_methods",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "production_methods",
+      "type": "vanilla_readme",
+      "description": "﻿#name = {"
     }
   ],
   "production_methods_icon": [
@@ -110949,6 +111513,11 @@
       "name": "regencies",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "regencies",
+      "type": "vanilla_readme",
+      "description": "﻿#<regency id> = {"
     }
   ],
   "regencies_icon": [
@@ -111425,6 +111994,11 @@
       "name": "religious_aspects",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "religious_aspects",
+      "type": "vanilla_readme",
+      "description": "﻿#<religious_aspect_id> = {"
     }
   ],
   "religious_aspects_icon": [
@@ -111460,6 +112034,11 @@
       "name": "religious_factions",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "religious_factions",
+      "type": "vanilla_readme",
+      "description": "﻿#<religious faction id> = {"
     }
   ],
   "religious_factions_icon": [
@@ -111572,6 +112151,11 @@
       "name": "religious_focuses",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "religious_focuses",
+      "type": "vanilla_readme",
+      "description": "﻿# Religious focuses"
     }
   ],
   "religious_focuses_icon": [
@@ -112006,6 +112590,11 @@
       "name": "resolutions",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "resolutions",
+      "type": "vanilla_readme",
+      "description": "﻿# International Organization Resolution system - create a resolution entirely in script and place a GUI button for it e"
     }
   ],
   "resolutions_icon": [
@@ -113488,6 +114077,11 @@
       "name": "situations",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "situations",
+      "type": "vanilla_readme",
+      "description": "﻿# Situations"
     }
   ],
   "situations_icon": [
@@ -114237,6 +114831,11 @@
       "name": "subject_military_stances",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "subject_military_stances",
+      "type": "vanilla_readme",
+      "description": "﻿# Configuration for AI help from subjects"
     }
   ],
   "subject_military_stances_icon": [
@@ -114293,6 +114892,11 @@
       "name": "subject_types",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "subject_types",
+      "type": "vanilla_readme",
+      "description": "﻿# SUBJECT TYPES"
     }
   ],
   "subject_types_icon": [
@@ -115840,6 +116444,11 @@
       "name": "unit_abilities",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "unit_abilities",
+      "type": "vanilla_readme",
+      "description": "﻿#"
     }
   ],
   "unit_abilities_icon": [
@@ -115875,6 +116484,11 @@
       "name": "unit_categories",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "unit_categories",
+      "type": "vanilla_readme",
+      "description": "﻿#<unit_category_id> = {"
     }
   ],
   "unit_categories_icon": [
@@ -116043,6 +116657,11 @@
       "name": "unit_types",
       "type": "data_type",
       "description": ""
+    },
+    {
+      "name": "unit_types",
+      "type": "vanilla_readme",
+      "description": "﻿# Unit Type scripts"
     }
   ],
   "unit_types_icon": [
@@ -210982,6 +211601,223 @@
       "name": "loc-audit-baseline-2026-10",
       "type": "modding_case",
       "description": ""
+    }
+  ],
+  "ai_scripted_expansion_score": [
+    {
+      "name": "ai_scripted_expansion_score",
+      "type": "vanilla_readme",
+      "description": "﻿# Scripted expansion scores add or subtract score from potential expansion targets when Ai evaluates future wars"
+    }
+  ],
+  "ai_scripted_expansion_target": [
+    {
+      "name": "ai_scripted_expansion_target",
+      "type": "vanilla_readme",
+      "description": "﻿# Scripted expansion targets add potential expansion targets when Ai evaluates future wars, it allows to evaluate count"
+    }
+  ],
+  "artist_types": [
+    {
+      "name": "artist_types",
+      "type": "vanilla_readme",
+      "description": "﻿## Artist Types"
+    }
+  ],
+  "artist_work": [
+    {
+      "name": "artist_work",
+      "type": "vanilla_readme",
+      "description": "﻿# Work of art type. Types and benefits of different works of art."
+    }
+  ],
+  "attribute_columns": [
+    {
+      "name": "attribute_columns",
+      "type": "vanilla_readme",
+      "description": "﻿# Attribute columns for different object types. This allows you to specify how columns will work for when you're using "
+    }
+  ],
+  "auto_modifiers": [
+    {
+      "name": "auto_modifiers",
+      "type": "vanilla_readme",
+      "description": "﻿# Auto Modifiers"
+    }
+  ],
+  "bureaucracies": [
+    {
+      "name": "bureaucracies",
+      "type": "vanilla_readme",
+      "description": "﻿# Government bureaucracy! Stuff you implement with good intentions but ends up costing you an arm and a leg."
+    }
+  ],
+  "child_educations": [
+    {
+      "name": "child_educations",
+      "type": "vanilla_readme",
+      "description": "﻿#<child education id> = {"
+    }
+  ],
+  "country_description_categories": [
+    {
+      "name": "country_description_categories",
+      "type": "vanilla_readme",
+      "description": "﻿# Country Description Categories"
+    }
+  ],
+  "generic_action_ai_lists": [
+    {
+      "name": "generic_action_ai_lists",
+      "type": "vanilla_readme",
+      "description": "﻿# AI Lists for Generic Actions"
+    }
+  ],
+  "generic_actions": [
+    {
+      "name": "generic_actions",
+      "type": "vanilla_readme",
+      "description": "﻿# Generic action system - create an action entirely in script and place a GUI button for it entirely in script - no nee"
+    }
+  ],
+  "international_organization_land_ownership_rules": [
+    {
+      "name": "international_organization_land_ownership_rules",
+      "type": "vanilla_readme",
+      "description": "﻿# International Organization Land Ownership Rules"
+    }
+  ],
+  "international_organization_payments": [
+    {
+      "name": "international_organization_payments",
+      "type": "vanilla_readme",
+      "description": "﻿# International Organization Payments"
+    }
+  ],
+  "international_organization_special_statuses": [
+    {
+      "name": "international_organization_special_statuses",
+      "type": "vanilla_readme",
+      "description": "﻿#<tag> = {"
+    }
+  ],
+  "join_war_rules": [
+    {
+      "name": "join_war_rules",
+      "type": "vanilla_readme",
+      "description": "﻿# These rules are used to determine when countries can join wars as allies"
+    }
+  ],
+  "movements": [
+    {
+      "name": "movements",
+      "type": "vanilla_readme",
+      "description": "﻿# Movements - model thoughts and ideas travelling through the population through of outbreaks, origins, spreads, resist"
+    }
+  ],
+  "rival_criteria": [
+    {
+      "name": "rival_criteria",
+      "type": "vanilla_readme",
+      "description": "﻿# Rival criterias determine who is allowed to be rivaled by the defined tag. Only the AI takes these criterias to heart"
+    }
+  ],
+  "road_types": [
+    {
+      "name": "road_types",
+      "type": "vanilla_readme",
+      "description": "﻿#<road type id> = {"
+    }
+  ],
+  "scripted_diplomatic_objectives": [
+    {
+      "name": "scripted_diplomatic_objectives",
+      "type": "vanilla_readme",
+      "description": "﻿#<name> = {"
+    }
+  ],
+  "scripted_effects": [
+    {
+      "name": "scripted_effects",
+      "type": "vanilla_readme",
+      "description": "﻿# Here you can define any kind of scripted effect which then can be used globally in the script"
+    }
+  ],
+  "scripted_relations": [
+    {
+      "name": "scripted_relations",
+      "type": "vanilla_readme",
+      "description": "﻿# Scripted relations"
+    }
+  ],
+  "scripted_triggers": [
+    {
+      "name": "scripted_triggers",
+      "type": "vanilla_readme",
+      "description": "﻿# Here you can define any kind of scripted trigger which then can be used globally in the script"
+    }
+  ],
+  "tests": [
+    {
+      "name": "tests",
+      "type": "vanilla_readme",
+      "description": "﻿#<test id> = {"
+    }
+  ],
+  "town_rights": [
+    {
+      "name": "town_rights",
+      "type": "vanilla_readme",
+      "description": "﻿"
+    }
+  ],
+  "unit_formation_preference": [
+    {
+      "name": "unit_formation_preference",
+      "type": "vanilla_readme",
+      "description": "﻿#left/center/right = {"
+    }
+  ],
+  "wargoals": [
+    {
+      "name": "wargoals",
+      "type": "vanilla_readme",
+      "description": "﻿# WAR GOAL TYPES:"
+    }
+  ],
+  "map_modes": [
+    {
+      "name": "map_modes",
+      "type": "vanilla_readme",
+      "description": "﻿# MAP MODES"
+    }
+  ],
+  "filters": [
+    {
+      "name": "filters",
+      "type": "vanilla_readme",
+      "description": "﻿# Scripted filters for lists of objects."
+    }
+  ],
+  "achievements": [
+    {
+      "name": "achievements",
+      "type": "vanilla_readme",
+      "description": "﻿# possible - filters out achivements on game start so we dont have to check everything all the time"
+    }
+  ],
+  "static_modifiers": [
+    {
+      "name": "static_modifiers",
+      "type": "vanilla_readme",
+      "description": "﻿#<static_modifier_key> = {"
+    }
+  ],
+  "mod_architecture_guide": [
+    {
+      "name": "mod_architecture_guide",
+      "type": "mod_architecture_guide",
+      "description": "EU5 模组架构体系与创意工坊实践指南 (3-Tier Lifecycle Architecture)"
     }
   ]
 }

@@ -38,7 +38,7 @@ class DataHandler:
         self.version_1_4_beta: Dict[str, Any] = {}
         self.data_types_by_category: Dict[str, List[Dict[str, Any]]] = {}
 
-        # 扩展知识库数据 (eu5-modding-kb 全量对齐)
+        # 扩展知识库数据 (eu5-modding-kb 全量对齐 + 原版/工坊 1.4 深度扩展)
         self.guides: List[Dict[str, Any]] = []
         self.modding_cases: List[Dict[str, Any]] = []
         self.error_log_decoder: Dict[str, Any] = {}
@@ -48,6 +48,8 @@ class DataHandler:
         self.systems_map: Dict[str, Any] = {}
         self.engine_defines: Dict[str, Any] = {}
         self.start_here: Dict[str, Any] = {}
+        self.vanilla_readmes: List[Dict[str, Any]] = []
+        self.mod_architecture_guide: Dict[str, Any] = {}
 
         self._load_all_data()
 
@@ -80,6 +82,7 @@ class DataHandler:
                 ("glossary", "glossary.json"),
                 ("guides", "guides.json"),
                 ("modding_cases", "modding_cases.json"),
+                ("vanilla_readmes", "vanilla_readmes.json"),
             ]:
                 p = self.data_dir / filename
                 if p.exists():
@@ -98,6 +101,7 @@ class DataHandler:
                 ("systems_map", "systems_map.json"),
                 ("engine_defines", "engine_defines.json"),
                 ("start_here", "start_here.json"),
+                ("mod_architecture_guide", "mod_architecture_guide.json"),
             ]:
                 p = self.data_dir / filename
                 if p.exists():
@@ -540,6 +544,63 @@ class DataHandler:
             "sections": matched or sections
         }
 
+    def search_vanilla_readmes(self, query: str, limit: int = 10) -> List[Dict[str, Any]]:
+        """检索游戏本体全部 74 篇官方开发者 readme.txt 规范"""
+        q = query.lower()
+        results = []
+        for r in self.vanilla_readmes:
+            cat = r.get("category", "").lower()
+            path = r.get("path", "").lower()
+            summary = r.get("summary", "").lower()
+            content = r.get("content", "").lower()
+            if q in cat or q in path or q in summary or q in content:
+                item = r.copy()
+                del item["content"]
+                results.append(item)
+        return results[:limit]
+
+    def get_vanilla_readme(self, category: str) -> Optional[Dict[str, Any]]:
+        """获取游戏本体指定类目（如 advances, building_types, laws, generic_actions）官方开发者 readme.txt 全文"""
+        cat_norm = category.lower().replace("_", "-").replace(".txt", "").replace("common-", "")
+        for r in self.vanilla_readmes:
+            r_cat = r.get("category", "").lower().replace("_", "-")
+            if r_cat == cat_norm or cat_norm in r.get("path", "").lower():
+                return r
+        return None
+
+    def get_mod_architecture_guide(self, topic: Optional[str] = None) -> Dict[str, Any]:
+        """查询 EU5 三层生命周期架构 (loading_screen/main_menu/in_game)、无冲突 Sub-on-action 链与工坊实践指南"""
+        if not topic:
+            return self.mod_architecture_guide
+
+        t_lower = topic.lower()
+        all_tiers = self.mod_architecture_guide.get("lifecycle_tiers", {})
+        all_practices = self.mod_architecture_guide.get("best_practices", {})
+
+        # 宏观通用词命中
+        if any(w in t_lower for w in ["lifecycle", "tier", "架构", "生命周期", "all"]):
+            matched_tiers = all_tiers
+        else:
+            matched_tiers = {}
+            for tier_k, tier_v in all_tiers.items():
+                if t_lower in tier_k.lower() or t_lower in str(tier_v).lower():
+                    matched_tiers[tier_k] = tier_v
+
+        if any(w in t_lower for w in ["practice", "best", "工坊", "实践", "all"]):
+            matched_practices = all_practices
+        else:
+            matched_practices = {}
+            for prac_k, prac_v in all_practices.items():
+                if t_lower in prac_k.lower() or t_lower in str(prac_v).lower():
+                    matched_practices[prac_k] = prac_v
+
+        return {
+            "title": self.mod_architecture_guide.get("title", ""),
+            "query": topic,
+            "matched_lifecycle_tiers": matched_tiers or (all_tiers if not matched_practices else {}),
+            "matched_best_practices": matched_practices or (all_practices if not matched_tiers else {})
+        }
+
     def recover_corrupted_encoding(self, text: str) -> Dict[str, Any]:
         """
         基于实测 A 类乱码（UTF-8 文本被按 GBK/ANSI 错误读取并保存）的回环抢救算法。
@@ -741,7 +802,42 @@ class DataHandler:
                 "message": "提示: scripted_guis 表达式链路若漏写 '.End' 会导致静默失效，请核查末尾是否已闭合。"
             })
 
-        # 15. 编码提示
+        # 15. on_action 破坏性根挂钩检查
+        if re.search(r'\b(on_game_start|on_new_ruler|on_yearly_pulse|on_monthly_pulse)\s*=\s*\{[^}]*effect\s*=\s*\{', snippet):
+            issues.append({
+                "severity": "WARNING",
+                "code": "ON_ACTION_DESTRUCTIVE_ROOT_EFFECT",
+                "message": "高危兼容性警告: 检测到在根挂钩点 (如 on_game_start) 直接编写 'effect = { ... }'！这会覆写原版和其他模组的初始化逻辑！官方与工坊最佳实践必须使用子挂钩点链式挂载: 'on_game_start = { on_actions = { mymod_init_hook } }' 并在自定义挂钩点中写 effect。"
+            })
+
+        # 16. 自动布局容器内使用 position 属性 (pdx_gui_layout.cpp:201)
+        if re.search(r'\b(vbox|hbox|flowcontainer|dynamicgridbox)\s*=\s*\{[^}]*position\s*=\s*\{', snippet):
+            issues.append({
+                "severity": "ERROR",
+                "code": "GUI_LAYOUT_POSITION_VIOLATION",
+                "message": "GUI 布局错误: 在自动布局容器 (vbox/hbox/flowcontainer/dynamicgridbox) 内检测到 'position = { ... }'！这会导致 C++ 引擎报错: 'Widget cannot have a position in a layout (pdx_gui_layout.cpp:201)'。请移除 position，改用 layoutpolicy 或 spacing/margin。"
+            })
+
+        # 17. select_trigger 重复 target_flag 检查 (interaction_target.cpp:3505)
+        flags = re.findall(r'select_trigger\s*=\s*\{[^}]*target_flag\s*=\s*([a-zA-Z0-9_]+)', snippet)
+        if len(flags) > len(set(flags)):
+            dups = set([f for f in flags if flags.count(f) > 1])
+            issues.append({
+                "severity": "ERROR",
+                "code": "DUPLICATE_SELECT_TRIGGER_FLAG",
+                "message": f"交互动作缺陷: 检测到重复的 select_trigger target_flags ({', '.join(dups)})！会导致 interaction_target.cpp:3505 致命错误。每个 select_trigger 必须拥有唯一的 target_flag 命名。"
+            })
+
+        # 18. EU4 废弃修改器检查 (pdx_persistent_reader.cpp:289)
+        eu4_mods = re.findall(r'\b(great_power_score|army_reinforce_cost|exploration_maintenance_cost|colonial_maintenance_cost)\b', snippet)
+        if eu4_mods:
+            issues.append({
+                "severity": "ERROR",
+                "code": "DEPRECATED_EU4_MODIFIER",
+                "message": f"修改器失效错误: 检测到使用 EU4 废弃修改器 ({', '.join(set(eu4_mods))})！EU5 引擎不识别这些修改器，会导致 pdx_persistent_reader.cpp:289 报错且静默失效。请使用 MCP search_modifiers 获取合法 EU5 修改器。"
+            })
+
+        # 19. 编码提示
         suggestions.append({
             "code": "UTF8_BOM_REMINDER",
             "message": "部署提醒: EU5 所有 mod 脚本和本地化 .yml 文件必须带 UTF-8 BOM（EF BB BF）。普通无 BOM 文件会被游戏引擎忽略或解析为乱码。"
@@ -758,7 +854,7 @@ class DataHandler:
 
     def get_statistics(self) -> Dict[str, Any]:
         return {
-            "version": "2.2.0 (EU5 1.4-Beta & KB Full Integration)",
+            "version": "2.3.0 (EU5 1.4-Beta & Vanilla/Workshop Full Integration)",
             "total_entries": len(self.all_data),
             "breakdown": {
                 "modifiers": len(self.modifiers),
@@ -771,6 +867,7 @@ class DataHandler:
                 "vanilla_mechanics": len(self.vanilla_mechanics),
                 "guides_and_tutorials": len(self.guides),
                 "modding_cases": len(self.modding_cases),
+                "vanilla_readmes": len(self.vanilla_readmes),
                 "error_decoder_rules": len(self.error_log_decoder.get("entries", [])),
                 "id_rules_prefixed": len(self.id_rules.get("prefixed_rules", [])),
                 "id_rules_bare": len(self.id_rules.get("bare_rules", [])),

@@ -1,7 +1,7 @@
 {
   "name": "eu5-modding",
-  "version": "2.2.0",
-  "description": "EU5 (Europa Universalis V / Jomini 引擎) Modding 全流程智能体套件：全面融合 eu5-modding-kb 156 篇权威知识库、30 个 MCP 检索与排错工具、23 项只读资源及绑定的三项智能体开发审查技能",
+  "version": "2.3.0",
+  "description": "EU5 (Europa Universalis V / Jomini 引擎) Modding 全流程智能体套件：全面融合游戏本体 74 篇开发者 Readme、38 个 N 块 1,430 个 Defines 常量、206 个原生 on_actions、eu5-modding-kb 156 篇知识库、33 个 MCP 检索与排错工具、25 项只读资源及绑定的三项智能体开发审查技能",
   "author": {
     "name": "atri404",
     "url": "https://github.com/atri404/EU5-Modding-Mcp"

@@ -580,6 +580,61 @@ def register_tools(mcp, data_handler):
             return json.dumps({"error": str(e)}, ensure_ascii=False)
 
     @mcp.tool()
+    def get_mod_architecture_guide(topic: Optional[str] = None) -> str:
+        """
+        查询 EU5 三层生命周期架构规范与工坊实践指南 (loading_screen / main_menu / in_game 物理隔离原则、无冲突 Sub-on-action 链式挂载、CMF 虚拟存储国机制与 Faster Universalis 性能调优常量)
+
+        Args:
+            topic: 可选主题关键词（例如 'lifecycle', 'loading_screen', 'main_menu', 'in_game', 'sub_on_action', 'storage_country', 'performance', 'cmf'）
+        """
+        if not data_handler:
+            return json.dumps({"error": "Data handler not initialized"}, ensure_ascii=False)
+        try:
+            result = data_handler.get_mod_architecture_guide(topic=topic)
+            return json.dumps(result, ensure_ascii=False, indent=2)
+        except Exception as e:
+            return json.dumps({"error": str(e)}, ensure_ascii=False)
+
+    @mcp.tool()
+    def search_vanilla_readmes(query: str, limit: int = 10) -> str:
+        """
+        检索游戏本体全部 74 份官方开发者 readme.txt 规范（涵盖 advances, building_types, laws, generic_actions, cabinet_actions, disasters 等所有核心类目）
+
+        Args:
+            query: 搜索关键词（例如 'advances', 'building', 'cabinet', 'action', 'law', 'estate', 'military'）
+            limit: 返回数量限制（默认 10）
+        """
+        if not data_handler:
+            return json.dumps({"error": "Data handler not initialized"}, ensure_ascii=False)
+        try:
+            results = data_handler.search_vanilla_readmes(query, limit=limit)
+            return json.dumps({
+                "query": query,
+                "count": len(results),
+                "results": results
+            }, ensure_ascii=False, indent=2)
+        except Exception as e:
+            return json.dumps({"error": str(e)}, ensure_ascii=False)
+
+    @mcp.tool()
+    def get_vanilla_readme(category: str) -> str:
+        """
+        获取游戏本体指定类目的官方开发者 readme.txt 完整设计规范与语法说明
+
+        Args:
+            category: 类目名称（例如 'advances', 'building_types', 'cabinet_actions', 'casus_belli', 'laws', 'generic_actions', 'disasters', 'goods'）
+        """
+        if not data_handler:
+            return json.dumps({"error": "Data handler not initialized"}, ensure_ascii=False)
+        try:
+            result = data_handler.get_vanilla_readme(category)
+            if not result:
+                return json.dumps({"error": f"未找到类目 '{category}' 的开发者 readme.txt"}, ensure_ascii=False)
+            return json.dumps(result, ensure_ascii=False, indent=2)
+        except Exception as e:
+            return json.dumps({"error": str(e)}, ensure_ascii=False)
+
+    @mcp.tool()
     def get_statistics() -> str:
         """
         获取当前 MCP 服务器的数据统计信息（包含全库各分类条目总数与 156 篇知识库覆盖率）
