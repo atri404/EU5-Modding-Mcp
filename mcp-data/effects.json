@@ -1,12 +1,5 @@
 [
   {
-    "name": "# Effect Documentation",
-    "description": "",
-    "supported_scopes": [],
-    "supported_targets": [],
-    "type": "effect"
-  },
-  {
     "name": "abandon_colonial_charter",
     "description": "Abandons a colonial charter",
     "supported_scopes": [

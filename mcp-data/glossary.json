@@ -1,0 +1,837 @@
+[
+  {
+    "key": "内部名 / 英文",
+    "cn_name": "中文（游戏内译名）",
+    "note": "一句话"
+  },
+  {
+    "key": "---",
+    "cn_name": "---",
+    "note": "---"
+  },
+  {
+    "key": "`age`",
+    "cn_name": "时代",
+    "note": "6 个，全局按日期推进"
+  },
+  {
+    "key": "`institution`",
+    "cn_name": "思潮",
+    "note": "每时代 3 种；9 条传播通道，需接纳"
+  },
+  {
+    "key": "`advance`",
+    "cn_name": "革新",
+    "note": "3178 条；国家同时只能研究 1 项"
+  },
+  {
+    "key": "`research` / `research_progress`",
+    "cn_name": "研究 / 研究进度",
+    "note": "进度 = f(礼仪语言力量, 识字率, 教士满意度, 思潮数)"
+  },
+  {
+    "key": "`embrace`",
+    "cn_name": "接纳",
+    "note": "接纳思潮后解锁对应革新"
+  },
+  {
+    "key": "`liturgical_language`",
+    "cn_name": "礼仪语言",
+    "note": "国教的正式语言；天主教等固定不可改"
+  },
+  {
+    "key": "`language_power`",
+    "cn_name": "语言力量",
+    "note": "相对世界最强语言的百分比"
+  },
+  {
+    "key": "`rgo`",
+    "cn_name": "原产",
+    "note": "原料采集点，**不需要建筑**；官方正式名\"原料生产\""
+  },
+  {
+    "key": "`rgo_pops`",
+    "cn_name": "劳工或奴隶",
+    "note": "可从事原产的人群类型，只有 laborers + slaves"
+  },
+  {
+    "key": "`raw_material` / `produced_goods`",
+    "cn_name": "原材料 / 制成品",
+    "note": "前者由原产产出，后者由建筑里的人群产出"
+  },
+  {
+    "key": "`production_method`",
+    "cn_name": "生产方式",
+    "note": "决定建筑的投入品与效率"
+  },
+  {
+    "key": "`establishment`",
+    "cn_name": "投产度",
+    "note": "达阈值前吞吐缩水，超过后给产出加成；默认关闭"
+  },
+  {
+    "key": "`employment_size`",
+    "cn_name": "雇佣规模",
+    "note": "`1 = 1000 人`（readme 第 5 行）"
+  },
+  {
+    "key": "`rural_settlement/town/city/megalopolis`",
+    "cn_name": "乡村/集镇/城市/大都市",
+    "note": "四个 `location_rank`，是建筑的可建造门槛"
+  },
+  {
+    "key": "`subsidy`",
+    "cn_name": "补贴",
+    "note": "亏损建筑由所有者每月补足"
+  },
+  {
+    "key": "`market`",
+    "cn_name": "市场",
+    "note": "市场中心 + 按市场接入度与市场保护覆盖的地点"
+  },
+  {
+    "key": "`market_center`",
+    "cn_name": "市场中心",
+    "note": "集中经济行为的地点，所有者可控制入市资格"
+  },
+  {
+    "key": "`market_access`",
+    "cn_name": "市场接入度",
+    "note": "地点到市场中心的距离；决定交割顺序"
+  },
+  {
+    "key": "`merchant_capacity`",
+    "cn_name": "贸易容量",
+    "note": "能在市场内进出口多少商品"
+  },
+  {
+    "key": "`merchant_power`",
+    "cn_name": "贸易优势",
+    "note": "供给有限时决定出口交割优先顺序（英文名 Trade Advantage）"
+  },
+  {
+    "key": "`trade_profit` / `trade_income`",
+    "cn_name": "贸易利润 / 贸易收入",
+    "note": "价差收益 / 卖货收入；按阶层权力分配"
+  },
+  {
+    "key": "`stockpile`",
+    "cn_name": "商品储备",
+    "note": "市场储备的商品量，用于缓冲价格"
+  },
+  {
+    "key": "`protectionism`",
+    "cn_name": "市场保护",
+    "note": "提高本地控制度，抵消市场吸引力"
+  },
+  {
+    "key": "`sound_toll`",
+    "cn_name": "海峡通行费",
+    "note": "特定海峡控制者向穿行贸易收费"
+  },
+  {
+    "key": "`maritime_presence`",
+    "cn_name": "海上存在",
+    "note": "沿岸海区的海上影响力，贸易优势的重要来源"
+  },
+  {
+    "key": "domestic/trading/foreign/distant",
+    "cn_name": "国内/贸易/外国/遥远市场",
+    "note": "四类市场，按你与它的关系划分"
+  },
+  {
+    "key": "`continent` / `sub_continent`",
+    "cn_name": "大陆 / 次大陆",
+    "note": "9 个（含 4 个海洋大陆）/ 23 个"
+  },
+  {
+    "key": "`region` / `area`",
+    "cn_name": "区域 / 地区",
+    "note": "82 个 / 805 个；静态层级树的中层"
+  },
+  {
+    "key": "`province_definition`",
+    "cn_name": "预设省份",
+    "note": "4309 个；静态地图分组，定义在 `definitions.txt`"
+  },
+  {
+    "key": "`province`",
+    "cn_name": "省份",
+    "note": "**运行时**：同一预设省份内由同一国家拥有的一组地点"
+  },
+  {
+    "key": "`location`",
+    "cn_name": "地点",
+    "note": "最小地块，≈2.87 万；总是属于某个省份"
+  },
+  {
+    "key": "`sea_zone`",
+    "cn_name": "海区 / 海域",
+    "note": "在 `default.map` 的 `sea_zones` 段（4821 个）"
+  },
+  {
+    "key": "`impassable_mountains` / `non_ownable`",
+    "cn_name": "不可通行山地 / 不可拥有（走廊）",
+    "note": "1878 个 / 153 个（撒哈拉、叙利亚沙漠走廊等）"
+  },
+  {
+    "key": "`scripted_geography`",
+    "cn_name": "脚本地理",
+    "note": "mod/事件用自定义地理包，可混合任意层级"
+  },
+  {
+    "key": "`culture` / `culture_group`",
+    "cn_name": "文化 / 文化组",
+    "note": "一个文化可属多个组；文化组可选，语言必填"
+  },
+  {
+    "key": "`primary_culture`",
+    "cn_name": "主流文化",
+    "note": "代表国家身份认同"
+  },
+  {
+    "key": "`accepted_culture` / `tolerated_culture`",
+    "cn_name": "已接纳文化 / 相容文化",
+    "note": "三层地位的中上两层"
+  },
+  {
+    "key": "`dominant_culture`",
+    "cn_name": "优势文化",
+    "note": "地点/国家内规模最大的文化（**≠ 主导**）"
+  },
+  {
+    "key": "`cultural_unity`",
+    "cn_name": "文化统一度",
+    "note": "主流文化人口占比"
+  },
+  {
+    "key": "`cultural_tradition` / `cultural_influence`",
+    "cn_name": "文化传统 / 文化影响",
+    "note": "文化战争的防御力 / 攻击力"
+  },
+  {
+    "key": "`culture_war_power`",
+    "cn_name": "文化战争力量",
+    "note": "攻/防比；影响同化、整合、间谍网、围城"
+  },
+  {
+    "key": "`assimilation`",
+    "cn_name": "同化",
+    "note": "其他文化的人群转为主流文化"
+  },
+  {
+    "key": "`religion` / `religion_group`",
+    "cn_name": "宗教 / 宗教组",
+    "note": "293 个 / 29 个"
+  },
+  {
+    "key": "`religious_unity`",
+    "cn_name": "宗教统一度",
+    "note": "官方宗教人口占比"
+  },
+  {
+    "key": "`tolerance_own/heretic/heathen`",
+    "cn_name": "容忍度（国教/异端/异教）",
+    "note": "三个独立数值；1 点 = 5% 满意度"
+  },
+  {
+    "key": "`religious_influence`",
+    "cn_name": "宗教影响力",
+    "note": "货币资源，仅 17 个宗教有"
+  },
+  {
+    "key": "`religious_aspect`",
+    "cn_name": "宗教信条",
+    "note": "可增删换的教义槽位"
+  },
+  {
+    "key": "`religious_school` / `sect`",
+    "cn_name": "宗教学派 / 宗派",
+    "note": "43 学派；宗派仅佛教系"
+  },
+  {
+    "key": "`god` / `omen`",
+    "cn_name": "神 / 神谕",
+    "note": "127 神祇；神谕有渐进实装期"
+  },
+  {
+    "key": "`holy_site`",
+    "cn_name": "圣地",
+    "note": "241 座，`importance` 1–5"
+  },
+  {
+    "key": "`canonization` / `saint`",
+    "cn_name": "封圣 / 圣人",
+    "note": "封圣花 75 宗教影响力"
+  },
+  {
+    "key": "`cardinal` / `curia`",
+    "cn_name": "枢机 / 教廷",
+    "note": "仅天主教；教廷是 IO 特殊地位"
+  },
+  {
+    "key": "`patriarch`",
+    "cn_name": "牧首",
+    "note": "东正教系，含自治牧首区"
+  },
+  {
+    "key": "`reform_desire`",
+    "cn_name": "改革呼声",
+    "note": "天主教内部冲突值"
+  },
+  {
+    "key": "`tithe`",
+    "cn_name": "什一税",
+    "note": "天主教的 IO 定期付款，`= 0.02`"
+  },
+  {
+    "key": "`movement`",
+    "cn_name": "运动",
+    "note": "宗教/文化在人口中的传播引擎"
+  },
+  {
+    "key": "`estate`",
+    "cn_name": "阶层",
+    "note": "国家内部利益集团（8 个）"
+  },
+  {
+    "key": "`estate_power`",
+    "cn_name": "阶层力量",
+    "note": "政府内政治力量；是**存量**概念"
+  },
+  {
+    "key": "`estate_satisfaction`",
+    "cn_name": "阶层满意度",
+    "note": "需求满足程度"
+  },
+  {
+    "key": "`estate_opinions`",
+    "cn_name": "阶层观感",
+    "note": "阶层**对他国**的观感"
+  },
+  {
+    "key": "`estate_privilege`",
+    "cn_name": "阶层特权",
+    "note": "提高阶层力量的特殊权利"
+  },
+  {
+    "key": "`crown_power`",
+    "cn_name": "王室力量",
+    "note": "被阶层力量总和削弱"
+  },
+  {
+    "key": "`law` / `policy`",
+    "cn_name": "法律 / 政策",
+    "note": "法律是容器，含多个政策；**同时只能选一个**"
+  },
+  {
+    "key": "`parliament`",
+    "cn_name": "议会",
+    "note": "阶层表达诉求的场所"
+  },
+  {
+    "key": "`parliament_agenda`",
+    "cn_name": "议会议程",
+    "note": "阶层提要求，解决它换支持"
+  },
+  {
+    "key": "`parliament_issue`",
+    "cn_name": "议会诉求 / 议案",
+    "note": "需表决的事项，未通过有损失"
+  },
+  {
+    "key": "`parliament_support`",
+    "cn_name": "议会支持",
+    "note": "通过诉求的意愿值"
+  },
+  {
+    "key": "`disaster`",
+    "cn_name": "灾难",
+    "note": "作用域收缩到单国、槽位唯一的局势（\"个人局势\"）"
+  },
+  {
+    "key": "`situation`",
+    "cn_name": "局势",
+    "note": "跨国家/跨地区的持续状态容器，可多个并存"
+  },
+  {
+    "key": "内部名 / 英文",
+    "cn_name": "中文（游戏内译名）",
+    "note": "一句话"
+  },
+  {
+    "key": "---",
+    "cn_name": "---",
+    "note": "---"
+  },
+  {
+    "key": "`advance`",
+    "cn_name": "革新",
+    "note": "**不是\"科技\"**；3178 条"
+  },
+  {
+    "key": "`institution`",
+    "cn_name": "思潮",
+    "note": "**不是\"制度\"**；每时代 3 种"
+  },
+  {
+    "key": "⚠ `devotion`",
+    "cn_name": "奉献度",
+    "note": "神权国的政府影响力；**不是\"虔诚\"**"
+  },
+  {
+    "key": "`establishment`",
+    "cn_name": "投产度",
+    "note": "**不是\"机构/建立\"**；是建筑投产度"
+  },
+  {
+    "key": "内部名 / 英文",
+    "cn_name": "中文（游戏内译名）",
+    "note": "一句话"
+  },
+  {
+    "key": "---",
+    "cn_name": "---",
+    "note": "---"
+  },
+  {
+    "key": "`province`",
+    "cn_name": "省份",
+    "note": "**运行时概念**，≠ 静态 `province_definition`（预设省份）"
+  },
+  {
+    "key": "`area` / `region`",
+    "cn_name": "地区 / 区域",
+    "note": "两级不同：**地区在区域之下**（大陆→次大陆→区域→地区）"
+  },
+  {
+    "key": "`dominant_culture`",
+    "cn_name": "优势文化",
+    "note": "规模最大者；**≠ 主导文化**"
+  },
+  {
+    "key": "`tolerated_culture`",
+    "cn_name": "相容文化",
+    "note": "**不是\"被容忍的\"**；三层地位的中层"
+  },
+  {
+    "key": "`rgo`",
+    "cn_name": "原产",
+    "note": "官方的正式名是\"原料生产\"，原产是缩写"
+  },
+  {
+    "key": "⚠ `disease`",
+    "cn_name": "疾病 / **疫病**",
+    "note": "库内术语对照写\"疾病\"，同篇正文与概念词条用\"疫病\""
+  },
+  {
+    "key": "⚠ `outbreak`",
+    "cn_name": "疫情",
+    "note": "指\"一次具体爆发\"（`disease_outbreak` 作用域）"
+  },
+  {
+    "key": "⚠ `pop` / `pop_type`",
+    "cn_name": "POP / 社会阶级",
+    "note": "库内术语对照写\"POP 类型\"；词条\"社会阶级\""
+  },
+  {
+    "key": "内部名 / 英文",
+    "cn_name": "中文（游戏内译名）",
+    "note": "一句话"
+  },
+  {
+    "key": "---",
+    "cn_name": "---",
+    "note": "---"
+  },
+  {
+    "key": "`trade_company`",
+    "cn_name": "贸易公司",
+    "note": "**是一种附庸类型**（`subject_types\\trade_company.txt`），不是建筑"
+  },
+  {
+    "key": "`union` / `personal_union`",
+    "cn_name": "共主邦联",
+    "note": "**不是\"联合\"**；因王室联姻共主形成的条约类型，两个键同译名"
+  },
+  {
+    "key": "`spy_network`",
+    "cn_name": "间谍网",
+    "note": "渗透程度，是\"地下外交行动\"的货币"
+  },
+  {
+    "key": "`ai_disposition`",
+    "cn_name": "国家态度",
+    "note": "**不是\"性格\"**；是该国目前对你的看法，会不断重估"
+  },
+  {
+    "key": "`ai_personality`",
+    "cn_name": "国家性格",
+    "note": "8 种，驱动外交与军事行动的基本特性"
+  },
+  {
+    "key": "`antagonism`",
+    "cn_name": "敌意",
+    "note": "**EU5 版的\"侵略扩张\"**，0–1000"
+  },
+  {
+    "key": "`conquistador`",
+    "cn_name": "征服者",
+    "note": "**既是动作也是附属国类型**"
+  },
+  {
+    "key": "`colonial_charter`",
+    "cn_name": "特许殖民地",
+    "note": "国家想殖民**整个省份**时建立；特许殖民地将迁徙"
+  },
+  {
+    "key": "`merchant_power`",
+    "cn_name": "**贸易优势**",
+    "note": "**不是\"商人力量\"**（英文名 Trade Advantage）；贸易篇 2026-09 已订正"
+  },
+  {
+    "key": "`merchant_capacity`",
+    "cn_name": "**贸易容量**",
+    "note": "**不是\"商人容量\"**"
+  },
+  {
+    "key": "`market_access`",
+    "cn_name": "**市场接入度**",
+    "note": "**不是\"市场准入\"**"
+  },
+  {
+    "key": "`protectionism`",
+    "cn_name": "**市场保护**",
+    "note": "**不是\"保护主义\"**；条约开关 `lifts_trade_protection` 叫\"取消市场保护\""
+  },
+  {
+    "key": "`maritime_presence`",
+    "cn_name": "**海上存在**",
+    "note": "**不是\"海事存在\"**"
+  },
+  {
+    "key": "`stockpile`",
+    "cn_name": "**商品储备**",
+    "note": "**不是\"库存\"**"
+  },
+  {
+    "key": "`sound_toll`",
+    "cn_name": "**海峡通行费**",
+    "note": "不是\"通行费\"；豁免开关 `is_exempt_from_sound_toll`"
+  },
+  {
+    "key": "`war_exhaustion`",
+    "cn_name": "**厌战度**",
+    "note": "不是\"厌战\""
+  },
+  {
+    "key": "`estate_opinions`",
+    "cn_name": "**阶层外交倾向**",
+    "note": "**不是\"阶层观感\"**——是阶层**对他国**的观感"
+  },
+  {
+    "key": "内部名 / 英文",
+    "cn_name": "中文（游戏内译名）",
+    "note": "一句话"
+  },
+  {
+    "key": "---",
+    "cn_name": "---",
+    "note": "---"
+  },
+  {
+    "key": "`law`",
+    "cn_name": "法律",
+    "note": "**只能解锁/锁定，不存在\"被修改\"**；可切换的是政策"
+  },
+  {
+    "key": "`event_target`",
+    "cn_name": "—",
+    "note": "**无此概念**；用 `save_scope_as = xxx` + `scope:xxx`"
+  },
+  {
+    "key": "`ROOT` / `PREV`",
+    "cn_name": "—",
+    "note": "不存在；EU5 是 `root` / `prev` / `this`"
+  },
+  {
+    "key": "本地化 `KEY:0`",
+    "cn_name": "—",
+    "note": "不存在 `:0` 后缀"
+  },
+  {
+    "key": "选项 `weight = N`",
+    "cn_name": "—",
+    "note": "不存在；用 `ai_chance` 或 `ai_will_select`"
+  },
+  {
+    "key": "`province_event`",
+    "cn_name": "—",
+    "note": "不存在；用 `type = location_event`"
+  },
+  {
+    "key": "内部名 / 英文",
+    "cn_name": "中文（游戏内译名）",
+    "note": "一句话"
+  },
+  {
+    "key": "---",
+    "cn_name": "---",
+    "note": "---"
+  },
+  {
+    "key": "作用域 scope",
+    "cn_name": "作用域",
+    "note": "主体对象；由类目或事件 `type` 决定"
+  },
+  {
+    "key": "`root` / `prev` / `this`",
+    "cn_name": "—",
+    "note": "EU5 的作用域词；无 `ROOT`/`PREV` 大写变体"
+  },
+  {
+    "key": "`save_scope_as` / `scope:xxx`",
+    "cn_name": "具名作用域",
+    "note": "保存后复用；**不跨嵌套 effect 调用**"
+  },
+  {
+    "key": "`?=`",
+    "cn_name": "可选作用域",
+    "note": "允许目标不存在；`?=` 块内是效果上下文"
+  },
+  {
+    "key": "`trigger`",
+    "cn_name": "触发器",
+    "note": "只读条件；与效果**不能混写**"
+  },
+  {
+    "key": "`effect`",
+    "cn_name": "效果",
+    "note": "写操作；`limit` 里不得放效果"
+  },
+  {
+    "key": "`script_value`",
+    "cn_name": "脚本值",
+    "note": "公式/常量，任意需要数字处可引用"
+  },
+  {
+    "key": "`scripted_effect` / `scripted_trigger`",
+    "cn_name": "效果宏 / 条件宏",
+    "note": "支持 `$参数$` 文本替换"
+  },
+  {
+    "key": "`on_action`",
+    "cn_name": "触发钩子",
+    "note": "引擎事件挂载点；同名块是**合并**语义"
+  },
+  {
+    "key": "`modifier`",
+    "cn_name": "修正",
+    "note": "数值增减块；键必须在 `modifier_type_definitions` 注册"
+  },
+  {
+    "key": "`static_modifier`",
+    "cn_name": "静态修正",
+    "note": "引擎按名识别，零脚本引用也生效"
+  },
+  {
+    "key": "`scaled & triggered modifier`",
+    "cn_name": "缩放修正",
+    "note": "用 `scale` + `potential_trigger` 动态算值"
+  },
+  {
+    "key": "`counters` / `variables`",
+    "cn_name": "变量",
+    "note": "用前必初始化；`exists = var:X` 不宜用于数值变量"
+  },
+  {
+    "key": "`INJECT` / `REPLACE`",
+    "cn_name": "追加 / 替换前缀",
+    "note": "文件合并前缀；事件不能 REPLACE/INJECT"
+  },
+  {
+    "key": "内部名 / 英文",
+    "cn_name": "中文（游戏内译名）",
+    "note": "一句话"
+  },
+  {
+    "key": "---",
+    "cn_name": "---",
+    "note": "---"
+  },
+  {
+    "key": "`metadata.json`",
+    "cn_name": "mod 描述符",
+    "note": "注册 mod：name/id/version/supported_game_version/tags"
+  },
+  {
+    "key": "in_game / loading_screen / main_menu / dlc",
+    "cn_name": "四区",
+    "note": "游戏本体的四个区，mod 按区镜像"
+  },
+  {
+    "key": "`localization\\<lang>\\`",
+    "cn_name": "本地化目录",
+    "note": "主语言文件；任务链另有 `missions\\` 子目录"
+  },
+  {
+    "key": "`main_menu\\common\\defines\\`",
+    "cn_name": "常量表",
+    "note": "`guides\\defines.md` 是它的索引"
+  },
+  {
+    "key": "`l_simp_chinese:`",
+    "cn_name": "语言头",
+    "note": "yml 首行；键须在语言头下且缩进"
+  },
+  {
+    "key": "BOM（`EF BB BF`）",
+    "cn_name": "字节顺序标记",
+    "note": "**mod 的 yml 必须带**；无 BOM 整文件被忽略"
+  },
+  {
+    "key": "`namespace`",
+    "cn_name": "命名空间",
+    "note": "事件 ID 形式 `<ns>.<数字>`，数字 1–9999 全局唯一"
+  },
+  {
+    "key": "loc 键",
+    "cn_name": "本地化键",
+    "note": "名称即键；漏一个显示 raw key"
+  },
+  {
+    "key": "raw key",
+    "cn_name": "原始键名",
+    "note": "本地化缺失时界面直接显示键名"
+  },
+  {
+    "key": "`$…$`",
+    "cn_name": "脚本参数",
+    "note": "`$PRICE$` / `$MONTHS"
+  },
+  {
+    "key": "`[Root.GetName]` / `[country",
+    "cn_name": "e]`",
+    "note": "GUI 表达式"
+  },
+  {
+    "key": "`game_concept_*`",
+    "cn_name": "概念词条",
+    "note": "中文名在 `game_concepts_l_simp_chinese.yml`"
+  },
+  {
+    "key": "`scripted_tests`",
+    "cn_name": "游戏内测试",
+    "note": "用游戏自带测试验证效果是否生效"
+  },
+  {
+    "key": "`error.log` / `Script location`",
+    "cn_name": "报错日志",
+    "note": "带 `Script location` 的那行才能定位文件与行号"
+  },
+  {
+    "key": "词",
+    "cn_name": "缺什么证据",
+    "note": ""
+  },
+  {
+    "key": "---",
+    "cn_name": "---",
+    "note": ""
+  },
+  {
+    "key": "`market_attraction`",
+    "cn_name": "库内只在中文检索键里出现英文键名；概念键为**市场吸引力**（`game_concept_market_attraction`），正文尚未记中文名",
+    "note": ""
+  },
+  {
+    "key": "`cultural_view` / `cultural_opinion`",
+    "cn_name": "库内术语对照的键名写 `cultural_view`，概念词条是 `cultural_opinion`（文化好感）——**键名需核对**",
+    "note": ""
+  },
+  {
+    "key": "`weather_system`",
+    "cn_name": "库内只给出内部名与机制说明，未记录中文译名，也未引对应概念键",
+    "note": ""
+  },
+  {
+    "key": "`presence` / `resistance` / `stagnation`",
+    "cn_name": "库内只给出内部名与\"存在度/抵抗/停滞\"的说明，未见对应 `game_concept_*` 键",
+    "note": ""
+  },
+  {
+    "key": "`r0` / `mortality_rate`",
+    "cn_name": "库内只给出内部名与\"基本传染数/死亡率\"的说明，未见对应概念键",
+    "note": ""
+  },
+  {
+    "key": "`NCharacter` / `NCombat` / `NPop` 等",
+    "cn_name": "库内只给出常量段名（N+系统名）与行号，未解释该命名约定本身",
+    "note": ""
+  },
+  {
+    "key": "`黄金` 的中文名",
+    "cn_name": "库内多处写\"金/gold\"（如\"gold 250\"），未记游戏内货币中文名（概念键为**杜卡特**）",
+    "note": ""
+  },
+  {
+    "key": "`政治权力` / `正义` / `业力`",
+    "cn_name": "库内在多篇里作代价货币使用，但未集中记录其概念键与中文名",
+    "note": ""
+  },
+  {
+    "key": "内部名",
+    "cn_name": "旧译（库内）",
+    "note": "现用（本体概念键）"
+  },
+  {
+    "key": "---",
+    "cn_name": "---",
+    "note": "---"
+  },
+  {
+    "key": "`merchant_power`",
+    "cn_name": "商人力量",
+    "note": "**贸易优势**"
+  },
+  {
+    "key": "`merchant_capacity`",
+    "cn_name": "商人容量",
+    "note": "**贸易容量**"
+  },
+  {
+    "key": "`market_access`",
+    "cn_name": "市场准入",
+    "note": "**市场接入度**"
+  },
+  {
+    "key": "`protectionism`",
+    "cn_name": "保护主义",
+    "note": "**市场保护**（条约开关 → \"取消市场保护\"）"
+  },
+  {
+    "key": "`maritime_presence`",
+    "cn_name": "海事存在",
+    "note": "**海上存在**"
+  },
+  {
+    "key": "`stockpile`",
+    "cn_name": "库存",
+    "note": "**商品储备**"
+  },
+  {
+    "key": "`sound_toll`",
+    "cn_name": "通行费",
+    "note": "**海峡通行费**"
+  },
+  {
+    "key": "`war_exhaustion`",
+    "cn_name": "厌战",
+    "note": "**厌战度**"
+  },
+  {
+    "key": "`estate_opinions`",
+    "cn_name": "阶层观感",
+    "note": "**阶层外交倾向**"
+  }
+]

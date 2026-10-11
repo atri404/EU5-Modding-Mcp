@@ -1,0 +1,18 @@
+{
+  "version": "1.4.0-open-beta",
+  "update_date": "2026-10",
+  "highlights": [
+    "新增远征系统 common/expedition_types，重构海外探险与地理发现闭环",
+    "新增独立阶层系统 common/estates 独立条目与特权解耦",
+    "新增军队移动与战术机动深度规则 (army movement mechanics)",
+    "重构法律与事件联动门槛，修复 on_action 子块跨文件合并时的 trigger 穿透问题",
+    "移除/废弃了 1.0~1.2 时期的部分冗余接口，修正类目行号吸附"
+  ],
+  "key_files_updated": [
+    "fields/common-expedition_types.md",
+    "fields/common-estates.md",
+    "vanilla/vanilla-army-movement.md",
+    "cases/encoding-corruption-2026-10.md",
+    "pitfalls.md"
+  ]
+}

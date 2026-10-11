@@ -1,9 +1,3457 @@
 [
   {
-    "name": "# Event Target Documentation",
-    "description": "### law_policy\ngets the policy chosen for a particular law in the scope international organization or country - usage law_policy(<law>)\nRequires Data: yes\nInput Scopes: country, international_organization\nOutput Scopes: policy\n### parliament_issue\nUnknown, add something in code registration\nInput Scopes: country, international_organization\nOutput Scopes: parliament_issue\n### parliament_seat\nUnknown, add something in code registration\nInput Scopes: country, international_organization\nOutput Scopes: location\n### parliament_type\nUnknown, add something in code registration\nInput Scopes: country, international_organization\nOutput Scopes: parliament_type\n### active_resolution\ngets the active resolution of the type specified in the scope international organization or situation - usage active_resolution(<resolution>)\nRequires Data: yes\nInput Scopes: international_organization, situation\nOutput Scopes: active_resolution\n### cast_vote_in_active_resolution\ngets the cast vote in a resolution, returns nothing if the vote isn't explicit - usage cast_vote_in_resolution(<country>)\nRequires Data: yes\nInput Scopes: active_resolution\n### resolution\nUnknown, add something in code registration\nInput Scopes: active_resolution\nOutput Scopes: resolution\n### resolution_proposer\nUnknown, add something in code registration\nInput Scopes: active_resolution\nOutput Scopes: country\n### resolution_target\nLinks to the named parameter (from the select_triggers) in the scope active resolution\nRequires Data: yes\nInput Scopes: active_resolution\n### vote_in_active_resolution\ngets the active resolution of the type specified in the scope active resolution - usage vote_in_resolution(<country>)\nRequires Data: yes\nInput Scopes: active_resolution\n### capital\nUnknown, add something in code registration\nInput Scopes: country, dynasty, province, area\nOutput Scopes: location\n### active_outbreak\ngets the active outbreak for a disease in a location or subunit - usage active_outbreak(<disease>)\nRequires Data: yes\nInput Scopes: location, sub_unit\nOutput Scopes: disease_outbreak\n### controller\nUnknown, add something in code registration\nInput Scopes: location, sub_unit\nOutput Scopes: country\n### disaster_type\nUnknown, add something in code registration\nInput Scopes: disaster\nOutput Scopes: disaster_type\n### leader\nUnknown, add something in code registration\nInput Scopes: unit, exploration\nOutput Scopes: character\n### num_pop_type_in_province\nThe amount of pops of a specific type at Province\nRequires Data: yes\nInput Scopes: province\nOutput Scopes: value\n### province_capital\nUnknown, add something in code registration\nInput Scopes: province\nOutput Scopes: location\n### dynasty_head\nUnknown, add something in code registration\nInput Scopes: dynasty\nOutput Scopes: character\n### dynasty_home\nUnknown, add something in code registration\nInput Scopes: dynasty\nOutput Scopes: location\n### language\nUnknown, add something in code registration\nInput Scopes: country, sub_unit, character, dynasty, culture, religion, market, dialect\nOutput Scopes: language\n### continent\nUnknown, add something in code registration\nInput Scopes: location, province, province_definition, area, region, sub_continent\nOutput Scopes: continent\n### source_province\nUnknown, add something in code registration\nInput Scopes: colonial_charter\nOutput Scopes: province\n### dominant_dialect\nUnknown, add something in code registration\nInput Scopes: location, country\nOutput Scopes: dialect\n### dominant_language\nUnknown, add something in code registration\nInput Scopes: location, country\nOutput Scopes: language\n### owning_unit\nUnknown, add something in code registration\nInput Scopes: sub_unit\nOutput Scopes: unit\n### sub_unit_category\nUnknown, add something in code registration\nInput Scopes: sub_unit\nOutput Scopes: sub_unit_category\n### subunit_home\nUnknown, add something in code registration\nInput Scopes: sub_unit\nOutput Scopes: location\n### estate_type\nUnknown, add something in code registration\nInput Scopes: character, pop, rebels, building, estate_privilege, parliament_issue, estate\nOutput Scopes: estate_type\n### borrower\nUnknown, add something in code registration\nInput Scopes: loan\nOutput Scopes: country\n### attacker_leader\nUnknown, add something in code registration\nInput Scopes: war\nOutput Scopes: country\n### casus_belli\nUnknown, add something in code registration\nInput Scopes: war\nOutput Scopes: casus_belli\n### defender_leader\nUnknown, add something in code registration\nInput Scopes: war\nOutput Scopes: country\n### law\nUnknown, add something in code registration\nInput Scopes: policy\nOutput Scopes: law\n### price\nUnknown, add something in code registration\nInput Scopes: policy\nOutput Scopes: price\n### modifier\nScope to the value of the modifier type of specified key belonging to the current object\nRequires Data: yes\nInput Scopes: location, country, unit, character, religion, province, international_organization\nOutput Scopes: value, boolean\n### building_base_cost_in_gold\nThe Building base price in gold\nInput Scopes: building_type\nOutput Scopes: value\n### sub_continent\nUnknown, add something in code registration\nInput Scopes: location, province, province_definition, area, region\nOutput Scopes: sub_continent\n### active_mission\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: mission\n### autocephalous_patriarchate\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: international_organization\n### civil_war\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: war\n### civil_war_opponent\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: country\n### consort\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: character\n### country_color\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: color\n### country_rank\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: country_rank\n### country_rank_on_date\nUnknown, add something in code registration\nRequires Data: yes\nInput Scopes: country\nOutput Scopes: country_rank\n### country_stance\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: military_stance\n### court_dialect\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: dialect\n### court_language\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: language\n### current_mission_task\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: mission_task\n### dominant_upper_class_culture\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: culture\n### estate\nLinks to a particular estate. Usage: estate:<estate_type_link> or estate(<estate_type_link>)\nRequires Data: yes\nInput Scopes: country\nOutput Scopes: estate\n### estate_power\nThe power of an estate\nRequires Data: yes\nInput Scopes: country\nOutput Scopes: value\n### estate_satisfaction\nThe satisfaction of an estate\nRequires Data: yes\nInput Scopes: country\nOutput Scopes: value\n### estate_target_satisfaction\nThe target satisfaction of an estate\nRequires Data: yes\nInput Scopes: country\nOutput Scopes: value\n### estate_tax_base\nThe base tax of an estate\nRequires Data: yes\nInput Scopes: country\nOutput Scopes: value\n### estate_tax_percentage\nThe tax percentage levied on an estate\nRequires Data: yes\nInput Scopes: country\nOutput Scopes: value\n### government_type\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: government\n### heir\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: character\n### known_in_country\nThe amount of goods known to a speficic Country\nRequires Data: yes\nInput Scopes: country\nOutput Scopes: value\n### last_valid_ruler\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: character\n### liturgical_dialect\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: dialect\n### liturgical_language\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: language\n### low_control_best_tax_base\nget the best low control tax base\nInput Scopes: country\nOutput Scopes: province\n### marriage_union\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: international_organization\n### num_estate_privileges\nThe amount of privileges an estate has\nRequires Data: yes\nInput Scopes: country\nOutput Scopes: value\n### num_location_rank\nCount the amount of owned locations of a specific rank\nRequires Data: yes\nInput Scopes: country\nOutput Scopes: value\n### num_pop_type_in_country\nThe amount of pops of a specific type in a country\nRequires Data: yes\nInput Scopes: country\nOutput Scopes: value\n### num_possible_estate_privileges\nThe amount of possible privileges an estate can get\nRequires Data: yes\nInput Scopes: country\nOutput Scopes: value\n### overlord\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: country\n### percentage_pop_type_in_country\nThe percentage of pops of a specific type in a country\nRequires Data: yes\nInput Scopes: country\nOutput Scopes: value\n### previous_ruler\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: character\n### produced_in_country\nThe amount of goods produced in a speficic Country\nRequires Data: yes\nInput Scopes: country\nOutput Scopes: value\n### province\nUnknown, add something in code registration\nRequires Data: yes\nInput Scopes: country\nOutput Scopes: province\n### regency_type\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: regency_type\n### regent\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: character\n### ruler\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: character\n### ruler_or_heir_if_regent\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: character\n### ruler_or_regent\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: character\n### societal_value\nThe value of a societal value of a country\nRequires Data: yes\nInput Scopes: country\nOutput Scopes: value\n### subject_type\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: subject_type\n### succession_law\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: heir_selection\n### top_overlord\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: country\n### top_overlord_or_this\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: country\n### total_effective_building_levels\nThe amount of total effective building levels in a speficic Country\nRequires Data: yes\nInput Scopes: country\nOutput Scopes: value\n### total_sub_unit_count\nChecks the amount of a subunit-category that a country has (in regiments/ships)\nRequires Data: yes\nInput Scopes: country\nOutput Scopes: value\n### total_sub_unit_strength\nChecks the total strength of a subunit-category for a unit\nRequires Data: yes\nInput Scopes: country\nOutput Scopes: value\n### total_sub_unit_type_count\nChecks the amount of a subunit-type that a country has (in regiments/ships)\nRequires Data: yes\nInput Scopes: country\nOutput Scopes: value\n### union\nUnknown, add something in code registration\nInput Scopes: country\nOutput Scopes: international_organization\n### war_with_country\nGets the current war of the country scope against the specified target country - usage war_with_country(<country>)\nRequires Data: yes\nInput Scopes: country\nOutput Scopes: war\n### commander\nUnknown, add something in code registration\nInput Scopes: combat_side\nOutput Scopes: country\n### commanding_country\nUnknown, add something in code registration\nInput Scopes: combat_side\nOutput Scopes: country\n### enemy_side\nUnknown, add something in code registration\nInput Scopes: combat_side\nOutput Scopes: combat_side\n### leading_unit\nUnknown, add something in code registration\nInput Scopes: combat_side\nOutput Scopes: unit\n### area_exploration\nLinks to an exploration in the scope area for the suppled country. Usage: area_exploration:<country> or area_exploration(<country>)\nRequires Data: yes\nInput Scopes: area\nOutput Scopes: exploration\n### produced_goods\nUnknown, add something in code registration\nInput Scopes: production_method\nOutput Scopes: goods\n### upgrade_demand\nUnknown, add something in code registration\nInput Scopes: production_method\nOutput Scopes: demand\n### culture\nUnknown, add something in code registration\nInput Scopes: country, sub_unit, character, dynasty, pop, rebels, mercenary\nOutput Scopes: culture\n### religion\nUnknown, add something in code registration\nInput Scopes: country, sub_unit, character, dynasty, pop, rebels, mercenary\nOutput Scopes: religion\n### market_price\nThe price a goods has in a market\nRequires Data: yes\nInput Scopes: market\nOutput Scopes: value\n### most_powerful_merchant\nUnknown, add something in code registration\nInput Scopes: market\nOutput Scopes: country\n### produced_in_market\nThe amount of goods produced in a speficic market\nRequires Data: yes\nInput Scopes: market\nOutput Scopes: value\n### stockpile_in_market\nThe amount of goods stockpiled in a specific market\nRequires Data: yes\nInput Scopes: market\nOutput Scopes: value\n### target_price\nThe target price a goods has in a market\nRequires Data: yes\nInput Scopes: market\nOutput Scopes: value\n### traded_in_market\nThe amount of goods traded in a specific market\nRequires Data: yes\nInput Scopes: market\nOutput Scopes: value\n### special_status\nUnknown, add something in code registration\nInput Scopes: parliament_issue\nOutput Scopes: special_status\n### group\nUnknown, add something in code registration\nInput Scopes: religion\nOutput Scopes: group\n### religious_head\nUnknown, add something in code registration\nInput Scopes: religion\nOutput Scopes: country\n### owner\nUnknown, add something in code registration\nInput Scopes: location, unit, sub_unit, character, pop, colonial_charter, market, province, rebels, trade, privateer, exploration, mercenary, work_of_art, loan, building, disaster, cabinet, cardinal, estate\nOutput Scopes: country\n### building\nUnknown, add something in code registration\nRequires Data: yes\nInput Scopes: location\nOutput Scopes: building\n### cardinal\nUnknown, add something in code registration\nInput Scopes: location\nOutput Scopes: cardinal\n### institution_progress\nThe progress towards an institution of a location\nRequires Data: yes\nInput Scopes: location\nOutput Scopes: value\n### last_dynasty_in_location\nUnknown, add something in code registration\nInput Scopes: location\nOutput Scopes: dynasty\n### location_rank\nUnknown, add something in code registration\nInput Scopes: location\nOutput Scopes: location_rank\n### market\nUnknown, add something in code registration\nInput Scopes: location\nOutput Scopes: market\n### num_pop_type\nThe amount of pops of a specific type at location\nRequires Data: yes\nInput Scopes: location\nOutput Scopes: value\n### percentage_pop_type_in_location\nThe percentage of pops of a specific type in a location\nRequires Data: yes\nInput Scopes: location\nOutput Scopes: value\n### previous_owner\nUnknown, add something in code registration\nInput Scopes: location\nOutput Scopes: country\n### province\nUnknown, add something in code registration\nInput Scopes: location\nOutput Scopes: province\n### raw_material\nUnknown, add something in code registration\nInput Scopes: location\nOutput Scopes: goods\n### raw_material_location\nUnknown, add something in code registration\nInput Scopes: location\nOutput Scopes: goods\n### sea_zone\nUnknown, add something in code registration\nInput Scopes: location\nOutput Scopes: location\n### second_best_market\nUnknown, add something in code registration\nInput Scopes: location\nOutput Scopes: market\n### secondary_culture\nUnknown, add something in code registration\nInput Scopes: location\nOutput Scopes: culture\n### secondary_otherwise_primary_culture\nUnknown, add something in code registration\nInput Scopes: location\nOutput Scopes: culture\n### top_owner\nUnknown, add something in code registration\nInput Scopes: location\nOutput Scopes: country\n### language_family\nUnknown, add something in code registration\nInput Scopes: language\nOutput Scopes: language_family\n### dialect\nUnknown, add something in code registration\nInput Scopes: character, dynasty, culture, religion, market\nOutput Scopes: dialect\n### area\nUnknown, add something in code registration\nInput Scopes: location, province, province_definition, privateer, exploration\nOutput Scopes: area\n### combat\nUnknown, add something in code registration\nInput Scopes: location, unit, combat_side\nOutput Scopes: combat\n### siege_defender\nthe siege defender country\nInput Scopes: siege\nOutput Scopes: country\n### siege_main_attacker\nthe siege main attacker country\nInput Scopes: siege\nOutput Scopes: country\n### advance_type\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: advance_type\n### age\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: age\n### area\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: area\n### array_define\nReference the value of a numeric value in an array define: array_define:Namespace|Name|Index. Index is 0-based.\nRequires Data: yes\nGlobal Link: yes\nOutput Scopes: value\n### artist_type\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: artist_type\n### avatar\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: avatar\n### bias_value\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: value\n### building_type\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: building_type\n### c\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: country\n### cabinet_action\nCabinet action from database key\nRequires Data: yes\nOutput Scopes: cabinet_action\n### casus_belli\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: casus_belli\n### character\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: character\n### character_interaction\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: character_interaction\n### child_education\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: child_education\n### climate\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: climate\n### compare_complex_value\nA comparison trigger that needs a parsable string parameter that will return its value in the context it is used eg: scope:root.number_of(armies)\nWild Card: yes\nRequires Data: yes\nOutput Scopes: value\n### compare_date\nA comparison trigger that will return its date in the context it is used eg: root.gold\nWild Card: yes\nOutput Scopes: date\n### compare_value\nA comparison trigger that will return its value in the context it is used eg: root.gold\nWild Card: yes\nOutput Scopes: value\n### continent\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: continent\n### country_interaction\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: country_interaction\n### country_rank\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: country_rank\n### culture\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: culture\n### culture_group\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: culture_group\n### default_price\nThe default price for a goods\nRequires Data: yes\nOutput Scopes: value\n### define\nReference the value of a numeric or color define: define:Namespace|Name\nRequires Data: yes\nGlobal Link: yes\nOutput Scopes: value, color, date\n### demand\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: demand\n### dialect\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: dialect\n### disaster_type\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: disaster_type\n### disease\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: disease\n### dynasty\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: dynasty\n### employment_system\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: employment_system\n### estate_privilege\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: estate_privilege\n### estate_type\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: estate_type\n### ethnicity\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: ethnicity\n### flag\nFlag literals eg: flag:the_boss\nRequires Data: yes\nGlobal Link: yes\nOutput Scopes: flag\n### formable_country\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: formable_country\n### generic_action\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: generic_action\n### gfx_culture\nGraphical culture from its key in the database.\nRequires Data: yes\nOutput Scopes: graphical_culture\n### global_var\nReference a previous set global variable via its name eg: global_var:important_thing\nRequires Data: yes\nGlobal Link: yes\n### god\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: god\n### goods\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: goods\n### government_reform\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: government_reform\n### government_type\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: government\n### hegemony\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: hegemony\n### heir_selection\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: heir_selection\n### holy_site_definition\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: holy_site_definition\n### holy_site_type\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: holy_site_type\n### institution\nUnknown, add something in code registration\nRequires Data: yes\nGlobal Link: yes\nOutput Scopes: institution\n### international_organization\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: international_organization\n### international_organization_type\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: international_organization_type\n### land_ownership_rule\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: land_ownership_rule\n### language\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: language\n### language_family\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: language_family\n### law\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: law\n### levy_setup\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: levy_setup\n### local_var\nReference a previous set local variable via its name eg: local_var:person_of_interest\nRequires Data: yes\nGlobal Link: yes\n### location\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: location\n### location_rank\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: location_rank\n### max_great_powers\nUnknown, add something in code registration\nOutput Scopes: value\n### mission\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: mission\n### mission_task\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: mission_task\n### named_script_value\nA script value that will calculate and returns its value in the context it is used\nWild Card: yes\nOutput Scopes: value, color\n### no\nBoolean literal for false values\nGlobal Link: yes\nOutput Scopes: boolean\n### parliament_agenda\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: parliament_agenda\n### parliament_issue\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: parliament_issue\n### parliament_type\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: parliament_type\n### payment\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: payment\n### peace_treaty\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: peace_treaty\n### policy\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: policy\n### pop_type\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: pop_type\n### prev\nThe previous scope\nGlobal Link: yes\n### price\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: price\n### produced_in_world\nThe amount of goods produced in the world\nRequires Data: yes\nOutput Scopes: value\n### production_method\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: production_method\n### province_definition\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: province_definition\n### recruitment_method\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: recruitment_method\n### regency_type\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: regency_type\n### region\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: region\n### relation_type\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: relation_type\n### religion\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: religion\n### religion_group\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: group\n### religious_aspect\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: religious_aspect\n### religious_faction\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: religious_faction\n### religious_figure\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: religious_figure\n### religious_focus\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: religious_focus\n### religious_school\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: religious_school\n### resolution\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: resolution\n### resolution_vote\ngets vote that a country is voting for on a particular resolution in an international organization - usage resolution_vote(<country>|<international organization>|<resolution>)\nRequires Data: yes\n### revolutionary_target\nUnknown, add something in code registration\nOutput Scopes: country\n### road_type\nRoad type from its key in the database.\nRequires Data: yes\nOutput Scopes: road_type\n### root\nThe head of the current top scope eg: reciever of an event, taker of a decision\nGlobal Link: yes\n### scope\nReference a previously saved scope via its name eg: scope:target\nRequires Data: yes\nGlobal Link: yes\n### scriptable_hint_definition\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: scriptable_hint_definition\n### situation\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: situation\n### societal_value_type\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: societal_value_type\n### special_status\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: special_status\n### sub_continent\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: sub_continent\n### sub_unit_category\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: sub_unit_category\n### subject_military_stance\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: military_stance\n### subject_type\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: subject_type\n### this\nThe current scope\n### topography\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: topography\n### trait\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: trait\n### unit_ability\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: unit_ability\n### unit_type\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: unit_type\n### value\nA numeric literal value eg: 1, 5.2, -6\nWild Card: yes\nGlobal Link: yes\nOutput Scopes: value\n### var\nReference a previous set variable via its name eg: var:mortal_enemy\nRequires Data: yes\n### vegetation\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: vegetation\n### work_of_art\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: work_of_art\n### work_of_art_type\nUnknown, add something in code registration\nRequires Data: yes\nOutput Scopes: work_of_art_type\n### yes\nBoolean literal for true values\nGlobal Link: yes\nOutput Scopes: boolean\n### estate_tax_base\nthe tax base of an estate\nInput Scopes: estate\nOutput Scopes: value\n### religious_school\nUnknown, add something in code registration\nInput Scopes: country, character\nOutput Scopes: religious_school\n### province_definition\nUnknown, add something in code registration\nInput Scopes: location, colonial_charter, province\nOutput Scopes: province_definition\n### disease\nUnknown, add something in code registration\nInput Scopes: disease_outbreak\nOutput Scopes: disease\n### creator\nUnknown, add something in code registration\nInput Scopes: work_of_art\nOutput Scopes: character\n### work_of_art_type\nUnknown, add something in code registration\nInput Scopes: work_of_art\nOutput Scopes: work_of_art_type\n### dominant_country\nUnknown, add something in code registration\nInput Scopes: culture\nOutput Scopes: country\n### gfx_culture\nThe graphical culture from a culture scope\nInput Scopes: culture\nOutput Scopes: graphical_culture\n### original_outbreak\nUnknown, add something in code registration\nInput Scopes: disease\nOutput Scopes: disease_outbreak\n### cabinet_member\nUnknown, add something in code registration\nInput Scopes: cabinet\nOutput Scopes: character\n### interaction_target\nUnknown, add something in code registration\nRequires Data: yes\nInput Scopes: cabinet\n### holy_site\nUnknown, add something in code registration\nInput Scopes: god, avatar\nOutput Scopes: holy_site\n### pop_type\nUnknown, add something in code registration\nInput Scopes: pop\nOutput Scopes: pop_type\n### avatar\nUnknown, add something in code registration\nInput Scopes: holy_site\nOutput Scopes: avatar\n### dominant_culture\nUnknown, add something in code registration\nInput Scopes: location, country, province\nOutput Scopes: culture\n### dominant_religion\nUnknown, add something in code registration\nInput Scopes: location, country, province\nOutput Scopes: religion\n### siege\nUnknown, add something in code registration\nInput Scopes: location, unit\nOutput Scopes: siege\n### location\nUnknown, add something in code registration\nInput Scopes: character, pop, combat, siege, market, exploration, work_of_art, holy_site, building, cardinal\nOutput Scopes: location\n### international_organization_target\nUnknown, add something in code registration\nInput Scopes: international_organization\nOutput Scopes: country\n### international_organization_type\nUnknown, add something in code registration\nInput Scopes: international_organization\nOutput Scopes: international_organization_type\n### land_ownership_rule\nUnknown, add something in code registration\nInput Scopes: international_organization\nOutput Scopes: land_ownership_rule\n### last_leader_country\nUnknown, add something in code registration\nInput Scopes: international_organization\nOutput Scopes: country\n### leader_at_index\nScopes to the leader characters of the IO which are defined in leader = {}. In case of countries instead, their ruler, heir or regent (in that order) gets returned instead. Usage: leader_at_index(<int>\nRequires Data: yes\nInput Scopes: international_organization\nOutput Scopes: character\n### leader_country\nUnknown, add something in code registration\nInput Scopes: international_organization\nOutput Scopes: country\n### leadership_election_resolution\nUnknown, add something in code registration\nInput Scopes: international_organization\nOutput Scopes: resolution\n### birth_location\nUnknown, add something in code registration\nInput Scopes: character\nOutput Scopes: location\n### dynasty\nUnknown, add something in code registration\nInput Scopes: character\nOutput Scopes: dynasty\n### employer\nEmployer of the character\nInput Scopes: character\nOutput Scopes: country\n### ethnicity\nUnknown, add something in code registration\nInput Scopes: character\nOutput Scopes: ethnicity\n### exploration\nUnknown, add something in code registration\nInput Scopes: character\nOutput Scopes: exploration\n### father\nUnknown, add something in code registration\nInput Scopes: character\nOutput Scopes: character\n### first_spouse\nUnknown, add something in code registration\nInput Scopes: character\nOutput Scopes: character\n### mother\nUnknown, add something in code registration\nInput Scopes: character\nOutput Scopes: character\n### rule_end_date\nUnknown, add something in code registration\nRequires Data: yes\nInput Scopes: character\nOutput Scopes: date\n### unit\nUnknown, add something in code registration\nInput Scopes: character\nOutput Scopes: unit\n### region\nUnknown, add something in code registration\nInput Scopes: location, province, province_definition, area\nOutput Scopes: region\n### sub_unit_count\nChecks the amount of a subunit-type inside a unit (in regiments)\nRequires Data: yes\nInput Scopes: unit\nOutput Scopes: value\n### sub_unit_fraction\nChecks the fraction of a subunit-type inside a unit (in regiments)\nRequires Data: yes\nInput Scopes: unit\nOutput Scopes: value\n### sub_unit_strength\nChecks the strength of a subunit-type inside a unit (in regiments)\nRequires Data: yes\nInput Scopes: unit\nOutput Scopes: value\n### total_sub_unit_category_in_unit\nChecks the total strength of a subunit-category for a unit\nRequires Data: yes\nInput Scopes: unit\nOutput Scopes: value\n### total_sub_unit_type_strength\nChecks the total strength of a subunit-type for a country\nRequires Data: yes\nInput Scopes: unit\nOutput Scopes: value\n### unit_destination\nUnknown, add something in code registration\nInput Scopes: unit\nOutput Scopes: location\n### unit_location\nUnknown, add something in code registration\nInput Scopes: unit\nOutput Scopes: location\n### unit_next_location\nUnknown, add something in code registration\nInput Scopes: unit\nOutput Scopes: location\n### building_type\nUnknown, add something in code registration\nInput Scopes: building\nOutput Scopes: building_type\n### combat_attacker\nUnknown, add something in code registration\nInput Scopes: combat\nOutput Scopes: combat_side\n### combat_defender\nUnknown, add something in code registration\nInput Scopes: combat\nOutput Scopes: combat_side\n### capacity_market\nUnknown, add something in code registration\nInput Scopes: trade\nOutput Scopes: market\n### from_market\nUnknown, add something in code registration\nInput Scopes: trade\nOutput Scopes: market\n### to_market\nUnknown, add something in code registration\nInput Scopes: trade\nOutput Scopes: market\n### traded_goods\nUnknown, add something in code registration\nInput Scopes: trade\nOutput Scopes: goods\n### cabinet_action\nThe cabinet action a character is performing\nInput Scopes: character, cabinet\nOutput Scopes: cabinet_action\n### god\nUnknown, add something in code registration\nInput Scopes: holy_site, avatar\nOutput Scopes: god\n### rebel\nUnknown, add something in code registration\nInput Scopes: character, pop\nOutput Scopes: rebels\n### origin\nUnknown, add something in code registration\nInput Scopes: work_of_art, institution, disease_outbreak, disease\nOutput Scopes: location\n### customer\nUnknown, add something in code registration\nInput Scopes: mercenary\nOutput Scopes: country\n### mercenary_home\nUnknown, add something in code registration\nInput Scopes: mercenary\nOutput Scopes: location\n--------------------\nEvent Targets Saved from Code:\ncontext\ninternal\nneighbor\npossible_colonial_charters\ninclude_dead\ninclude_any_present\nonly_tolerated\nonly_accepted\npossible_exploration_areas\npossible_launch_locations\nadjacent_locations\nvacant_adjacent_locations\nadjacent_provinces\nborder\nborder_or_recipients_capital_area\nprovinces_ai_wants_to_give_away\nonly_actual_locations\nonly_defending_sieges\nonly_attacking_sieges\nareas_being_explored\nunassigned_areas_being_explored\nsubjects\ninclude_subjects\ninclude_subjects_and_buildings\nsame_international_organization\ndiplomatic_range\nbest_explorers\nactor\nrecipient\ntarget\ntarget_1\ntarget_2\ntarget_3\ntarget_4\ntarget_5\nowner\nlocation\nvictory\nattacker\ndefender\nunit\nformer_overlord\nfuture_overlord\nwinner\nloser\noverlord\nsubject\nold_ruler\nnew_ruler\nfirst_ruler\nsecond_ruler\nruler\nconsort\nconsorts\nexploration\nwar\ntarget_region\ntarget_province\ntarget_country\ntarget_location\ncurrent_presence\ndisease_outbreak\ndisease\nproposer\nmin_value\nmax_value\ndistance\nfirst\nsecond\ntotal_votes_available\ntotal_votes_needed\nhighest_vote\nkilled_land_units\nkilled_navy_units\nlost_land_units\nlost_navy_units\npayers\npayees\nprice\nprice_modifier\npayer\npayee\nrebel\nworld\ncharacter\nlocked\ncapacity\ngoods\nold_goods\nnew_goods\nmerchant\nfrom\nto\nbuilding\nbuilding_type\nvote\ncabinet\nsubject_type\nold_subject_type\ninternational_organization\nroad_type\nscripted_relation_type\ninternational_organization_type\nestate\nsource\nvote_target\nweather_system\nleaders\ndisaster\nsituation\nis_active\ncountry_interaction\nold_capital\nnew_capital\nfirst_leader\nsecond_leader\nnew_union\ntarget_value\ntarget_price\nactive_resolution\nwar_score\nselected_province\nheir_selection\nold_heir_selection\nlaw\npolicy\nbuilder\nold_religion",
-    "supported_scopes": [],
-    "supported_targets": [],
-    "type": "effect"
+    "name": "law_policy",
+    "description": "gets the policy chosen for a particular law in the scope international organization or country - usage law_policy(<law>)",
+    "input_scopes": [
+      "country",
+      "international_organization"
+    ],
+    "output_scopes": [
+      "policy"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "parliament_issue",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country",
+      "international_organization"
+    ],
+    "output_scopes": [
+      "parliament_issue"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "parliament_seat",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country",
+      "international_organization"
+    ],
+    "output_scopes": [
+      "location"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "parliament_type",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country",
+      "international_organization"
+    ],
+    "output_scopes": [
+      "parliament_type"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "active_resolution",
+    "description": "gets the active resolution of the type specified in the scope international organization or situation - usage active_resolution(<resolution>)",
+    "input_scopes": [
+      "international_organization",
+      "situation"
+    ],
+    "output_scopes": [
+      "active_resolution"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "cast_vote_in_active_resolution",
+    "description": "gets the cast vote in a resolution, returns nothing if the vote isn't explicit - usage cast_vote_in_resolution(<country>)",
+    "input_scopes": [
+      "active_resolution"
+    ],
+    "output_scopes": [],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "resolution",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "active_resolution"
+    ],
+    "output_scopes": [
+      "resolution"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "resolution_proposer",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "active_resolution"
+    ],
+    "output_scopes": [
+      "country"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "resolution_target",
+    "description": "Links to the named parameter (from the select_triggers) in the scope active resolution",
+    "input_scopes": [
+      "active_resolution"
+    ],
+    "output_scopes": [],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "vote_in_active_resolution",
+    "description": "gets the active resolution of the type specified in the scope active resolution - usage vote_in_resolution(<country>)",
+    "input_scopes": [
+      "active_resolution"
+    ],
+    "output_scopes": [],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "capital",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country",
+      "dynasty",
+      "province",
+      "area"
+    ],
+    "output_scopes": [
+      "location"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "active_outbreak",
+    "description": "gets the active outbreak for a disease in a location or subunit - usage active_outbreak(<disease>)",
+    "input_scopes": [
+      "location",
+      "sub_unit"
+    ],
+    "output_scopes": [
+      "disease_outbreak"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "controller",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "location",
+      "sub_unit"
+    ],
+    "output_scopes": [
+      "country"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "disaster_type",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "disaster"
+    ],
+    "output_scopes": [
+      "disaster_type"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "leader",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "unit",
+      "exploration"
+    ],
+    "output_scopes": [
+      "character"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "num_pop_type_in_province",
+    "description": "The amount of pops of a specific type at Province",
+    "input_scopes": [
+      "province"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "province_capital",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "province"
+    ],
+    "output_scopes": [
+      "location"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "dynasty_head",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "dynasty"
+    ],
+    "output_scopes": [
+      "character"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "dynasty_home",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "dynasty"
+    ],
+    "output_scopes": [
+      "location"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "language",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country",
+      "sub_unit",
+      "character",
+      "dynasty",
+      "culture",
+      "religion",
+      "market",
+      "dialect"
+    ],
+    "output_scopes": [
+      "language"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "continent",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "location",
+      "province",
+      "province_definition",
+      "area",
+      "region",
+      "sub_continent"
+    ],
+    "output_scopes": [
+      "continent"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "source_province",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "colonial_charter"
+    ],
+    "output_scopes": [
+      "province"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "dominant_dialect",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "location",
+      "country"
+    ],
+    "output_scopes": [
+      "dialect"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "dominant_language",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "location",
+      "country"
+    ],
+    "output_scopes": [
+      "language"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "owning_unit",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "sub_unit"
+    ],
+    "output_scopes": [
+      "unit"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "sub_unit_category",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "sub_unit"
+    ],
+    "output_scopes": [
+      "sub_unit_category"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "subunit_home",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "sub_unit"
+    ],
+    "output_scopes": [
+      "location"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "estate_type",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "character",
+      "pop",
+      "rebels",
+      "building",
+      "estate_privilege",
+      "parliament_issue",
+      "estate"
+    ],
+    "output_scopes": [
+      "estate_type"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "borrower",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "loan"
+    ],
+    "output_scopes": [
+      "country"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "attacker_leader",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "war"
+    ],
+    "output_scopes": [
+      "country"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "casus_belli",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "war"
+    ],
+    "output_scopes": [
+      "casus_belli"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "defender_leader",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "war"
+    ],
+    "output_scopes": [
+      "country"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "law",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "policy"
+    ],
+    "output_scopes": [
+      "law"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "price",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "policy"
+    ],
+    "output_scopes": [
+      "price"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "modifier",
+    "description": "Scope to the value of the modifier type of specified key belonging to the current object",
+    "input_scopes": [
+      "location",
+      "country",
+      "unit",
+      "character",
+      "religion",
+      "province",
+      "international_organization"
+    ],
+    "output_scopes": [
+      "value",
+      "boolean"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "building_base_cost_in_gold",
+    "description": "The Building base price in gold",
+    "input_scopes": [
+      "building_type"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "sub_continent",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "location",
+      "province",
+      "province_definition",
+      "area",
+      "region"
+    ],
+    "output_scopes": [
+      "sub_continent"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "active_mission",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "mission"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "autocephalous_patriarchate",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "international_organization"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "civil_war",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "war"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "civil_war_opponent",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "country"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "consort",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "character"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "country_color",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "color"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "country_rank",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "country_rank"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "country_rank_on_date",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "country_rank"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "country_stance",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "military_stance"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "court_dialect",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "dialect"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "court_language",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "language"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "current_mission_task",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "mission_task"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "dominant_upper_class_culture",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "culture"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "estate",
+    "description": "Links to a particular estate. Usage: estate:<estate_type_link> or estate(<estate_type_link>)",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "estate"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "estate_power",
+    "description": "The power of an estate",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "estate_satisfaction",
+    "description": "The satisfaction of an estate",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "estate_target_satisfaction",
+    "description": "The target satisfaction of an estate",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "estate_tax_base",
+    "description": "The base tax of an estate",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "estate_tax_percentage",
+    "description": "The tax percentage levied on an estate",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "government_type",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "government"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "heir",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "character"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "known_in_country",
+    "description": "The amount of goods known to a speficic Country",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "last_valid_ruler",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "character"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "liturgical_dialect",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "dialect"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "liturgical_language",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "language"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "low_control_best_tax_base",
+    "description": "get the best low control tax base",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "province"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "marriage_union",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "international_organization"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "num_estate_privileges",
+    "description": "The amount of privileges an estate has",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "num_location_rank",
+    "description": "Count the amount of owned locations of a specific rank",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "num_pop_type_in_country",
+    "description": "The amount of pops of a specific type in a country",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "num_possible_estate_privileges",
+    "description": "The amount of possible privileges an estate can get",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "overlord",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "country"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "percentage_pop_type_in_country",
+    "description": "The percentage of pops of a specific type in a country",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "previous_ruler",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "character"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "produced_in_country",
+    "description": "The amount of goods produced in a speficic Country",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "province",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "province"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "regency_type",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "regency_type"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "regent",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "character"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "ruler",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "character"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "ruler_or_heir_if_regent",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "character"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "ruler_or_regent",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "character"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "societal_value",
+    "description": "The value of a societal value of a country",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "subject_type",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "subject_type"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "succession_law",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "heir_selection"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "top_overlord",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "country"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "top_overlord_or_this",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "country"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "total_effective_building_levels",
+    "description": "The amount of total effective building levels in a speficic Country",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "total_sub_unit_count",
+    "description": "Checks the amount of a subunit-category that a country has (in regiments/ships)",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "total_sub_unit_strength",
+    "description": "Checks the total strength of a subunit-category for a unit",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "total_sub_unit_type_count",
+    "description": "Checks the amount of a subunit-type that a country has (in regiments/ships)",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "union",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "international_organization"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "war_with_country",
+    "description": "Gets the current war of the country scope against the specified target country - usage war_with_country(<country>)",
+    "input_scopes": [
+      "country"
+    ],
+    "output_scopes": [
+      "war"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "commander",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "combat_side"
+    ],
+    "output_scopes": [
+      "country"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "commanding_country",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "combat_side"
+    ],
+    "output_scopes": [
+      "country"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "enemy_side",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "combat_side"
+    ],
+    "output_scopes": [
+      "combat_side"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "leading_unit",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "combat_side"
+    ],
+    "output_scopes": [
+      "unit"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "area_exploration",
+    "description": "Links to an exploration in the scope area for the suppled country. Usage: area_exploration:<country> or area_exploration(<country>)",
+    "input_scopes": [
+      "area"
+    ],
+    "output_scopes": [
+      "exploration"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "produced_goods",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "production_method"
+    ],
+    "output_scopes": [
+      "goods"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "upgrade_demand",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "production_method"
+    ],
+    "output_scopes": [
+      "demand"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "culture",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country",
+      "sub_unit",
+      "character",
+      "dynasty",
+      "pop",
+      "rebels",
+      "mercenary"
+    ],
+    "output_scopes": [
+      "culture"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "religion",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country",
+      "sub_unit",
+      "character",
+      "dynasty",
+      "pop",
+      "rebels",
+      "mercenary"
+    ],
+    "output_scopes": [
+      "religion"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "market_price",
+    "description": "The price a goods has in a market",
+    "input_scopes": [
+      "market"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "most_powerful_merchant",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "market"
+    ],
+    "output_scopes": [
+      "country"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "produced_in_market",
+    "description": "The amount of goods produced in a speficic market",
+    "input_scopes": [
+      "market"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "stockpile_in_market",
+    "description": "The amount of goods stockpiled in a specific market",
+    "input_scopes": [
+      "market"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "target_price",
+    "description": "The target price a goods has in a market",
+    "input_scopes": [
+      "market"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "traded_in_market",
+    "description": "The amount of goods traded in a specific market",
+    "input_scopes": [
+      "market"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "special_status",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "parliament_issue"
+    ],
+    "output_scopes": [
+      "special_status"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "group",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "religion"
+    ],
+    "output_scopes": [
+      "group"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "religious_head",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "religion"
+    ],
+    "output_scopes": [
+      "country"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "owner",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "location",
+      "unit",
+      "sub_unit",
+      "character",
+      "pop",
+      "colonial_charter",
+      "market",
+      "province",
+      "rebels",
+      "trade",
+      "privateer",
+      "exploration",
+      "mercenary",
+      "work_of_art",
+      "loan",
+      "building",
+      "disaster",
+      "cabinet",
+      "cardinal",
+      "estate"
+    ],
+    "output_scopes": [
+      "country"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "building",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "location"
+    ],
+    "output_scopes": [
+      "building"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "cardinal",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "location"
+    ],
+    "output_scopes": [
+      "cardinal"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "institution_progress",
+    "description": "The progress towards an institution of a location",
+    "input_scopes": [
+      "location"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "last_dynasty_in_location",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "location"
+    ],
+    "output_scopes": [
+      "dynasty"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "location_rank",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "location"
+    ],
+    "output_scopes": [
+      "location_rank"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "market",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "location"
+    ],
+    "output_scopes": [
+      "market"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "num_pop_type",
+    "description": "The amount of pops of a specific type at location",
+    "input_scopes": [
+      "location"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "percentage_pop_type_in_location",
+    "description": "The percentage of pops of a specific type in a location",
+    "input_scopes": [
+      "location"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "previous_owner",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "location"
+    ],
+    "output_scopes": [
+      "country"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "province",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "location"
+    ],
+    "output_scopes": [
+      "province"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "raw_material",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "location"
+    ],
+    "output_scopes": [
+      "goods"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "raw_material_location",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "location"
+    ],
+    "output_scopes": [
+      "goods"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "sea_zone",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "location"
+    ],
+    "output_scopes": [
+      "location"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "second_best_market",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "location"
+    ],
+    "output_scopes": [
+      "market"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "secondary_culture",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "location"
+    ],
+    "output_scopes": [
+      "culture"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "secondary_otherwise_primary_culture",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "location"
+    ],
+    "output_scopes": [
+      "culture"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "top_owner",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "location"
+    ],
+    "output_scopes": [
+      "country"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "language_family",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "language"
+    ],
+    "output_scopes": [
+      "language_family"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "dialect",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "character",
+      "dynasty",
+      "culture",
+      "religion",
+      "market"
+    ],
+    "output_scopes": [
+      "dialect"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "area",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "location",
+      "province",
+      "province_definition",
+      "privateer",
+      "exploration"
+    ],
+    "output_scopes": [
+      "area"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "combat",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "location",
+      "unit",
+      "combat_side"
+    ],
+    "output_scopes": [
+      "combat"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "siege_defender",
+    "description": "the siege defender country",
+    "input_scopes": [
+      "siege"
+    ],
+    "output_scopes": [
+      "country"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "siege_main_attacker",
+    "description": "the siege main attacker country",
+    "input_scopes": [
+      "siege"
+    ],
+    "output_scopes": [
+      "country"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "advance_type",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "advance_type"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "age",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "age"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "area",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "area"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "array_define",
+    "description": "Reference the value of a numeric value in an array define: array_define:Namespace|Name|Index. Index is 0-based.\nGlobal Link: yes",
+    "input_scopes": [],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "artist_type",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "artist_type"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "avatar",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "avatar"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "bias_value",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "building_type",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "building_type"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "c",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "country"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "cabinet_action",
+    "description": "Cabinet action from database key",
+    "input_scopes": [],
+    "output_scopes": [
+      "cabinet_action"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "casus_belli",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "casus_belli"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "character",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "character"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "character_interaction",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "character_interaction"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "child_education",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "child_education"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "climate",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "climate"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "compare_complex_value",
+    "description": "A comparison trigger that needs a parsable string parameter that will return its value in the context it is used eg: scope:root.number_of(armies)\nWild Card: yes",
+    "input_scopes": [],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "compare_date",
+    "description": "A comparison trigger that will return its date in the context it is used eg: root.gold\nWild Card: yes",
+    "input_scopes": [],
+    "output_scopes": [
+      "date"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "compare_value",
+    "description": "A comparison trigger that will return its value in the context it is used eg: root.gold\nWild Card: yes",
+    "input_scopes": [],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "continent",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "continent"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "country_interaction",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "country_interaction"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "country_rank",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "country_rank"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "culture",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "culture"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "culture_group",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "culture_group"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "default_price",
+    "description": "The default price for a goods",
+    "input_scopes": [],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "define",
+    "description": "Reference the value of a numeric or color define: define:Namespace|Name\nGlobal Link: yes",
+    "input_scopes": [],
+    "output_scopes": [
+      "value",
+      "color",
+      "date"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "demand",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "demand"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "dialect",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "dialect"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "disaster_type",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "disaster_type"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "disease",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "disease"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "dynasty",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "dynasty"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "employment_system",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "employment_system"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "estate_privilege",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "estate_privilege"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "estate_type",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "estate_type"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "ethnicity",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "ethnicity"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "flag",
+    "description": "Flag literals eg: flag:the_boss\nGlobal Link: yes",
+    "input_scopes": [],
+    "output_scopes": [
+      "flag"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "formable_country",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "formable_country"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "generic_action",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "generic_action"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "gfx_culture",
+    "description": "Graphical culture from its key in the database.",
+    "input_scopes": [],
+    "output_scopes": [
+      "graphical_culture"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "global_var",
+    "description": "Reference a previous set global variable via its name eg: global_var:important_thing\nGlobal Link: yes",
+    "input_scopes": [],
+    "output_scopes": [],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "god",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "god"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "goods",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "goods"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "government_reform",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "government_reform"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "government_type",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "government"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "hegemony",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "hegemony"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "heir_selection",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "heir_selection"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "holy_site_definition",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "holy_site_definition"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "holy_site_type",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "holy_site_type"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "institution",
+    "description": "Unknown, add something in code registration\nGlobal Link: yes",
+    "input_scopes": [],
+    "output_scopes": [
+      "institution"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "international_organization",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "international_organization"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "international_organization_type",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "international_organization_type"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "land_ownership_rule",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "land_ownership_rule"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "language",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "language"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "language_family",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "language_family"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "law",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "law"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "levy_setup",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "levy_setup"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "local_var",
+    "description": "Reference a previous set local variable via its name eg: local_var:person_of_interest\nGlobal Link: yes",
+    "input_scopes": [],
+    "output_scopes": [],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "location",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "location"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "location_rank",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "location_rank"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "max_great_powers",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "mission",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "mission"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "mission_task",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "mission_task"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "named_script_value",
+    "description": "A script value that will calculate and returns its value in the context it is used\nWild Card: yes",
+    "input_scopes": [],
+    "output_scopes": [
+      "value",
+      "color"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "no",
+    "description": "Boolean literal for false values\nGlobal Link: yes",
+    "input_scopes": [],
+    "output_scopes": [
+      "boolean"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "parliament_agenda",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "parliament_agenda"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "parliament_issue",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "parliament_issue"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "parliament_type",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "parliament_type"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "payment",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "payment"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "peace_treaty",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "peace_treaty"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "policy",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "policy"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "pop_type",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "pop_type"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "prev",
+    "description": "The previous scope\nGlobal Link: yes",
+    "input_scopes": [],
+    "output_scopes": [],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "price",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "price"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "produced_in_world",
+    "description": "The amount of goods produced in the world",
+    "input_scopes": [],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "production_method",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "production_method"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "province_definition",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "province_definition"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "recruitment_method",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "recruitment_method"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "regency_type",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "regency_type"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "region",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "region"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "relation_type",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "relation_type"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "religion",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "religion"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "religion_group",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "group"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "religious_aspect",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "religious_aspect"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "religious_faction",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "religious_faction"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "religious_figure",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "religious_figure"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "religious_focus",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "religious_focus"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "religious_school",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "religious_school"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "resolution",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "resolution"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "resolution_vote",
+    "description": "gets vote that a country is voting for on a particular resolution in an international organization - usage resolution_vote(<country>|<international organization>|<resolution>)",
+    "input_scopes": [],
+    "output_scopes": [],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "revolutionary_target",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "country"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "road_type",
+    "description": "Road type from its key in the database.",
+    "input_scopes": [],
+    "output_scopes": [
+      "road_type"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "root",
+    "description": "The head of the current top scope eg: reciever of an event, taker of a decision\nGlobal Link: yes",
+    "input_scopes": [],
+    "output_scopes": [],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "scope",
+    "description": "Reference a previously saved scope via its name eg: scope:target\nGlobal Link: yes",
+    "input_scopes": [],
+    "output_scopes": [],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "scriptable_hint_definition",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "scriptable_hint_definition"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "situation",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "situation"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "societal_value_type",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "societal_value_type"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "special_status",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "special_status"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "sub_continent",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "sub_continent"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "sub_unit_category",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "sub_unit_category"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "subject_military_stance",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "military_stance"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "subject_type",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "subject_type"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "this",
+    "description": "The current scope",
+    "input_scopes": [],
+    "output_scopes": [],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "topography",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "topography"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "trait",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "trait"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "unit_ability",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "unit_ability"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "unit_type",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "unit_type"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "value",
+    "description": "A numeric literal value eg: 1, 5.2, -6\nWild Card: yes\nGlobal Link: yes",
+    "input_scopes": [],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "var",
+    "description": "Reference a previous set variable via its name eg: var:mortal_enemy",
+    "input_scopes": [],
+    "output_scopes": [],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "vegetation",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "vegetation"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "work_of_art",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "work_of_art"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "work_of_art_type",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [],
+    "output_scopes": [
+      "work_of_art_type"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "yes",
+    "description": "Boolean literal for true values\nGlobal Link: yes",
+    "input_scopes": [],
+    "output_scopes": [
+      "boolean"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "estate_tax_base",
+    "description": "the tax base of an estate",
+    "input_scopes": [
+      "estate"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "religious_school",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "country",
+      "character"
+    ],
+    "output_scopes": [
+      "religious_school"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "province_definition",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "location",
+      "colonial_charter",
+      "province"
+    ],
+    "output_scopes": [
+      "province_definition"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "disease",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "disease_outbreak"
+    ],
+    "output_scopes": [
+      "disease"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "creator",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "work_of_art"
+    ],
+    "output_scopes": [
+      "character"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "work_of_art_type",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "work_of_art"
+    ],
+    "output_scopes": [
+      "work_of_art_type"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "dominant_country",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "culture"
+    ],
+    "output_scopes": [
+      "country"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "gfx_culture",
+    "description": "The graphical culture from a culture scope",
+    "input_scopes": [
+      "culture"
+    ],
+    "output_scopes": [
+      "graphical_culture"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "original_outbreak",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "disease"
+    ],
+    "output_scopes": [
+      "disease_outbreak"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "cabinet_member",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "cabinet"
+    ],
+    "output_scopes": [
+      "character"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "interaction_target",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "cabinet"
+    ],
+    "output_scopes": [],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "holy_site",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "god",
+      "avatar"
+    ],
+    "output_scopes": [
+      "holy_site"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "pop_type",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "pop"
+    ],
+    "output_scopes": [
+      "pop_type"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "avatar",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "holy_site"
+    ],
+    "output_scopes": [
+      "avatar"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "dominant_culture",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "location",
+      "country",
+      "province"
+    ],
+    "output_scopes": [
+      "culture"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "dominant_religion",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "location",
+      "country",
+      "province"
+    ],
+    "output_scopes": [
+      "religion"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "siege",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "location",
+      "unit"
+    ],
+    "output_scopes": [
+      "siege"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "location",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "character",
+      "pop",
+      "combat",
+      "siege",
+      "market",
+      "exploration",
+      "work_of_art",
+      "holy_site",
+      "building",
+      "cardinal"
+    ],
+    "output_scopes": [
+      "location"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "international_organization_target",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "international_organization"
+    ],
+    "output_scopes": [
+      "country"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "international_organization_type",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "international_organization"
+    ],
+    "output_scopes": [
+      "international_organization_type"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "land_ownership_rule",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "international_organization"
+    ],
+    "output_scopes": [
+      "land_ownership_rule"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "last_leader_country",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "international_organization"
+    ],
+    "output_scopes": [
+      "country"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "leader_at_index",
+    "description": "Scopes to the leader characters of the IO which are defined in leader = {}. In case of countries instead, their ruler, heir or regent (in that order) gets returned instead. Usage: leader_at_index(<int>",
+    "input_scopes": [
+      "international_organization"
+    ],
+    "output_scopes": [
+      "character"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "leader_country",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "international_organization"
+    ],
+    "output_scopes": [
+      "country"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "leadership_election_resolution",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "international_organization"
+    ],
+    "output_scopes": [
+      "resolution"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "birth_location",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "character"
+    ],
+    "output_scopes": [
+      "location"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "dynasty",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "character"
+    ],
+    "output_scopes": [
+      "dynasty"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "employer",
+    "description": "Employer of the character",
+    "input_scopes": [
+      "character"
+    ],
+    "output_scopes": [
+      "country"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "ethnicity",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "character"
+    ],
+    "output_scopes": [
+      "ethnicity"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "exploration",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "character"
+    ],
+    "output_scopes": [
+      "exploration"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "father",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "character"
+    ],
+    "output_scopes": [
+      "character"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "first_spouse",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "character"
+    ],
+    "output_scopes": [
+      "character"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "mother",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "character"
+    ],
+    "output_scopes": [
+      "character"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "rule_end_date",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "character"
+    ],
+    "output_scopes": [
+      "date"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "unit",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "character"
+    ],
+    "output_scopes": [
+      "unit"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "region",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "location",
+      "province",
+      "province_definition",
+      "area"
+    ],
+    "output_scopes": [
+      "region"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "sub_unit_count",
+    "description": "Checks the amount of a subunit-type inside a unit (in regiments)",
+    "input_scopes": [
+      "unit"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "sub_unit_fraction",
+    "description": "Checks the fraction of a subunit-type inside a unit (in regiments)",
+    "input_scopes": [
+      "unit"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "sub_unit_strength",
+    "description": "Checks the strength of a subunit-type inside a unit (in regiments)",
+    "input_scopes": [
+      "unit"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "total_sub_unit_category_in_unit",
+    "description": "Checks the total strength of a subunit-category for a unit",
+    "input_scopes": [
+      "unit"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "total_sub_unit_type_strength",
+    "description": "Checks the total strength of a subunit-type for a country",
+    "input_scopes": [
+      "unit"
+    ],
+    "output_scopes": [
+      "value"
+    ],
+    "requires_data": true,
+    "type": "event_target"
+  },
+  {
+    "name": "unit_destination",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "unit"
+    ],
+    "output_scopes": [
+      "location"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "unit_location",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "unit"
+    ],
+    "output_scopes": [
+      "location"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "unit_next_location",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "unit"
+    ],
+    "output_scopes": [
+      "location"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "building_type",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "building"
+    ],
+    "output_scopes": [
+      "building_type"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "combat_attacker",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "combat"
+    ],
+    "output_scopes": [
+      "combat_side"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "combat_defender",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "combat"
+    ],
+    "output_scopes": [
+      "combat_side"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "capacity_market",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "trade"
+    ],
+    "output_scopes": [
+      "market"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "from_market",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "trade"
+    ],
+    "output_scopes": [
+      "market"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "to_market",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "trade"
+    ],
+    "output_scopes": [
+      "market"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "traded_goods",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "trade"
+    ],
+    "output_scopes": [
+      "goods"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "cabinet_action",
+    "description": "The cabinet action a character is performing",
+    "input_scopes": [
+      "character",
+      "cabinet"
+    ],
+    "output_scopes": [
+      "cabinet_action"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "god",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "holy_site",
+      "avatar"
+    ],
+    "output_scopes": [
+      "god"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "rebel",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "character",
+      "pop"
+    ],
+    "output_scopes": [
+      "rebels"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "origin",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "work_of_art",
+      "institution",
+      "disease_outbreak",
+      "disease"
+    ],
+    "output_scopes": [
+      "location"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "customer",
+    "description": "Unknown, add something in code registration",
+    "input_scopes": [
+      "mercenary"
+    ],
+    "output_scopes": [
+      "country"
+    ],
+    "requires_data": false,
+    "type": "event_target"
+  },
+  {
+    "name": "mercenary_home",
+    "description": "Unknown, add something in code registration\n\n\n--------------------\n\nEvent Targets Saved from Code:\n\ncontext\ninternal\nneighbor\npossible_colonial_charters\ninclude_dead\ninclude_any_present\nonly_tolerated\nonly_accepted\npossible_exploration_areas\npossible_launch_locations\nadjacent_locations\nvacant_adjacent_locations\nadjacent_provinces\nborder\nborder_or_recipients_capital_area\nprovinces_ai_wants_to_give_away\nonly_actual_locations\nonly_defending_sieges\nonly_attacking_sieges\nareas_being_explored\nunassigned_areas_being_explored\nsubjects\ninclude_subjects\ninclude_subjects_and_buildings\nsame_international_organization\ndiplomatic_range\nbest_explorers\nactor\nrecipient\ntarget\ntarget_1\ntarget_2\ntarget_3\ntarget_4\ntarget_5\nowner\nlocation\nvictory\nattacker\ndefender\nunit\nformer_overlord\nfuture_overlord\nwinner\nloser\noverlord\nsubject\nold_ruler\nnew_ruler\nfirst_ruler\nsecond_ruler\nruler\nconsort\nconsorts\nexploration\nwar\ntarget_region\ntarget_province\ntarget_country\ntarget_location\ncurrent_presence\ndisease_outbreak\ndisease\nproposer\nmin_value\nmax_value\ndistance\nfirst\nsecond\ntotal_votes_available\ntotal_votes_needed\nhighest_vote\nkilled_land_units\nkilled_navy_units\nlost_land_units\nlost_navy_units\npayers\npayees\nprice\nprice_modifier\npayer\npayee\nrebel\nworld\ncharacter\nlocked\ncapacity\ngoods\nold_goods\nnew_goods\nmerchant\nfrom\nto\nbuilding\nbuilding_type\nvote\ncabinet\nsubject_type\nold_subject_type\ninternational_organization\nroad_type\nscripted_relation_type\ninternational_organization_type\nestate\nsource\nvote_target\nweather_system\nleaders\ndisaster\nsituation\nis_active\ncountry_interaction\nold_capital\nnew_capital\nfirst_leader\nsecond_leader\nnew_union\ntarget_value\ntarget_price\nactive_resolution\nwar_score\nselected_province\nheir_selection\nold_heir_selection\nlaw\npolicy\nbuilder\nold_religion",
+    "input_scopes": [
+      "mercenary"
+    ],
+    "output_scopes": [
+      "location"
+    ],
+    "requires_data": false,
+    "type": "event_target"
   }
 ]
