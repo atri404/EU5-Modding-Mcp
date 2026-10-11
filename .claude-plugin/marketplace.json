@@ -1,0 +1,21 @@
+{
+  "name": "EU5-Modding-Mcp",
+  "owner": {
+    "name": "atri404"
+  },
+  "metadata": {
+    "description": "EU5 (Europa Universalis V / Jomini 引擎) Modding 全流程智能体套件与 MCP 服务器 (适配 1.3.x 及 1.4-beta)"
+  },
+  "plugins": [
+    {
+      "name": "eu5-modding",
+      "source": "./",
+      "description": "EU5 模组开发一体化套件：绑定 36 个 MCP 工具与 25 项只读资源、5 条快捷斜杠指令、74 份原版开发者 Readme、38 块 Defines 常量、216 条原生挂钩点、156 篇知识库及三项智能体开发审查技能。"
+    },
+    {
+      "name": "eu5-modding-mcp",
+      "source": "./",
+      "description": "EU5 模组开发一体化套件：绑定 36 个 MCP 工具与 25 项只读资源、5 条快捷斜杠指令、74 份原版开发者 Readme、38 块 Defines 常量、216 条原生挂钩点、156 篇知识库及三项智能体开发审查技能。"
+    }
+  ]
+}

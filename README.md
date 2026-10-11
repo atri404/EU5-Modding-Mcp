@@ -43,41 +43,99 @@
 
 ---
 
-## 🚀 快速安装与配置
+## 🚀 快速安装与使用方式
 
-### 方式一：作为 Claude Code 插件加载 (推荐，Skills + Commands + MCP 强绑定)
-
-在启动 Claude Code 时直接挂载本仓库目录：
-
-```bash
-# 启动时直接挂载本插件目录
-claude --plugin-dir "D:\eu5mods\EU5-Modding-Mcp"
-```
-
-加载后，Claude Code 会自动：
-1. 启动并连接 `.claude-plugin/plugin.json` 中配置的 `eu5-modding-mcp` 服务（36 个工具与 25 项资源即开即用）；
-2. 激活 `commands/` 中的 5 条快捷斜杠指令；
-3. 激活 `skills/` 中的 `eu5-mod-dev`、`eu5-mod-review`、`eu5-mod-lookup` 技能；
-4. 当你在终端中输入 `/plugin disable eu5-modding` 关闭插件时，MCP 服务、指令与技能将**同时安全卸载**。
+本项目支持 **Claude Code 插件一键安装**、**免克隆远程运行 (类比 Chrome MCP)** 与 **本地源码克隆运行** 等多种便捷安装方式。
 
 ---
 
-### 方式二：单独作为 MCP 服务器配置
+### 方式一：Claude Code 官方插件市场一键安装 (最推荐，如同 token-weather-zh)
 
-如果你需要在其它环境（如 Claude Desktop、Cursor 或 Windsurf）中作为独立 MCP 服务器使用：
+适用于 Claude Code 终端用户。通过内置插件市场源一键安装，**无需手动 git clone**，MCP 服务（36 个工具与 25 项资源）、5 条斜杠指令与 3 个开发技能将**全套自动加载**：
+
+#### 1. 新安装插件
+在 Claude Code 会话中直接输入：
+```bash
+/plugin install eu5-modding --marketplace atri404/EU5-Modding-Mcp
+```
+*或者在系统终端中使用 CLI 安装：*
+```bash
+claude plugin marketplace add atri404/EU5-Modding-Mcp
+claude plugin install eu5-modding@EU5-Modding-Mcp
+```
+
+#### 2. 升级至最新版 (v2.3.1)
+```bash
+claude plugin marketplace update EU5-Modding-Mcp
+claude plugin update eu5-modding@EU5-Modding-Mcp
+```
+
+#### 3. 卸载或禁用
+```bash
+/plugin disable eu5-modding
+# 或完全卸载：
+/plugin uninstall eu5-modding
+```
+
+---
+
+### 方式二：免克隆远程直接运行 MCP (类比 Google Chrome DevTools MCP 的 npx 模式)
+
+如果你希望直接运行 MCP 服务而无需手动克隆整个仓库代码，可使用 Python 生态的 `uvx`（等价于 Node 的 `npx`）零配置启动：
 
 #### 在 Claude Code 中注册：
 ```bash
-claude mcp add eu5-modding-mcp "C:\Users\杨洋\AppData\Local\Programs\Python\Python312\python.exe" -- "D:\eu5mods\EU5-Modding-Mcp\server.py"
+claude mcp add eu5-modding-mcp uvx --from git+https://github.com/atri404/EU5-Modding-Mcp.git eu5-modding-mcp
 ```
 
-#### 在 Claude Desktop / Cursor 配置文件 (`claude_desktop_config.json`) 中：
+#### 在 Claude Desktop / Cursor (`claude_desktop_config.json`) 中注册：
 ```json
 {
   "mcpServers": {
     "eu5-modding-mcp": {
-      "command": "C:\\Users\\杨洋\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
-      "args": ["D:\\eu5mods\\EU5-Modding-Mcp\\server.py"]
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/atri404/EU5-Modding-Mcp.git",
+        "eu5-modding-mcp"
+      ]
+    }
+  }
+}
+```
+
+---
+
+### 方式三：Git 源码克隆本地运行 (开发者与离线模式)
+
+如果你需要自行修改源码、在离线环境中使用，或者启动时挂载本地工作区：
+
+```bash
+# 1. 克隆本仓库到本地
+git clone https://github.com/atri404/EU5-Modding-Mcp.git
+cd EU5-Modding-Mcp
+
+# 2. 安装必要运行依赖
+pip install -r requirements.txt
+```
+
+#### 选项 A：启动 Claude Code 时直接挂载本地插件目录（推荐，MCP + Skills + 指令全套生效）：
+```bash
+claude --plugin-dir ./EU5-Modding-Mcp
+```
+
+#### 选项 B：作为本地独立 MCP 注册到 Claude Code：
+```bash
+claude mcp add eu5-modding-mcp python -- "<你的本地绝对路径>/EU5-Modding-Mcp/server.py"
+```
+
+#### 选项 C：在 Claude Desktop / Cursor 配置文件中挂载本地脚本：
+```json
+{
+  "mcpServers": {
+    "eu5-modding-mcp": {
+      "command": "python",
+      "args": ["<你的本地绝对路径>/EU5-Modding-Mcp/server.py"]
     }
   }
 }

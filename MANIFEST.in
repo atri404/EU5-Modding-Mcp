@@ -1,0 +1,9 @@
+include server.py
+include README.md
+include LICENSE
+include plugin.json
+recursive-include mcp-data *.json
+recursive-include commands *.md
+recursive-include skills *.md
+recursive-include .claude-plugin *.json
+recursive-include .cursor-plugin *.json
